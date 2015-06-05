@@ -1,0 +1,88 @@
+<!doctype HTML>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+
+        Forge
+
+  </title>
+
+  <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/bootstrap.css"></link>
+  <link rel="stylesheet" href="css/style.css"></link>
+  <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <![endif]-->
+</head>
+<body ng-app="Forge">
+
+  <main class="container-fluid" ng-view></main>
+
+  <script src="vendor/jquery.min.js"></script>
+  <script src="vendor/bootstrap.min.js"></script>
+  <script src="vendor/angular.min.js"></script>
+  <script src="vendor/angular-route.min.js"></script>
+  <script src="vendor/angular-resource.min.js"></script>
+  <script src="vendor/ui-bootstrap.min.js"></script>
+  <script src="vendor/ui-bootstrap-tpls.min.js"></script>
+
+  <script>
+  (function() {
+    angular
+      .module('Forge', [
+        'ngRoute',
+        'ngResource',
+        'ui.bootstrap'
+      ])
+
+      .config(function($routeProvider, $locationProvider) {
+        $routeProvider
+          .when('/', {
+            templateUrl:  'views/forge.html',
+            controller:   'ForgeCtrl'
+          })
+          .otherwise({
+            redirectTo:   '/'
+          })
+        ;
+
+        $locationProvider.html5Mode(true);
+      })
+
+      .controller('ForgeCtrl', function($scope, $log, $modal) {
+        $scope.showSignUpForm = function() {
+          var modalInstance = $modal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl:  'views/modals/signup.html',
+            controller:   'SignUpModalCtrl'
+          });
+
+          modalInstance.result.then(function() {
+          }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          });
+        };
+      })
+
+      .controller('SignUpModalCtrl', function($scope, $log, $modalInstance) {
+        $scope.signup = function() {
+          // TODO POST account to User
+          // TODO update auth control with login
+        };
+
+        $scope.cancel = function() {
+          $modalInstance.dismiss('cancel');
+        };
+      })
+
+    ;
+  })();
+  </script>
+</body>
+</html>
