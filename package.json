@@ -19,6 +19,8 @@
     "log4js": "^0.6.25",
     "merge": "^1.2.0",
     "method-override": "^2.3.3",
+    "mongoose": "^4.0.5",
+    "mongoose-validator": "^1.0.3",
     "passport": "^0.2.2",
     "promised-mongo": "^0.11.1",
     "q": "^1.4.1",

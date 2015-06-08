@@ -101,8 +101,9 @@ app.use(function (req, res) {
 // Handle 500s
 app.use(function (error, req, res, next) {
     log.error(error);
-    res.status(500);
-    res.sendFile(path.join(__dirname, '/public', '500.html'));
+    res
+      .status(500)
+      .send(error.stack); // rendering this via angular
 });
 
 app.locals.pretty = true;

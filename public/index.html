@@ -41,11 +41,37 @@
         'ui.bootstrap'
       ])
 
-      .config(function($routeProvider, $locationProvider) {
+      .config(function($httpProvider, $provide, $routeProvider, $locationProvider) {
+
+        $provide.factory('ServerErrorInterceptor',
+          function($q, $location, $rootScope) {
+            return {
+              response: function(response) {
+                return response || $q.when(response);
+              },
+
+              responseError: function(rejection) {
+                if (rejection.status === 500) {
+                  console.log("Oh snap!", rejection.data);
+
+                  $rootScope.ServerError = rejection.data;
+                  $location.url('/error');
+                }
+
+                return $q.reject(rejection);
+              }
+            };
+          })
+        ;
+
         $routeProvider
           .when('/', {
             templateUrl:  'views/forge.html',
             controller:   'ForgeCtrl'
+          })
+          .when('/error', {
+            templateUrl: '500.html',
+            controller: 'ErrorCtrl'
           })
           .otherwise({
             redirectTo:   '/'
@@ -53,6 +79,12 @@
         ;
 
         $locationProvider.html5Mode(true);
+        $httpProvider.interceptors.push('ServerErrorInterceptor');
+      })
+
+      .controller('ErrorCtrl', function($scope, $rootScope) {
+        $scope.error = $rootScope.ServerError
+          || "The server didn't send back anything.";
       })
 
       .controller('ForgeCtrl', function($scope, $log, $modal) {
@@ -68,11 +100,23 @@
             $log.info('Modal dismissed at: ' + new Date());
           });
         };
+
+        // close all modals on a route change.
+        // FIXME
+        $scope.$on('$routeChangeStart', function(){
+          $modalInstance.close();
+        });
       })
 
-      .controller('SignUpModalCtrl', function($scope, $log, $modalInstance) {
+      .controller('SignUpModalCtrl', function($scope, $log, $modalInstance, Users) {
         $scope.signup = function() {
           // TODO POST account to User
+          var user = new Users({
+            username: 'Hurp',
+            password: 'durp',
+            email: 'hurp@durp.com'
+          })
+            .$save();
           // TODO update auth control with login
         };
 
@@ -80,6 +124,17 @@
           $modalInstance.dismiss('cancel');
         };
       })
+
+      .factory('Users', ['$resource',
+        function($resource) {
+          return $resource('/api/user/:id', {
+            userId: '@_id'
+          }, {
+            update: {
+              method: 'PUT'
+            }
+          });
+        }]);
 
     ;
   })();

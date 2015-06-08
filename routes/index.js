@@ -1,6 +1,7 @@
 'use strict';
 
-var passport = require('passport');
+var passport = require('passport'),
+  user = require('../lib/controllers/user');
 
 module.exports = function(app, route) {
     // catchall route
@@ -9,6 +10,8 @@ module.exports = function(app, route) {
             // placeholder for catching each request
             next();
         })
+
+        .post('/api/user', user.create)
 
         .post('/login', passport.authenticate('local', {
           successFlash: 'Loading your Forge...',
