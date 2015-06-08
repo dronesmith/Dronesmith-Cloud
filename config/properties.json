@@ -11,7 +11,10 @@
         "path": "log/",
         "filename": "forgecore.log"
     },
-    "mongo": {
-      "url": "mongodb://localhost/forge"
+    "db": {
+      "user": "",
+      "name": "forge",
+      "url": "mongodb://localhost/forge",
+      "options": {}
     }
 }

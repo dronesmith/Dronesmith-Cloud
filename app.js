@@ -17,6 +17,7 @@ var express = require('express'),
   lessMiddleware = require('less-middleware');
 
 // Init internal modules
+require('./lib/db');
 require('./lib/passport');
 
 // get basic properties and set logging.

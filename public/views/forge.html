@@ -15,9 +15,9 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
       <div class="panel panel-default">
-        <form class="panel-body">
+        <ng-form class="panel-body">
           <fieldset class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Username or Email</label>
             <input type="email" class="form-control" id="email" placeholder="luci@sharklasers.net">
           </fieldset>
 
@@ -26,10 +26,10 @@
             <input type="password" class="form-control" id="password">
           </fieldset>
 
-          <button type="submit" class="center-block btn btn-primary">Login to my Forge</button>
+          <button type="submit" class="center-block btn btn-primary" ng-click="login()">Login to my Forge</button>
 
           <p class="text-center"><em><small><a href="" ng-click="showSignUpForm()">Don't have an account?</a></small></em></p>
-        </form>
+        </ng-form>
     </div>
     </div>
     <div class="col-sm-4"></div>

@@ -51,9 +51,9 @@
               },
 
               responseError: function(rejection) {
-                if (rejection.status === 500) {
-                  console.log("Oh snap!", rejection.data);
+                if (rejection.status === 500 || rejection.status === 400) {
 
+                  // TODO better way of doing this. This is cheap.
                   $rootScope.ServerError = rejection.data;
                   $location.url('/error');
                 }
@@ -103,6 +103,7 @@
 
         // close all modals on a route change.
         // FIXME
+        // NOTE probably just cut out modals. Clunky and more trouble than they're worth.
         $scope.$on('$routeChangeStart', function(){
           $modalInstance.close();
         });
@@ -113,7 +114,8 @@
           // TODO POST account to User
           var user = new Users({
             username: 'Hurp',
-            password: 'durp',
+            password: 'durple500',
+            confirmPassword: 'durple500',
             email: 'hurp@durp.com'
           })
             .$save();
@@ -134,7 +136,21 @@
               method: 'PUT'
             }
           });
-        }]);
+        }])
+
+      .factory('Session', ['$resource',
+        function($resource) {
+          return $resource('/api/session/:id', {
+            userId: '@_id'
+          }, {
+            sync: {
+              method: 'PUT'
+            },
+            authenticate: {
+              method: 'POST'
+            }
+          });
+        }])
 
     ;
   })();
