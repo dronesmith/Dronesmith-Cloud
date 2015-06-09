@@ -23,13 +23,14 @@
 </head>
 <body ng-app="Forge">
 
-  <main class="container-fluid" ng-view></main>
+  <main class="container-fluid" ui-view></main>
 
   <script src="vendor/jquery.min.js"></script>
   <script src="vendor/bootstrap.min.js"></script>
   <script src="vendor/angular.min.js"></script>
   <script src="vendor/angular-route.min.js"></script>
   <script src="vendor/angular-resource.min.js"></script>
+  <script src="vendor/angular-ui-router.min.js"></script>
   <script src="vendor/angular-animate.min.js"></script>
   <script src="vendor/ui-bootstrap.min.js"></script>
   <script src="vendor/ui-bootstrap-tpls.min.js"></script>
@@ -40,11 +41,17 @@
       .module('Forge', [
         'ngRoute',
         'ngResource',
+        'ui.router',
         'ngAnimate',
         'ui.bootstrap'
       ])
 
-      .config(function($httpProvider, $provide, $routeProvider, $locationProvider) {
+      .config(function(
+        $httpProvider,
+        $provide,
+        $stateProvider,
+        // $urlRouterProvider,
+        $locationProvider) {
 
         $provide.factory('ServerErrorInterceptor',
           function($q, $location, $rootScope) {
@@ -68,19 +75,37 @@
           })
         ;
 
-        $routeProvider
-          .when('/', {
-            templateUrl:  'views/forge.html',
-            controller:   'ForgeCtrl'
+        $stateProvider
+          .state('login', {
+            url: '/',
+            templateUrl:    'views/forge.html',
+            controller:     'ForgeCtrl'
           })
-          .when('/error', {
-            templateUrl:  '500.html',
-            controller:   'ErrorCtrl'
+          .state('error', {
+            url: '/error',
+            templateUrl:    'views/500.html',
+            controller:     'ErrorCtrl' 
           })
-          .otherwise({
-            redirectTo:   '/'
+          .state('signup', {
+              templateUrl:  'views/modals/signup.html'
           })
         ;
+
+        // urlRouterProvider.otherwise('/');
+
+        // $routeProvider
+        //   .when('/', {
+        //     templateUrl:  'views/forge.html',
+        //     controller:   'ForgeCtrl'
+        //   })
+        //   .when('/error', {
+        //     templateUrl:  '500.html',
+        //     controller:   'ErrorCtrl'
+        //   })
+        //   .otherwise({
+        //     redirectTo:   '/'
+        //   })
+        // ;
 
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('ServerErrorInterceptor');
