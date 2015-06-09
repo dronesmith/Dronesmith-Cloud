@@ -16,5 +16,20 @@
       "name": "forge",
       "url": "mongodb://localhost/forge",
       "options": {}
+    },
+    "session": {
+        "cookie": {
+            "httpOnly": true
+        },
+        "secret": "play it off",
+        "maxAge": null,
+        "resave": false,
+        "saveUninitialized": true
+    },
+    "session": {
+        "host": "127.0.0.1",
+        "port": 6379,
+        "prefix": "forge.sess::",
+        "pass": ""
     }
 }

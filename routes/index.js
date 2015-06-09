@@ -1,7 +1,8 @@
 'use strict';
 
 var passport = require('passport'),
-  user = require('../lib/controllers/user');
+  user = require('../lib/controllers/user'),
+  session = require('../lib/controllers/session');
 
 module.exports = function(app, route) {
     // catchall route
@@ -11,12 +12,11 @@ module.exports = function(app, route) {
             next();
         })
 
+        // User creation
         .post('/api/user', user.create)
 
-        .post('/login', passport.authenticate('local', {
-          successFlash: 'Loading your Forge...',
-          failureFlash: 'Invalid Username or password'
-        }));
+        // Authenticate a session (allows logins)
+        .post('/api/session', session.authenticate)
     ;
 
     if (app.get('env') === 'development') {

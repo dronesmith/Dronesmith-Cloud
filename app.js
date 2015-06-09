@@ -14,11 +14,12 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   favicon = require('serve-favicon'),
   session = require('express-session'),
+  RedisStore = require('connect-redis')(session),
   lessMiddleware = require('less-middleware');
 
 // Init internal modules
 require('./lib/db');
-require('./lib/passport');
+var passport = require('./lib/passport')();
 
 // get basic properties and set logging.
 var env = process.env.NODE_ENV || 'development',
@@ -52,7 +53,6 @@ app.set('env', env);
  * - Less Middleware
  *   Processes LESS to CSS on the fly to make our lives easier.
  */
-
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -66,8 +66,11 @@ app.use(session({
   },
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new RedisStore(config.session)
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(lessMiddleware(path.join(__dirname, 'theme'), {
 	dest: path.join(__dirname, 'public'),
   debug: true

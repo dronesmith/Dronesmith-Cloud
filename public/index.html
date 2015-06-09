@@ -15,6 +15,7 @@
   <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/bootstrap.css"></link>
   <link rel="stylesheet" href="css/style.css"></link>
+  <link rel="stylesheet" href="css/animations.css"></link>
   <!--[if lt IE 9]>
      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -29,6 +30,7 @@
   <script src="vendor/angular.min.js"></script>
   <script src="vendor/angular-route.min.js"></script>
   <script src="vendor/angular-resource.min.js"></script>
+  <script src="vendor/angular-animate.min.js"></script>
   <script src="vendor/ui-bootstrap.min.js"></script>
   <script src="vendor/ui-bootstrap-tpls.min.js"></script>
 
@@ -38,6 +40,7 @@
       .module('Forge', [
         'ngRoute',
         'ngResource',
+        'ngAnimate',
         'ui.bootstrap'
       ])
 
@@ -51,6 +54,7 @@
               },
 
               responseError: function(rejection) {
+                // TODO proper handling of 400s
                 if (rejection.status === 500 || rejection.status === 400) {
 
                   // TODO better way of doing this. This is cheap.
@@ -70,8 +74,8 @@
             controller:   'ForgeCtrl'
           })
           .when('/error', {
-            templateUrl: '500.html',
-            controller: 'ErrorCtrl'
+            templateUrl:  '500.html',
+            controller:   'ErrorCtrl'
           })
           .otherwise({
             redirectTo:   '/'
@@ -87,7 +91,7 @@
           || "The server didn't send back anything.";
       })
 
-      .controller('ForgeCtrl', function($scope, $log, $modal) {
+      .controller('ForgeCtrl', function($scope, $log, $modal, Session) {
         $scope.showSignUpForm = function() {
           var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
@@ -107,6 +111,10 @@
         $scope.$on('$routeChangeStart', function(){
           $modalInstance.close();
         });
+
+        $scope.login = function() {
+          Session.authenticate($scope.loginInfo);
+        }
       })
 
       .controller('SignUpModalCtrl', function($scope, $log, $modalInstance, Users) {
@@ -119,7 +127,9 @@
             email: 'hurp@durp.com'
           })
             .$save();
-          // TODO update auth control with login
+
+          // TODO
+          // Session.authenticate({});
         };
 
         $scope.cancel = function() {
