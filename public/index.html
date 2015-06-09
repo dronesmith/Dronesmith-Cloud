@@ -54,7 +54,7 @@
         $locationProvider) {
 
         $provide.factory('ServerErrorInterceptor',
-          function($q, $location, $rootScope) {
+          function($q, $injector, $rootScope) {
             return {
               response: function(response) {
                 return response || $q.when(response);
@@ -64,9 +64,13 @@
                 // TODO proper handling of 400s
                 if (rejection.status === 500 || rejection.status === 400) {
 
-                  // TODO better way of doing this. This is cheap.
+                  // TODO this is cheap. Find a better solution.
+                  // Note that $stateParams doesn't work.
                   $rootScope.ServerError = rejection.data;
-                  $location.url('/error');
+
+                  $injector
+                    .get('$state')
+                    .go('error');
                 }
 
                 return $q.reject(rejection);
@@ -77,35 +81,22 @@
 
         $stateProvider
           .state('login', {
-            url: '/',
+            url:            '/',
             templateUrl:    'views/forge.html',
             controller:     'ForgeCtrl'
           })
           .state('error', {
-            url: '/error',
-            templateUrl:    'views/500.html',
-            controller:     'ErrorCtrl' 
+            templateUrl:    '500.html',
+            controller:     'ErrorCtrl'
           })
           .state('signup', {
-              templateUrl:  'views/modals/signup.html'
+            templateUrl:  'views/signup.html',
+            controller:   'SignUpCtrl'
           })
         ;
 
+        // FIXME not sure why this isn't working...
         // urlRouterProvider.otherwise('/');
-
-        // $routeProvider
-        //   .when('/', {
-        //     templateUrl:  'views/forge.html',
-        //     controller:   'ForgeCtrl'
-        //   })
-        //   .when('/error', {
-        //     templateUrl:  '500.html',
-        //     controller:   'ErrorCtrl'
-        //   })
-        //   .otherwise({
-        //     redirectTo:   '/'
-        //   })
-        // ;
 
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('ServerErrorInterceptor');
@@ -116,37 +107,18 @@
           || "The server didn't send back anything.";
       })
 
-      .controller('ForgeCtrl', function($scope, $log, $modal, Session) {
-        $scope.showSignUpForm = function() {
-          var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl:  'views/modals/signup.html',
-            controller:   'SignUpModalCtrl'
-          });
-
-          modalInstance.result.then(function() {
-          }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-          });
-        };
-
-        // close all modals on a route change.
-        // FIXME
-        // NOTE probably just cut out modals. Clunky and more trouble than they're worth.
-        $scope.$on('$routeChangeStart', function(){
-          $modalInstance.close();
-        });
+      .controller('ForgeCtrl', function($scope, $log, Session) {
 
         $scope.login = function() {
           Session.authenticate($scope.loginInfo);
         }
       })
 
-      .controller('SignUpModalCtrl', function($scope, $log, $modalInstance, Users) {
+      .controller('SignUpCtrl', function($scope, $log, Users) {
         $scope.signup = function() {
           // TODO POST account to User
           var user = new Users({
-            username: 'Hurp',
+            username: 'Hurp2',
             password: 'durple500',
             confirmPassword: 'durple500',
             email: 'hurp@durp.com'
@@ -157,9 +129,6 @@
           // Session.authenticate({});
         };
 
-        $scope.cancel = function() {
-          $modalInstance.dismiss('cancel');
-        };
       })
 
       .factory('Users', ['$resource',
