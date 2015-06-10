@@ -11,6 +11,25 @@
         || "The server didn't send back anything.";
     })
 
+    .controller('AppCtrl', function($scope, $rootScope) {
+      $scope.alerts = [];
+
+      $scope.$on('alert:fail', function(ev, data) {
+        $scope.addAlert(data.error || data);
+      })
+
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
+
+      $scope.addAlert = function(msg, kind) {
+        $scope.alerts.push(
+          {type: kind || 'danger', msg: msg || 'bad request'});
+      };
+
+
+    })
+
     .controller('ForgeCtrl', function($scope, $log, $state, Session) {
       $scope.userInfo = null;
 
@@ -24,10 +43,6 @@
     })
 
     .controller('LoginCtrl', function($scope, $log, $state, Session) {
-      // TODO maybe make this into a directive for 400s?
-      $scope.alerts = [
-      ];
-
 
       $scope.login = function() {
         // TODO probably some kind of auth service that rests on top of session resource.
@@ -35,25 +50,13 @@
           .authenticate($scope.loginInfo)
           .$promise
           .then(function(data) {
-            if (data) {
-              $state.go('forge');
-            }
-          })
-          .catch(function(rejection) {
-            $scope.error = $scope.alerts.push(
-              {type: 'danger', msg: rejection.data.error});
+            $state.go('forge');
           })
         ;
-
-        $scope.closeAlert = function(index) {
-          $scope.alerts.splice(index, 1);
-        };
       }
     })
 
     .controller('SignUpCtrl', function($scope, $log, $state, $timeout, Users, Session) {
-      $scope.alerts = [
-      ];
 
       $scope.signup = function() {
         var user = new Users($scope.signUpInfo);
@@ -64,31 +67,13 @@
               .authenticate($scope.signUpInfo)
               .$promise
               .then(function(data) {
-                if (data) {
 
-                  $scope.error = $scope.alerts.push(
-                    {type: 'success', msg: "Welcome to Forge!"});
+                $state.go('forge');
 
-                  $timeout(function() {
-                    $state.go('forge');
-                  }, 2000);
-
-                }
-              })
-              .catch(function(rejection) {
-                $scope.error = $scope.alerts.push(
-                  {type: 'danger', msg: rejection.data.error});
               })
             ;
           })
-          .catch(function(rejection) {
-            $scope.error = $scope.alerts.push(
-              {type: 'danger', msg: rejection.data});
-          });
-      };
-
-      $scope.closeAlert = function(index) {
-        $scope.alerts.splice(index, 1);
+        ;
       };
 
     })

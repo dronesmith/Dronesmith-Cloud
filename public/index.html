@@ -1,5 +1,5 @@
 <!doctype HTML>
-<html lang="en">
+<html lang="en" ng-app="Forge">
 <head>
   <base href="/">
   <meta charset="utf-8">
@@ -21,7 +21,10 @@
      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    <![endif]-->
 </head>
-<body ng-app="Forge">
+<body ng-controller="AppCtrl">
+
+  <!-- HTTP request statuses -->
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
   <main ui-view></main>
 

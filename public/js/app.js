@@ -38,6 +38,8 @@
                 $injector
                   .get('$state')
                   .go('error');
+              } else if (rejection.status === 400) {
+                $rootScope.$broadcast('alert:fail', rejection.data);
               }
 
               return $q.reject(rejection);
