@@ -32,6 +32,15 @@
   background-color: #27A9E1;
 }
 
+/*
+
+  COMMUNITY BARSTYLES
+
+*/
+
+#communityBar section {
+  height: 7vh;
+}
 
 /*
 
@@ -42,7 +51,7 @@
 #modView aside {
   /*min-height: 480px;
   max-height: 1800px;*/
-  height: 80vh;
+  height: 86vh;
 }
 
 /*
@@ -52,7 +61,7 @@
 */
 
 #eeduLink section {
-  height: 5vh;
+  height: 7vh;
   width: 100vh;
 }
 
