@@ -1,10 +1,14 @@
 
 <section id="forge">
 
-  <community-bar></community-bar>
+  <h1 ng-hide="userInfo" class="text-center">Loading Forge...</h1>
 
-  <mod-view></mod-view>
+  <div ng-show="userInfo">
+    <community-bar></community-bar>
 
-  <eedu-link></eedu-link>
+    <mod-view></mod-view>
+
+    <eedu-link></eedu-link>
+  </div>
 
 </section>

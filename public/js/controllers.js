@@ -56,12 +56,27 @@
 
     // Directive Controllers
 
-    .controller('CommunityBarCtrl', function($scope) {
+    .controller('CommunityBarCtrl', function($scope, $state, Session) {
+      $scope.userInfo = null;
+      Session
+        .get({}, function(data) {
+          $scope.userInfo = data.userData || null;
+        });
 
+      $scope.logout = function() {
+        Session
+          .authenticate({deauth: true})
+          .$promise
+          .then(function(data) {
+            if (!data.userData) {
+              $state.go('login');
+            }
+          });
+      };
     })
 
     .controller('ModViewCtrl', function($scope) {
-      
+
     })
 
     .controller('EeduLinkCtrl', function($scope) {
