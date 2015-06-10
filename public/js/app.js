@@ -29,8 +29,7 @@
             },
 
             responseError: function(rejection) {
-              // TODO proper handling of 400s
-              if (rejection.status === 500 || rejection.status === 400) {
+              if (rejection.status === 500) {
 
                 // TODO this is cheap. Find a better solution.
                 // Note that $stateParams doesn't work.

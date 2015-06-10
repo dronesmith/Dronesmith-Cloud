@@ -43,6 +43,7 @@
 
           <button type="submit" class="center-block btn btn-primary" ng-click="login()">Login to my Forge</button>
         </ng-form>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         <p class="text-center"><em><small><a href="" ui-sref="signup">Don't have an account?</a></small></em></p>
     </div>
     </div>

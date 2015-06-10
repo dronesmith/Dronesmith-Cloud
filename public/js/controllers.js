@@ -23,7 +23,11 @@
         });
     })
 
-    .controller('LoginCtrl', function($scope, $log, $state, Session) {
+    .controller('LoginCtrl', function($scope, $log, $state, $interval, Session) {
+      $scope.alerts = [
+      ];
+
+
       $scope.login = function() {
         Session
           .authenticate($scope.loginInfo)
@@ -32,8 +36,16 @@
             if (data) {
               $state.go('forge');
             }
-          });
+          })
+          .catch(function(rejection) {
+            $scope.error = $scope.alerts.push(
+              {type: 'danger', msg: rejection.data.error});
+          })
+        ;
 
+        $scope.closeAlert = function(index) {
+          $scope.alerts.splice(index, 1);
+        };
       }
     })
 
@@ -57,6 +69,9 @@
     // Directive Controllers
 
     .controller('CommunityBarCtrl', function($scope, $state, Session) {
+      // FIXME We don't want to poll when we can just retrieve this from the
+      // parent controller.
+      // Or, maybe make a Forge Service?
       $scope.userInfo = null;
       Session
         .get({}, function(data) {
