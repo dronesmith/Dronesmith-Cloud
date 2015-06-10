@@ -17,6 +17,9 @@ module.exports = function(app, route) {
 
         // Authenticate a session (allows logins)
         .post('/api/session', session.authenticate)
+
+        // See if user still has a running session
+        .get('/api/session', session.poll)
     ;
 
     if (app.get('env') === 'development') {

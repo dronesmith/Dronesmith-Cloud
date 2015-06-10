@@ -80,10 +80,14 @@
         ;
 
         $stateProvider
-          .state('login', {
+          .state('forge', {
             url:            '/',
             templateUrl:    'views/forge.html',
             controller:     'ForgeCtrl'
+          })
+          .state('login', {
+            templateUrl:    'views/login.html',
+            controller:     'LoginCtrl'
           })
           .state('error', {
             templateUrl:    '500.html',
@@ -107,10 +111,29 @@
           || "The server didn't send back anything.";
       })
 
-      .controller('ForgeCtrl', function($scope, $log, Session) {
+      .controller('ForgeCtrl', function($scope, $log, $state, Session) {
+        $scope.userInfo = null;
 
+        Session
+          .get({}, function(data) {
+            $scope.userInfo = data || null;
+            if (!$scope.userInfo) {
+              $state.go('login');
+            }
+          });
+      })
+
+      .controller('LoginCtrl', function($scope, $log, $state, Session) {
         $scope.login = function() {
-          Session.authenticate($scope.loginInfo);
+          Session
+            .authenticate($scope.loginInfo)
+            .$promise
+            .then(function(data) {
+              if (data) {
+                $state.go('forge');
+              }
+            });
+
         }
       })
 
@@ -144,8 +167,7 @@
 
       .factory('Session', ['$resource',
         function($resource) {
-          return $resource('/api/session/:id', {
-            userId: '@_id'
+          return $resource('/api/session', {
           }, {
             sync: {
               method: 'PUT'

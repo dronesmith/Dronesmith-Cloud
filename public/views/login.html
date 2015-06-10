@@ -1,0 +1,52 @@
+
+<section id="forge">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <hgroup class="text-center">
+        <h1>Welcome to Forge</h1>
+        <h3><em>A Robotics Development Kit for everyone!</em></h3>
+      </hgroup>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <ng-form class="panel-body" name="loginForm" novalidate>
+          <fieldset class="form-group">
+            <label class="control-label" for="email">Username or Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="luci@sharklasers.net"
+              ng-model="loginInfo.email"
+              required>
+          </fieldset>
+
+          <fieldset class="form-group control-group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty}">
+            <label class="control-label" for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              ng-model="loginInfo.password"
+              ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
+              required
+              >
+          </fieldset>
+
+          <button type="submit" class="center-block btn btn-primary" ng-click="login()">Login to my Forge</button>
+        </ng-form>
+        <p class="text-center"><em><small><a href="" ui-sref="signup">Don't have an account?</a></small></em></p>
+    </div>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+
+</section>

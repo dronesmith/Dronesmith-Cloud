@@ -64,7 +64,7 @@ app.use(session({
   genid: function(req) {
     return uuid.v4();
   },
-  secret: 'keyboard cat',
+  secret: 'myehhhhh',
   resave: false,
   saveUninitialized: false,
   store: new RedisStore(config.session)
@@ -76,6 +76,14 @@ app.use(lessMiddleware(path.join(__dirname, 'theme'), {
   debug: true
 }));
 
+// Check for session, later authorization
+app.use(function (req, res, next) {
+  log.debug(req.session);
+  if (!req.session) {
+    return next(new Error('Session should never be null!\nIs Redis running?'));
+  }
+  next();
+});
 
 // Render statics (including HTML)
 app.use(express.static(path.join(__dirname, 'public')));
@@ -87,7 +95,7 @@ var router = require('./routes/index')(app, Router);
 app.use('/', router);
 
 app.use(function (req, res, next) {
-    res.setHeader('x-powered-by', 'drones, lots of drones');
+    res.setHeader('x-powered-by', 'SkyworksAS');
     return next();
 });
 
