@@ -5,20 +5,63 @@
 </div>
 <div class="row">
   <div class="col-sm-4"></div>
-  <div class="col-sm-4">
-    <ng-form class="panel-body">
-      <fieldset class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="luci@sharklasers.net">
+  <div class="col-sm-4 panel">
+    <ng-form class="panel-body" name="signUpForm" novalidate>
+
+
+      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.username.$invalid && signUpForm.username.$dirty}">
+        <label class="control-label" for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          ng-model="signUpInfo.username"
+          required
+          >
       </fieldset>
 
-      <fieldset class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password">
+      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}">
+        <label class="control-label" for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          ng-model="signUpInfo.email"
+          required
+          >
+      </fieldset>
+
+      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}">
+        <label class="control-label" for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          ng-model="signUpInfo.password"
+          ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
+          required
+          >
+      </fieldset>
+
+      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
+        <label class="control-label" for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          ng-model="signUpInfo.confirmPassword"
+          ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
+          required
+          >
       </fieldset>
       <button type="submit" class="pull-left btn btn-danger" ui-sref="login">Cancel</button>
       <button type="submit" class="pull-right btn btn-primary" ng-click="signup()">Sign Up</button>
     </ng-form>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
   </div>
   <div class="col-sm-4"></div>
 </div>

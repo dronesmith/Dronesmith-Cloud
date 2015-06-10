@@ -23,12 +23,14 @@
         });
     })
 
-    .controller('LoginCtrl', function($scope, $log, $state, $interval, Session) {
+    .controller('LoginCtrl', function($scope, $log, $state, Session) {
+      // TODO maybe make this into a directive for 400s?
       $scope.alerts = [
       ];
 
 
       $scope.login = function() {
+        // TODO probably some kind of auth service that rests on top of session resource.
         Session
           .authenticate($scope.loginInfo)
           .$promise
@@ -49,19 +51,44 @@
       }
     })
 
-    .controller('SignUpCtrl', function($scope, $log, Users) {
-      $scope.signup = function() {
-        // TODO POST account to User
-        var user = new Users({
-          username: 'Hurp2',
-          password: 'durple500',
-          confirmPassword: 'durple500',
-          email: 'hurp@durp.com'
-        })
-          .$save();
+    .controller('SignUpCtrl', function($scope, $log, $state, $timeout, Users, Session) {
+      $scope.alerts = [
+      ];
 
-        // TODO
-        // Session.authenticate({});
+      $scope.signup = function() {
+        var user = new Users($scope.signUpInfo);
+        user
+          .$save()
+          .then(function(data) {
+            Session
+              .authenticate($scope.signUpInfo)
+              .$promise
+              .then(function(data) {
+                if (data) {
+
+                  $scope.error = $scope.alerts.push(
+                    {type: 'success', msg: "Welcome to Forge!"});
+
+                  $timeout(function() {
+                    $state.go('forge');
+                  }, 2000);
+
+                }
+              })
+              .catch(function(rejection) {
+                $scope.error = $scope.alerts.push(
+                  {type: 'danger', msg: rejection.data.error});
+              })
+            ;
+          })
+          .catch(function(rejection) {
+            $scope.error = $scope.alerts.push(
+              {type: 'danger', msg: rejection.data});
+          });
+      };
+
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
       };
 
     })
