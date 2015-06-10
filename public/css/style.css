@@ -1,3 +1,9 @@
+/*
+
+  MAIN STYLES
+
+*/
+
 .bg-mid {
   background-color: #777;
 }
@@ -10,10 +16,50 @@
   background-color: #555;
 }
 
+.bg-semidark {
+  background-color: #444;
+}
+
 .bg-darker {
   background-color: #333;
+}
+
+.bg-darkest {
+  background-color: #222;
 }
 
 .bg-blue {
   background-color: #27A9E1;
 }
+
+
+/*
+
+  MOD VIEW STYLES
+
+*/
+
+#modView aside {
+  /*min-height: 480px;
+  max-height: 1800px;*/
+  height: 80vh;
+}
+
+/*
+
+  EEDU LINK STYLES
+
+*/
+
+#eeduLink section {
+  height: 5vh;
+  width: 100vh;
+}
+
+/*
+
+  DEFINE ADDITIONAL PARTIAL/VIEW STYLES HERE
+
+  ALWAYS SEPARATE BY IDS
+
+*/
