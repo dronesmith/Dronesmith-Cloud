@@ -1,0 +1,22 @@
+<div class="terminal">
+	<div class="row">
+		<div class="col-sm-2 ">
+			<select class="form-control" ng-model='language' ng-options='language.name for language in languages' ng-change="languageChanged()"></select>
+		</div>
+		<!-- <div class="col-sm-10"> -->
+		<!-- </div>  -->
+	</div>
+	<br>
+	<div id="editor" ui-ace='aceOption' ng-model="language.sampleCode"></div>
+	<div class="wrapper">
+		<input class='btn btn-primary' type='button' ng-click='run()' value='RUN >>'>
+		<input class='btn btn-primary' type='button' ng-click='reset()' value='RESET >>'>
+		<input class="btn btn-primary" type='button' ng-click="undoBtn()" value='UNDO'>
+		<input class="btn btn-primary" type='button' ng-click="redoBtn()" value='REDO'>
+		<progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{message}}</progressbar>
+	</div>
+	<div class="console">
+		<p ng-repeat="w in world track by $index">>> {{w}}</p>
+	</div>
+
+</div>

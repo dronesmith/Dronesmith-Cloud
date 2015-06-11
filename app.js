@@ -78,7 +78,6 @@ app.use(lessMiddleware(path.join(__dirname, 'theme'), {
 
 // Check for session, later authorization
 app.use(function (req, res, next) {
-  log.debug(req.session);
   if (!req.session) {
     return next(new Error('Session should never be null!\nIs Redis running?'));
   }
