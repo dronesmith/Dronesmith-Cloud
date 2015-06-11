@@ -41,6 +41,8 @@ Standard CSS should be defined in the `public/css` directory. You probably don't
 
 Talk about angular controllers/directives/filters/etc here
 
+This layer involves controlling the behavior on the frontend. 
+
 ### Routing Layer 
 
 Talk about node express here. RESTful stuff.
@@ -52,6 +54,8 @@ Talk about serverside of Forge.
 ### DB Layer
 
 Talk about ODM, Redis and Mongo, and schema layout
+
+
 
 # Running
 
