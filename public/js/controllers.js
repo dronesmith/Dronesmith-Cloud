@@ -38,6 +38,8 @@
           $scope.userInfo = data.userData || null;
           if (!$scope.userInfo) {
             $state.go('login');
+          } else {
+            $scope.$broadcast('session:update', $scope.userInfo);
           }
         });
     })
@@ -102,8 +104,18 @@
       };
     })
 
-    .controller('ModViewCtrl', function($scope) {
+    .controller('ModViewCtrl', function($scope, Session) {
+      $scope.mods = [];
 
+      $scope.activeMod = null;
+
+      $scope.$on('session:update', function(ev, sessionData) {
+        $scope.mods = sessionData.mods;
+
+        if (!$scope.activeMod && $scope.mods.length > 0) {
+          $scope.activeMod = $scope.mods[0];
+        }
+      });
     })
 
     .controller('EeduLinkCtrl', function($scope) {
