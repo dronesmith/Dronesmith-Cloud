@@ -1,0 +1,7 @@
+{
+  "name": "Blocks",
+  "icon": "library.png",
+  "index": "blocks.html",
+  "controller": "BlockCtrl",
+  "controller.index": "block.controllers.js"
+}

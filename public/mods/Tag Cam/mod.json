@@ -1,0 +1,7 @@
+{
+  "name": "Tag Cam",
+  "icon": "tagCam.png",
+  "index": "tagCam.html",
+  "controller": "TagCamCtrl",
+  "controller.index": "tagCam.controllers.js"
+}

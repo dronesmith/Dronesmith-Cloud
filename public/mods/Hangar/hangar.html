@@ -1,11 +1,11 @@
 <div id='hangar' class="container-fluid">
 
 	<user-panel></user-panel>
-	<div layout="row" layout-sm="column">
-		<div flex-gt-sm="65" layout-margin>
-			<div id='system' layout="row" layout-sm="column">
-				<div flex-gt-sm="50"><img src="img/front2.png"></div>
-				<div flex-gt-sm="50">
+	<div class="row">
+		<div class="col-sm-7">
+			<div id='system' class="row">
+				<div class="col-sm-6"><img src="img/front2.png"></div>
+				<div class="col-sm-6">
 					<h3>{{device.name}}</h3><br>
 					<p>Serial: 9384903943534SYD283</p>
 					<p>Make: Skyworks Arial Systems</p>
@@ -16,8 +16,8 @@
 					<button class="btn btn-primary" ng-click="connectToEedu($event)">Connect</button>
 				</div>
 			</div>
-			<div layout="row">
-				<div flex id='flight-logs' class="dark-grey">
+			<div>
+				<div id='flight-logs' class="dark-grey">
 					<div class="panel-heading">Flight Logs</div>
 					<table class="table table-striped">
 						<thead>
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<div flex-gt-sm="32" layout-margin class="dark-grey" style="padding: 0 20px;">
+		<div class="dark-grey col-sm-5" style="padding: 0 20px;">
 			<h3>Inventory</h3>
 			<div style="margin: 20px 20px">
 				<p style="font-weight: bold">Device List</p>

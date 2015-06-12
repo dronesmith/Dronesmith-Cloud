@@ -62,10 +62,26 @@
           templateUrl:    'views/forge.html',
           controller:     'ForgeCtrl'
         })
-        //===========This will go away later on=============
+        //===== Side menu bar: This will go away later on =============
         .state('forge.tagCam', {
-          templateUrl:    'mods/tagCam/tagCam.html',
-          controller:     'tagCamCtrl'
+          templateUrl:    'mods/Tag Cam/tagCam.html',
+          controller:     'TagCamCtrl'
+        })
+        .state('forge.hangar', {
+          templateUrl:    'mods/Hangar/hangar.html',
+          controller:     'HangarCtrl'
+        })
+        .state('forge.flightPlanner', {
+          templateUrl:    'mods/Flight Planner/flightPlanner.html',
+          controller:     'FlightPlannerCtrl'
+        })
+        .state('forge.myForge', {
+          templateUrl:    'mods/My Forge/myForge.html',
+          controller:     'TopProjectCtrl'
+        })
+        .state('forge.terminal', {
+          templateUrl:    'mods/Terminal/terminal.html',
+          controller:     'AceCtrl'
         })
         //=================================================
         .state('login', {

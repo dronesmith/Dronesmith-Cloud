@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-	forgeApp.controller('tagCamCtrl', ['$scope', '$mdDialog', function($scope, $mdDialog){
+	forgeApp.controller('TagCamCtrl', ['$scope', function($scope){
 			$scope.submit = function(event){
                 $mdDialog.show({
                     controller: DialogController,

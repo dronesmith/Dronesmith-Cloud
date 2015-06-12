@@ -169,22 +169,7 @@ flight-dash > :first-child{
 	display: -webkit-flex;
 	align-items: center;
 	-webkit-align-items: center;}
-.col-xs-12{
-	margin-top: 10px;}
 
-[ui-view].ng-enter{
-  -webkit-transition:opacity 1s ease-in-out;
-    -moz-transition:opacity 1s ease-in-out;
-    -o-transition:opacity 1s ease-in-out;
-    transition:opacity 1s ease-in-out;}
-
-[ui-view].ng-enter,
-[ui-view].ng-leave-active{
-  opacity: 0;}
-
-[ui-view].ng-enter-active,
-[ui-view].ng-leave{
-  opacity: 1;}
 
 /*-------------------------
 	background color class
@@ -385,8 +370,6 @@ flight-dash > :first-child{
 /*-------------------
 	Block Page
 --------------------*/
-section{
-	padding: 10px}
 
 .block{
 	min-height: 200px;
@@ -480,24 +463,6 @@ section{
 	padding: 10px 0;
 	font-size: 18px;
 	font-weight: bold;}
-md-option{
-	color: #27A9E1}
-md-select-label span{
-	color: #27A9E1	}
-md-dialog{
-    width: 300px;
-    height: 200px;}
-md-dialog .md-title{
-    color: #28282a;}
-md-dialog .md-actions{
-    margin-top: 50px;}
-md-dialog p{
-    color: #28282a;
-    text-align: center;
-    padding-top: 20px;}
-md-dialog.md-content-overflow .md-actions{
-    border-top: 0;}
-
 /* ------------------------------------------
 	[pages] Flight planner - waypoint
 ---------------------------------------------*/

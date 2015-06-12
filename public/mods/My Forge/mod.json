@@ -1,0 +1,7 @@
+{
+  "name": "My Forge",
+  "icon": "myforge.png",
+  "index": "myForge.html",
+  "controller": "",
+  "controller.index": "myForge.controllers.js"
+}
