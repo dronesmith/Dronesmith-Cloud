@@ -3,7 +3,10 @@
   <div class="row">
     <aside class="col-xs-2 col-sm-1 bg-darkest">
       <ul ng-show="mods.length > 0" ng-repeat="mod in mods">
-        <li><a href="">{{mod.name}}</a></li>
+        <li><a ng-href="">
+          <img ng-src="{{mod.icon}}">
+          {{mod.name}}
+          </a></li>
       </ul>
       <p class="lead" ng-hide="mods.length > 0">Your account has no mods. <a href="">Add some?</a></p>
     </aside>
