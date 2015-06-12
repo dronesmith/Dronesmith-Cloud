@@ -30,7 +30,7 @@
 
     })
 
-    .controller('ForgeCtrl', function($scope, $log, $state, Session) {
+    .controller('ForgeCtrl', function($scope, $log, $state, Session, Sync) {
       $scope.userInfo = null;
 
       Session
@@ -40,6 +40,7 @@
             $state.go('login');
           } else {
             $scope.$broadcast('session:update', $scope.userInfo);
+            Sync.launch();
           }
         });
     })
@@ -83,14 +84,11 @@
     // Directive Controllers
 
     .controller('CommunityBarCtrl', function($scope, $state, Session) {
-      // FIXME We don't want to poll when we can just retrieve this from the
-      // parent controller.
-      // Or, maybe make a Forge Service?
       $scope.userInfo = null;
-      Session
-        .get({}, function(data) {
-          $scope.userInfo = data.userData || null;
-        });
+
+      $scope.$on('session:update', function(ev, sessionData) {
+        $scope.userInfo = sessionData;
+      });
 
       $scope.logout = function() {
         Session
@@ -99,6 +97,7 @@
           .then(function(data) {
             if (!data.userData) {
               $state.go('login');
+              Sync.exit();
             }
           });
       };
@@ -113,6 +112,7 @@
         $scope.mods = sessionData.mods;
 
         if (!$scope.activeMod && $scope.mods.length > 0) {
+          // TODO this is pref data to be synced.
           $scope.activeMod = $scope.mods[0];
         }
       });

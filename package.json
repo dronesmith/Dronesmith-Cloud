@@ -9,6 +9,7 @@
   "author": "Geoff Gardner",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.2.1",
     "body-parser": "^1.12.4",
     "compression": "^1.4.4",
     "connect-redis": "^2.3.0",
