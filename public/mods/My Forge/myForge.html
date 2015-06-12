@@ -1,0 +1,67 @@
+<div id="myForge" class="my-forge-main">
+	<user-panel></user-panel>
+	<!-- My forge dashboard -->
+	<div ui-view class="container-fluid">
+		<div layout="row" layout-sm="column">
+
+				<div flex-gt-sm="70" class="col-sm-8 col-xs-12 left">
+					<div id="camera">
+						<script>
+                $('#camera').load('three/skybox.html');
+            </script>
+					</div>
+
+					<div id="news" class="row">
+						<div>
+							<div class="col-sm-4 col-xs-12">
+								<img src="img/img3.jpg" alt="">
+								<img src="img/img4.jpg" alt="">
+							</div>
+							<div id='top-project' class="col-sm-8 col-xs-12">
+								<div class="panel-heading">Tog Projects</div>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Project</th>
+											<th>User</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat='project in projects'>
+											<td>{{project.name}}</td>
+											<td>{{project.user}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div flex-gt-sm="30" class="col-sm-4 col-xs-12 my-forge-panel">
+					<h3>My Forge</h3>
+					<div style="background: #21262a; width: 100%; padding: 10px 10px; margin-bottom: 10px">
+						<div class="row">
+							<div class="col-sm-6" style="font-weight: bold">Cloud</div>
+							<div class="col-sm-6 text-right">8GB</div>
+						</div>
+						<div style="padding: 0 20px;">
+							<h2 style="color: #27a9e1">3%&nbsp;
+								<span style="font-size: 12px; color: #fff">Cloud Used</span>
+							</h2>
+						</div>
+					</div>
+					<div style="background: #21262a; width: 100%; padding: 10px 10px;">
+						<div class="row">
+							<div class="col-sm-6" style="font-weight: bold">Rank Status</div>
+							<div class="col-sm-6 text-right">1,005pts</div>
+						</div>
+						<div style="padding: 0 20px;">
+							<h2 style="color: #27a9e1; font-size: 150%">Level II Apprentice</h2>
+							<span style="font-size: 12px; color: #fff">Next Rank: Dronesmith(1,500pts)</span>
+						</div>
+					</div>
+				</div>
+
+		</div>
+	</div>
+</div>

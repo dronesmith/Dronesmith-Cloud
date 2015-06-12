@@ -1,0 +1,6 @@
+{
+  "name": "Flight Planner",
+  "icon": "planner.png",
+  "index": "flightPlanner.html",
+  "controller": "flightPlanner.js"
+}
