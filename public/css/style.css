@@ -1,74 +1,508 @@
-/*
+/*-------------------------
+	global class
+---------------------------*/
+html, body{
+	position: fixed;
+	top:0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	background-color: #3A3A3C;}
 
-  MAIN STYLES
+img{
+	width: 100%;}
 
-*/
+community-bar{
+	position: absolute;
+	height: 70px;
+	width: 100%;
+	left: 0;
+	top:0;
+	background-color: #1d1d1f;}
+community-bar img{
+	width: 50px;
+	margin-top: 10px}
+community-bar p{
+	font-size: 16px;}
+community-bar#toggleMenu{
+	font-size: 16px}
+community-bar .user-img{
+	border-radius: 50px;}
+.badge{
+	background-color: #27a9e1}
+	
+mod-view{
+	position: absolute;
+	width: 100%;
+	top: 70px;
+	bottom: 70px;
+	left: 0;
+	overflow-x: hidden;}
+mod-view .view-width{
+	padding: 0 10px;
+	width: 100%;}
+@media screen and (min-width: 768px){
+	mod-view .view-width{
+		float: left;
+		width: 89%;}}
+@media screen and (min-width: 992px){
+	mod-view .view-width{
+		width: 91%;}}
+@media screen and (min-width: 1200px){
+	mod-view .view-width{
+		width: 93%;}}
 
-.bg-mid {
-  background-color: #777;
+eedu-link{
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  height: 70px;
+  background-color: #28282a}
+eedu-link{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	left: 0px;
+	height: 70px;
+	background-color: #28282a}
+eedu-link .left{
+	margin-left: 10px}
+eedu-link .grey-box{
+	height: 60px;
+	padding: 10px 10px 0 10px;
+	background-color: #3c3c3e;
+	margin-top: 5px;
+	width: auto;
+	display: inline-block;}
+eedu-link .grey-box-line{
+	background-color: transparent;
+	border: 2px solid #28282a;
+	width: auto;
+	font-size: 10px;
+	font-weight: bold;
+	margin-top: 5px;
+	padding: 1px;}
+eedu-link .orange{
+	color: orange;}
+eedu-link .green{
+	color: green;}
+eedu-link .red{
+	color: red;}
+eedu-link .flight-time{
+	padding-top: 15px;
+	font-family: Impact}
+eedu-link .flight-time p:nth-child(2){
+	margin-top: -10px;
+	font-size: 25px;
+	color: #27A9E1;}
+eedu-link #battery{
+	top: 35px;
+	right: 20px;
+	float: right;
+	border: 2px solid white;
+	width: 23px;
+	height: 16px;
+	position: relative;}
+eedu-link #battery::after{
+	content: '';
+	width: 3px;
+	height: 10px;
+	background-color: white;
+	display: block;
+	position: absolute;
+	right: -5px;}
+eedu-link #battery .battery-low{
+	display: block;
+	width: 5px;
+	height: 10px;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	background-color: white}
+eedu-link #battery .battery-medium{
+	display: block;
+	width: 5px;
+	height: 10px;
+	position: absolute;
+	top: 1px;
+	left: 7px;
+	background-color: white;}
+eedu-link #battery .battery-high{
+	width: 5px;
+	height: 10px;
+	position: absolute;
+	top: 1px;
+	left: 13px;
+	background-color: white;}
+
+flight-dash{
+	position: absolute;
+	bottom: -250px;
+	height: 200px;
+	width: 100%;
+	background-color: black;
+	-webkit-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+flight-dash > :first-child{
+	font-size: 30px;
+	display: block;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+.md-button.md-fab{
+	width: 100px;
+	height: 100px;}
+
+.text-center{
+  text-align: center;
+  margin: 0 auto;}
+
+.thumbnail{
+	border: none;}
+
+.align-middle-container{
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;}
+.col-xs-12{
+	margin-top: 10px;}
+
+[ui-view].ng-enter{
+  -webkit-transition:opacity 1s ease-in-out;
+    -moz-transition:opacity 1s ease-in-out;
+    -o-transition:opacity 1s ease-in-out;
+    transition:opacity 1s ease-in-out;}
+
+[ui-view].ng-enter,
+[ui-view].ng-leave-active{
+  opacity: 0;}
+
+[ui-view].ng-enter-active,
+[ui-view].ng-leave{
+  opacity: 1;}
+
+/*-------------------------
+	background color class
+---------------------------*/
+.dark-grey{
+	background: #28282a;}
+.blue-box{
+	background: #21262a; 
+	padding: 10px 10px; 
+	margin-bottom: 10px;}
+
+/*-----background: #21262a; padding: 10px 10px; margin-bottom: 10px--------------------
+	[Gadget]left slide out menu
+---------------------------*/
+.greyBar{
+	position: fixed;
+	left: 0px;
+	width: 80px;
+	height: 100%;
+	z-index: -1;
+	background-color: #292929;}
+
+#menu a{
+	font-size: 0.8em}
+#menu{
+	display: block;
+	background-color: #292929;
+	width: 80px;}
+#menu img{
+	width: 32px;}
+
+/*---------------------------
+	[Gadget] user panel
+-----------------------------*/
+#panel-bar{
+	margin: 10px 0;
+	padding: 0 5px;
+	border-radius: 10px;
+	border: 1px solid grey;
+	height: 50px;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;}
+#panel-bar h3{
+	margin-top: 5px;}
+#panel{
+	list-style-type: none;
+	display: none;
+	position: relative;
+	float: right;
+	right: 0;
+	padding-left: 0px;
+	width: auto;
+	-webkit-transition: 0.5s ease-in-out;
+	transition: 0.5s ease-in-out;}
+#panel li{
+	font-size: 18px;
+	float: left;
+	padding-right: 20px;
+	padding-top: 6px;}
+
+.toggle-switch{
+	position: relative;
+	display: block;
+	float: right;
+	width: 40px;
+	height: 40px;
+	background-color: transparent;}
+.toggle-switch span{
+	display: block;
+	position: absolute;
+	top: 17px;
+	left: 5px;
+	right: 5px;
+	height: 3px;
+	background: #27a9e1;}
+.toggle-switch span::before,
+.toggle-switch span::after{
+	position: absolute;
+	display: block;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background-color: #27a9e1;
+	content: "";
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s}
+.toggle-switch span::before{
+	top: -10px;
+	-webkit-transition-property: top;
+	transition-property: top;}
+.toggle-switch span::after{
+	bottom: -10px;
+	-webkit-transition-property: bottom;
+	transition-property: bottom;}
+.toggle-switch.active span{
+	background-color: transparent;}
+.toggle-switch.active span::before{
+	top: 0;
+	-webkit-transition: 0.5s ease-in-out;
+	transition: 0.5s ease-in-out;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);}
+.toggle-switch.active span::after{
+	bottom: 0;
+	-webkit-transition: 0.5s ease-in-out;
+	transition: 0.5s ease-in-out;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);}
+
+/*-------------------------
+	[Pages] myForge
+---------------------------*/
+#slide-show{
+	margin-bottom: 20px;}
+#news img{
+	margin-bottom: 20px;}
+#top-project{
+	background-color: #28282a; }
+#myForge .left{
+	padding-right: 10px;}
+
+.my-forge-dashboard{
+	height: 100%}
+.my-forge-panel{
+	background-color: #28282a;
+    padding: 10px;}
+.my-forge-project{
+	margin-right: 5px;
+	padding-top: 5px;}
+
+.addProject-left{
+	background-color: #28282a;
+	width: 65%;
+	margin-right: 10px;
+    padding: 10px;}
+@media screen and (max-width: 768px){
+.addProject-left{
+	background-color: #28282a;
+	width: 100%;
+    padding: 10px;}
 }
 
-.bg-light {
-  background-color: #999;
+.project{
+	height: 200px;}
+.project a{
+	min-height: 140px;
+	line-height: 1.3em;
+	-webkit-box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.47);
+	-moz-box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.47);
+	box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.47);
+	transition: 0.8s ease-in all;}
+.project a:hover{
+	-webkit-box-shadow: 0 0 20px #27A9E1;
+	-moz-box-shadow: 0 0 20px #27A9E1;
+	box-shadow: 0 0 20px #27A9E1;}
+.project a img {
+	display: block;
+	margin: 26px auto 4px;}
+.project a h4 {
+	display: block;
+	width: 160px;
+	font-size: 1.3em;
+	font-family: Arial, Tahoma, sans-serif;
+	color: #646464;
+	word-wrap: break-word;
+	text-align: center;}
+.project a:hover h4 {
+	color: #787878;}
+/*--------- fade in & out project block effect---------*/
+.project.ng-enter{
+	-webkit-transition: 1s ease-in all;
+	transition: 1s ease-in all;
+	opacity: 0}
+.project.ng-enter-active{
+	opacity: 1}
+.project.ng-leave{
+	-webkit-transition: 1s ease-in all;
+	transition: 1s ease-in all;
+	opacity: 1}
+.project.ng-leave-active{
+	opacity: 0}
+.btn.ng-hide-add{
+	-webkit-transition: 1s ease-in all;
+	transition: 1s ease-in all;
+	color: transparent;
+	opacity: 1;}
+.btn.ng-hide-add-active{
+	opacity: 0}
+.btn.ng-hide-remove{
+	-webkit-transition: 1s ease-in all;
+	transition: 1s ease-in all;
+	opacity: 0;}
+.btn.ng-hide-remove-active{
+	opacity: 1}
+
+/*-------------------
+	Block Page
+--------------------*/
+section{
+	padding: 10px}
+
+.block{
+	min-height: 200px;
+	-webkit-box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.47);
+	-moz-box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.47);
+	box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.47);
+	transition: 0.8s ease-in all;}
+.text-block{
+	padding: 5px;
+	height: 100px;
+	overflow: hidden;}
+/*--------- fade in project block effect---------*/
+.wholeBlock.ng-enter{
+	-webkit-transition: 1s ease-in all;
+	transition: 1s ease-in all;
+	opacity: 0}
+.wholeBlock.ng-enter-active{
+	opacity: 1}
+
+/*----------------------
+	[Page] Terminal Page
+-----------------------*/
+.ace_editor{
+	height: 250px;
+	margin-bottom: 5px}
+@media screen and (min-height: 667px){
+	.ace_editor{
+		height: 300px;
+	}
+}
+@media screen and (min-height: 736px){
+	.ace_editor{
+		height: 375px;
+	}
+}
+@media screen and (min-height: 800px){
+	.ace_editor{
+		height: 450px;
+	}
+}
+@media screen and (min-height: 900px){
+	.ace_editor{
+		height: 500px;
+	}
+}
+@media screen and (min-height: 1000px){
+	.ace_editor{
+		height: 600px;
+	}
 }
 
-.bg-dark {
-  background-color: #555;
-}
+.progress{
+	height: 40px;
+	order: 2;
+	flex-grow: 1;
+	margin-bottom: 5px;}
+.terminal input{
+	height: 40px;}
+.terminal .console p{
+	margin: 0 0 0 0px !important;
+	background: black;}
+.terminal .wrapper{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: stretch;}
+.terminal .btn{
+	order: 1;}
 
-.bg-semidark {
-  background-color: #444;
-}
+/*------------------------------------
+	[Page] Hangar page
+--------------------------------------*/
+#hangar img{
+	width: 100%;}
+#hangar #system{
+	background-color: #cccccc;
+	padding: 50px 20px;
+	margin-bottom: 20px}
+#hangar #system h3{
+	color: black}
+#hangar #system p{
+	color: black}
+#hangar #system button{
+	width: 100px;
+	border-radius: 10px}
+#hangar .col-sm-8{
+	padding: 0 20px;}
+#hangar #flight-logs{
+	padding: 0 10px;}
+.panel-heading{
+	padding: 10px 0;
+	font-size: 18px;
+	font-weight: bold;}
+md-option{
+	color: #27A9E1}
+md-select-label span{
+	color: #27A9E1	}
+md-dialog{
+    width: 300px;
+    height: 200px;}
+md-dialog .md-title{
+    color: #28282a;}
+md-dialog .md-actions{
+    margin-top: 50px;}
+md-dialog p{
+    color: #28282a;
+    text-align: center;
+    padding-top: 20px;}
+md-dialog.md-content-overflow .md-actions{
+    border-top: 0;}
 
-.bg-darker {
-  background-color: #333;
-}
+/* ------------------------------------------
+	[pages] Flight planner - waypoint
+---------------------------------------------*/
 
-.bg-darkest {
-  background-color: #222;
-}
-
-.bg-blue {
-  background-color: #27A9E1;
-}
-
-/*
-
-  COMMUNITY BARSTYLES
-
-*/
-
-#communityBar section {
-  height: 7vh;
-}
-
-/*
-
-  MOD VIEW STYLES
-
-*/
-
-#modView aside {
-  /*min-height: 480px;
-  max-height: 1800px;*/
-  height: 86vh;
-}
-
-/*
-
-  EEDU LINK STYLES
-
-*/
-
-#eeduLink section {
-  height: 7vh;
-  width: 100vh;
-}
-
-/*
-
-  DEFINE ADDITIONAL PARTIAL/VIEW STYLES HERE
-
-  ALWAYS SEPARATE BY IDS
-
-*/
+#waypoint{
+	background-color: #28282a;}
+#views{
+	background-color: #28282a;}

@@ -1,5 +1,37 @@
 
-<section id="eeduLink" class="bg-semidark">
-    <p class="text-center">This is the eedu Link dashboard.</p>
-    <p class="text-right">woot.</p>
+<section id="eeduLink">
+	<div class="row">
+		<div class="col-xs-5">
+			<div class="row">
+				<div class="left">
+					<div class="grey-box">
+						<p class="text-center orange">{{primary.status}}</p>
+						<div class="text-center grey-box-line">STATUS</div>
+					</div>
+					<div class="grey-box">
+						<p class="text-center green">{{primary.payload + "g"}}</p>
+						<div class="text-center grey-box-line">PAYLOAD</div>
+					</div>
+					<div class="grey-box">
+						<p class="text-center red">{{primary.flightmode}}</p>
+						<div class="text-center grey-box-line">Flight Mode</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="flightTime" class="col-xs-2 flight-time">
+			<p class="text-center">Flight Time</p>
+			<p class="text-center"> 00:00:00 </p>
+		</div>
+
+		<div class="col-xs-5">
+			<div id="battery" ng-click="batteryLevel()">
+				<div class="battery-low"></div>
+				<div class="battery-medium"></div>
+				<div class="battery-high"></div>
+			</div>
+		</div>
+	</div>
+	<flight-dash layout="column" layout-align="space-around"></flight-dash>
 </section>

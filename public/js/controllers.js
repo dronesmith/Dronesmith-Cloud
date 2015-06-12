@@ -1,11 +1,8 @@
 (function() {
   'use strict';
 
-  angular
-    .module('Forge.controllers', [])
-
+  forgeApp
     // View Controllers
-
     .controller('ErrorCtrl', function($scope, $rootScope) {
       $scope.error = $rootScope.ServerError
         || "The server didn't send back anything.";

@@ -1,8 +1,7 @@
 (function() {
   'use strict';
 
-  angular
-    .module('Forge.services', [])
+  forgeApp
     .factory('Users', ['$resource',
       function($resource) {
         return $resource('/api/user/:id', {

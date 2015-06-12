@@ -1,20 +1,12 @@
-(function() {
-  'use strict';
 
-  angular
-    .module('Forge', [
-      'Forge.controllers',
-      'Forge.services',
-      'Forge.directives',
-      'Forge.filters',
+  var forgeApp = angular.module('Forge', [
       'ngRoute',
       'ngResource',
       'ui.router',
       'ngAnimate',
-      'ui.bootstrap'
-    ])
+      'ui.bootstrap']);
 
-    .config(function(
+  forgeApp.config(function(
       $httpProvider,
       $provide,
       $stateProvider,
@@ -54,6 +46,12 @@
           templateUrl:    'views/forge.html',
           controller:     'ForgeCtrl'
         })
+        //===========This will go away later on=============
+        .state('forge.tagCam', {
+          templateUrl:    'mods/tagCam/tagCam.html',
+          controller:     'tagCamCtrl'
+        })
+        //=================================================
         .state('login', {
           templateUrl:    'views/login.html',
           controller:     'LoginCtrl'
@@ -75,4 +73,3 @@
       $httpProvider.interceptors.push('ServerErrorInterceptor');
     })
   ;
-})();

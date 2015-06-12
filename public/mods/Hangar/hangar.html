@@ -1,0 +1,50 @@
+<div id='hangar' class="container-fluid">
+
+	<user-panel></user-panel>
+	<div layout="row" layout-sm="column">
+		<div flex-gt-sm="65" layout-margin>
+			<div id='system' layout="row" layout-sm="column">
+				<div flex-gt-sm="50"><img src="img/front2.png"></div>
+				<div flex-gt-sm="50">
+					<h3>{{device.name}}</h3><br>
+					<p>Serial: 9384903943534SYD283</p>
+					<p>Make: Skyworks Arial Systems</p>
+					<p>Model: eedu</p>
+					<p>Firmware Version: 1.3.4</p>
+					<p>Last updated: 05/15/2015</p>
+					<button class="btn btn-primary">Configure</button>
+					<button class="btn btn-primary" ng-click="connectToEedu($event)">Connect</button>
+				</div>
+			</div>
+			<div layout="row">
+				<div flex id='flight-logs' class="dark-grey">
+					<div class="panel-heading">Flight Logs</div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Log</th>
+								<th>Date/Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat='log in logs'>
+								<td>{{log.log}}</td>
+								<td>{{log.time}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div flex-gt-sm="32" layout-margin class="dark-grey" style="padding: 0 20px;">
+			<h3>Inventory</h3>
+			<div style="margin: 20px 20px">
+				<p style="font-weight: bold">Device List</p>
+				<select class="form-control" ng-init="device.name=defaultDevice.name" ng-model="device.name">
+					<option value="{{device.name}}" ng-repeat="device in devices">{{device.name}}</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+</div>

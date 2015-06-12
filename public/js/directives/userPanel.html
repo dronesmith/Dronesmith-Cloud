@@ -1,0 +1,30 @@
+<div id="panel-bar" layout="row">
+	<div flex="20">
+		<h3>{{panelType.title}}</h3>
+	</div>
+	<div flex="80">
+		<a href='javascript:void(0)' id="toggleSwitch" class="toggle-switch">
+			<span></span>
+		</a>
+		<ul id="panel">
+			<!-- <li ng-repeat="content in panelType.subMenus">
+				<a ui-sref='myForge.project'><h4>{{content.name}}</h4></a>
+			</li> -->
+			<!-- <li>
+				<h4>Market Place</h4>
+			</li>
+			<li>
+				<h4>Cloud</h4>
+			</li>
+			<li>
+				<h4>User</h4>
+			</li> -->
+			<li>
+				<a ui-sref='myForge.project.addProject'>Add</a>
+			</li>
+			<li>
+				<a href="#" ng-click="showMe=!showMe">Remove</a>
+			</li>
+		</ul>
+	</div>
+</div>

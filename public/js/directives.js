@@ -1,9 +1,7 @@
 (function() {
   'use strict';
 
-  angular
-    .module('Forge.directives', [])
-    
+  forgeApp
     .directive('communityBar', function() {
       return {
           restrict: 'E',
@@ -24,7 +22,18 @@
       return {
           restrict: 'E',
           templateUrl: 'views/partials/eedu-link.html',
-          controller: 'EeduLinkCtrl'
+          controller: 'EeduLinkCtrl',
+          link: function(scope, element, attr){
+            element.css({
+              cursor: "pointer"
+            });
+
+            element.click(function(){
+              $('flight-dash').css({
+                bottom: "0px"
+              });
+            });
+          }
       };
     })
   ;
