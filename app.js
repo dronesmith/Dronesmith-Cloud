@@ -64,7 +64,7 @@ app.use(session({
   genid: function(req) {
     return uuid.v4();
   },
-  secret: 'myehhhhh',
+  secret: 'tit-a-lee-tit-a-loo',
   resave: false,
   saveUninitialized: false,
   store: new RedisStore(config.session)
@@ -73,7 +73,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(lessMiddleware(path.join(__dirname, 'theme'), {
 	dest: path.join(__dirname, 'public'),
-  debug: true
+  debug: false
 }));
 
 // Check for session, later authorization
@@ -87,12 +87,7 @@ app.use(function (req, res, next) {
 // Render statics (including HTML)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Init the router
-var Router = express.Router();
-var router = require('./routes/index')(app, Router);
-
-app.use('/', router);
-
+// Some logging stuff.
 app.use(function (req, res, next) {
     res.setHeader('x-powered-by', 'SkyworksAS');
     return next();
@@ -102,6 +97,13 @@ app.use(function (req, res, next) {
     log.debug('[REQUEST]', req.method, req.url);
     next();
 });
+
+
+// Init the router
+var Router = express.Router();
+var router = require('./routes/index')(app, Router);
+
+app.use('/', router);
 
 // Handle 404s
 app.use(function (req, res) {

@@ -20,6 +20,8 @@ module.exports = function(app, route) {
 
         // See if user still has a running session
         .get('/api/session', session.poll)
+
+        .put('/api/session', session.sync)
     ;
 
     if (app.get('env') === 'development') {
