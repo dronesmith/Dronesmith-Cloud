@@ -41,7 +41,8 @@
               throw Error("All syncs require a key and a chunk!");
             }
 
-            user = Object.byString(angular.copy(chunk), key);
+            // XXX should we deep copy or can we get away with shallow?
+            user = angular.copy(Object.byString(chunk, key));
           },
 
           // This should be used when you want to regularly sync a
