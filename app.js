@@ -21,6 +21,9 @@ var express = require('express'),
 require('./lib/db');
 var passport = require('./lib/passport')();
 
+// get root path
+global.appRoot = path.resolve(__dirname);
+
 // get basic properties and set logging.
 var env = process.env.NODE_ENV || 'development',
 	config = require('./config/config.js'),

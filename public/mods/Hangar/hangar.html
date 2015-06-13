@@ -16,27 +16,25 @@
 					<button class="btn btn-primary" ng-click="connectToEedu($event)">Connect</button>
 				</div>
 			</div>
-			<div>
-				<div id='flight-logs' class="dark-grey">
-					<div class="panel-heading">Flight Logs</div>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Log</th>
-								<th>Date/Time</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat='log in logs'>
-								<td>{{log.log}}</td>
-								<td>{{log.time}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<div id='flight-logs'>
+				<div class="panel-heading">Flight Logs</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Log</th>
+							<th>Date/Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='log in logs'>
+							<td>{{log.log}}</td>
+							<td>{{log.time}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
-		<div class="dark-grey col-sm-5" style="padding: 0 20px;">
+		<div flex-gt-small="30" class="col-sm-4 side-panel" style="padding: 0 20px;">
 			<h3>Inventory</h3>
 			<div style="margin: 20px 20px">
 				<p style="font-weight: bold">Device List</p>

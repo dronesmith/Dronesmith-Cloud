@@ -100,10 +100,29 @@
       };
     })
 
-    .controller('ModViewCtrl', function($scope, Session) {
+    .controller('ModViewCtrl', function($scope, Session, $http) {
       $scope.mods = [];
-
       $scope.activeMod = null;
+
+      $scope.getCtrl = function() {
+        console.log('loading ctrl...');
+        return $scope.activeMod.controller;
+      };
+
+      $scope.changeActiveMod = function(view) {
+        $scope.activeMod = $scope.mods[view];
+
+        console.log($scope.activeMod, view);
+        // $scope.view = angular.element(document.createElement())
+        $http
+          .get($scope.activeMod.index)
+          .success(function(data) {
+            angular.element('#activeMod').html(data);
+          })
+          .error(function(data) {
+            angular.element('#activeMod').append('Failed to load ' + $scope.activeMod.index);
+          });
+      };
 
       $scope.$on('session:update', function(ev, sessionData) {
         $scope.mods = sessionData.mods;
