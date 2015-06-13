@@ -104,19 +104,15 @@
       $scope.mods = [];
       $scope.activeMod = null;
 
-      $scope.getCtrl = function() {
-        console.log('loading ctrl...');
-        return $scope.activeMod.controller;
-      };
-
       $scope.changeActiveMod = function(view) {
         $scope.activeMod = $scope.mods[view];
 
-        console.log($scope.activeMod, view);
-        // $scope.view = angular.element(document.createElement())
+        // dynamically add mod view.
         $http
           .get($scope.activeMod.index)
           .success(function(data) {
+
+            // Load mod!
             angular.element('#activeMod').html(data);
           })
           .error(function(data) {
