@@ -1,7 +1,8 @@
 (function(){
 	'use strict';
 
-	forgeApp
+	angular
+    .module('Forge.controllers', [])
 		.controller('HangarCtrl', ['$scope', '$mdDialog', function($scope, $mdDialog){
 
 			$scope.hangar = {
@@ -24,6 +25,7 @@
 				{"name": "eedu Four"}
 				]
 			$scope.defaultDevice = $scope.devices[0];
+			console.log('loaded controller sucessfully....');
 
             $scope.connectToEedu = function(event){
                 var deviceName = $scope.device.name;
