@@ -2,7 +2,6 @@
   'use strict';
 
   // Utilities
-
   Object.byString = function(o, s) {
     s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
     s = s.replace(/^\./, '');           // strip a leading dot
@@ -18,6 +17,24 @@
     return o;
   };
 
+
+// HACK HACK HACK
+// To manually load controllers, we have to make the provider global
+var controllerProvider = null;
+
+function registerController(moduleName, controllerName) {
+    var queue = angular.module(moduleName)._invokeQueue;
+
+    for (var i = 0; i < queue.length; ++i) {
+        var call = queue[i];
+        if(call[0] == "$controllerProvider" &&
+           call[1] == "register" &&
+           call[2][0] == controllerName) {
+            controllerProvider.register(controllerName, call[2][1]);
+        }
+    }
+}
+
   angular
     .module('Forge', [
       'Forge.controllers',
@@ -29,7 +46,10 @@
       'ui.router',
       'ngAnimate',
       'ui.bootstrap'
-    ])
+    ], function($controllerProvider) {
+      // Part of the above HACK
+      controllerProvider = $controllerProvider;
+    })
 
     .config(function(
       $httpProvider,
