@@ -1,9 +1,8 @@
 (function(){
 	'use strict';
 
-	angular
-    .module('Forge.controllers', [])
-		.controller('HangarCtrl', ['$scope', '$mdDialog', function($scope, $mdDialog){
+	forgeApp
+		.controller('HangarCtrl', ['$scope', function($scope){
 
 			$scope.hangar = {
 				title: "Hangar",
@@ -25,21 +24,11 @@
 				{"name": "eedu Four"}
 				]
 			$scope.defaultDevice = $scope.devices[0];
-			console.log('loaded controller sucessfully....');
 
             $scope.connectToEedu = function(event){
                 var deviceName = $scope.device.name;
 
-                $mdDialog.show(
-                    $mdDialog.alert()
-                        .parent(angular.element(document.body))
-                        .title('Connection')
-                        .content(deviceName + ' is connected')
-                        .ok("Ok")
-                        .targetEvent(event)
-                )
+                // TODO: connect to the device code
             };
-		}])
-
-		;
+		}]);
 })();

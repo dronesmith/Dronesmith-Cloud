@@ -100,7 +100,7 @@
       };
     })
 
-    .controller('ModViewCtrl', function($scope, Session, $http) {
+    .controller('ModViewCtrl', function($scope, Session, $http, $compile) {
       $scope.mods = [];
       $scope.activeMod = null;
 
@@ -113,7 +113,7 @@
           .success(function(data) {
 
             // Load mod!
-            angular.element('#activeMod').html(data);
+            angular.element('#activeMod').html($compile(data)($scope));
           })
           .error(function(data) {
             angular.element('#activeMod').append('Failed to load ' + $scope.activeMod.index);
