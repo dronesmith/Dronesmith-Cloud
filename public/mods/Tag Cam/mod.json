@@ -1,6 +1,6 @@
 {
   "name": "Tag Cam",
   "icon": "tagCam.png",
-  "index": "tagCam.html",
-  "controller": "tagCam.js"
+  "index": "tagCam",
+  "controller": "tagCamCtrl"
 }

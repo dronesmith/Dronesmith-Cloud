@@ -1,6 +1,6 @@
 {
   "name": "Hangar",
   "icon": "hangar.png",
-  "index": "hangar.html",
-  "controller": "hangar.js"
+  "index": "hangar",
+  "controller": "HangarCtrl"
 }

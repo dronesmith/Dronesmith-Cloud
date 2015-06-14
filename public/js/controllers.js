@@ -109,12 +109,17 @@
 
         // dynamically add mod view.
         $http
-          .get($scope.activeMod.index)
+          .get($scope.activeMod.index + '.html')
           .success(function(data) {
+            $http
+              .get($scope.activeMod.index + '.js')
+              .success(function(js) {
 
-            // Load mod!
-            angular.element('#activeMod').html($compile(data)($scope));
-            registerController('Forge', $scope.activeMod.controller);
+                // Load mod!
+                angular.element('#activeModScript').html('<script>' + js + '</script>');
+                registerController('Forge', $scope.activeMod.controller);
+                angular.element('#activeMod').html($compile(data)($scope));
+              })
           })
           .error(function(data) {
             angular.element('#activeMod').append('Failed to load ' + $scope.activeMod.index);
