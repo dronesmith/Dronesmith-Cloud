@@ -7,6 +7,7 @@
 				templateUrl: 'js/directives/flightDash.html',
 				link: function(scope, element, attr){
 					$('div#close-dash').click(function(){
+						console.log('Okay');
 						$('flight-dash').css({
 							bottom: "-250px"
 						});

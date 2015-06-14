@@ -1,6 +1,6 @@
 {
   "name": "Terminal",
-  "icon": "temrinal.png",
+  "icon": "terminal.png",
   "index": "terminal.html",
   "controller": "terminal.js"
 }

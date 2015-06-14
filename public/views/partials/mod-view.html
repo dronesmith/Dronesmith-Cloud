@@ -1,21 +1,9 @@
 
 <section id="modView">
-	<side-menu class=""></side-menu>
-	<div id='view' class="view-width">
-		<div ui-view>
-			<article>
-			  <h1>I'm the view for a Forge App.</h1>
-			  <p>If you're reading this, it means ModView isn't syncing with the DB.<br> That means either 1, there's a bad, bad bug, or 2, it's not implemented yet.<br><em>(Hint: it's 2)</em></p>
-			</article>
-		</div>
-	</div>
-
-  <!-- Geoff orginal stuff, he might need mod in mods part
-
   <div class="row">
-    <aside class="col-xs-2 col-sm-1 bg-darkest">
-      <ul ng-show="mods.length > 0" ng-repeat="mod in mods">
-        <li><a href="" ng-click="changeActiveMod($index)">
+    <aside class="col-xs-2 col-sm-1">
+      <ul ng-show="mods.length > 0" class="list-group greyBar">
+        <li class="list-item" ng-repeat="mod in mods" ><a href="" ng-click="changeActiveMod($index)">
           <img ng-src="{{mod.icon}}">
           {{mod.name}}
           </a></li>
@@ -28,6 +16,5 @@
         <p class="lead"><a href="">Add some?</a></p>
       </hgroup>
     </article>
-  </div> -->
-
+  </div>
 </section>

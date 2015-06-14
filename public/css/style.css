@@ -183,11 +183,6 @@ flight-dash > :first-child{
 	[Gadget]left slide out menu
 ---------------------------*/
 .greyBar{
-	position: fixed;
-	left: 0px;
-	width: 80px;
-	height: 100%;
-	z-index: -1;
 	background-color: #292929;}
 
 #menu a{

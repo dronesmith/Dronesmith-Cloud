@@ -114,6 +114,7 @@
 
             // Load mod!
             angular.element('#activeMod').html($compile(data)($scope));
+            registerController('Forge', $scope.activeMod.controller);
           })
           .error(function(data) {
             angular.element('#activeMod').append('Failed to load ' + $scope.activeMod.index);
