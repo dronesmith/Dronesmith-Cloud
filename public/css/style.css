@@ -139,6 +139,7 @@ eedu-link #battery .battery-high{
 
 flight-dash{
 	position: absolute;
+	opacity: 0;
 	bottom: -250px;
 	height: 200px;
 	width: 100%;
@@ -183,14 +184,17 @@ flight-dash > :first-child{
 	[Gadget]left slide out menu
 ---------------------------*/
 .greyBar{
+	position: fixed;
+	left: 0px;
+	width: 80px;
+	height: 100%;
+	z-index: -1;
 	background-color: #292929;}
 
 #menu a{
 	font-size: 0.8em}
 #menu{
-	display: block;
-	background-color: #292929;
-	width: 80px;}
+	background-color: #292929;}
 #menu img{
 	width: 32px;}
 

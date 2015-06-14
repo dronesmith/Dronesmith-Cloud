@@ -1,7 +1,6 @@
 <div id="close-dash" class="text-center glyphicon glyphicon-chevron-down"></div>
 <h1 class="text-center">Missions</h1>
-<div layout="row" layout-align="space-around center">
-
+<div>
 	<div ng-repeat="drone in drones">
 		<h4>{{drone.name}}</h4>
 		<p>{{drone.model + " v" + drone.version}}</p>
@@ -10,7 +9,7 @@
 			<span class="text-warning" ng-switch-when="disarmed">Standby</span>
 			<span class="text-info" ng-switch-when="off">Powered Down</span>
 		</p>
-		<md-button class="btn btn-default" value="Make Primary"
-			ng-click="makePrimary(drones.indexOf(drone))">Make Primary</md-button>
+		<button class="btn btn-default" value="Make Primary"
+			ng-click="makePrimary(drones.indexOf(drone))">Make Primary</button>
 	</div>
 </div>

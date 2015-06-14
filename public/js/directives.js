@@ -30,6 +30,7 @@
 
             element.click(function(){
               $('flight-dash').css({
+                opacity: 1,
                 bottom: "0px"
               });
             });

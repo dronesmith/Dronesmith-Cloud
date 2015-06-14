@@ -2,5 +2,5 @@
   "name": "My Forge",
   "icon": "myforge.png",
   "index": "myForge",
-  "controller": "myForgeCtrl"
+  "controller": "MyForgeCtrl"
 }

@@ -37,7 +37,8 @@ function registerController(moduleName, controllerName) {
       'ngResource',
       'ui.router',
       'ngAnimate',
-      'ui.bootstrap'
+      'ui.bootstrap',
+      'ui.ace'
     ], function($controllerProvider) {
       // Part of the above HACK
       controllerProvider = $controllerProvider;

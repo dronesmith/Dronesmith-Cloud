@@ -1,8 +1,6 @@
 (function(){
 	'use strict';
 
-	console.log('got here' + forgeApp);
-
 	return forgeApp
 		.controller('HangarCtrl', ['$scope', function($scope) {
 

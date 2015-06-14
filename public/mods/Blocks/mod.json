@@ -2,5 +2,5 @@
   "name": "Blocks",
   "icon": "library.png",
   "index": "blocksPage",
-  "controller": "blocksCtrl"
+  "controller": "BlocksCtrl"
 }

@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 
-	forgeApp.controller('AceCtrl', ['$scope','$timeout', function($scope, $timeout, UAVManager){
+	forgeApp.controller('terminalCtrl', ['$scope','$timeout', function($scope, $timeout, UAVManager){
 		$scope.languages = [
 			{'name': 'Javascript',
 			 'sampleCode': 	"var word = 'Hello World';\n" +
@@ -39,10 +39,13 @@
 			}
 		};
 
-		var editor = ace.edit('editor');
+		// /* 	There is error here because ace.edit is looking for 
+		//		"div id="editor" at the modView layer, not the current active layer
+		// */
+		// var editor = ace.edit($scope.editor);
 
-		editor.setTheme('ace/theme/twilight');
-		editor.setShowPrintMargin(false);
+		// editor.setTheme('ace/theme/twilight');
+		// editor.setShowPrintMargin(false);
 
 		$scope.undos = new ace.UndoManager();
 		$scope.undos.reset();
