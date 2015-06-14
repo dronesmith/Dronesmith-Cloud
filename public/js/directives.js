@@ -29,7 +29,7 @@
             });
 
             element.click(function(){
-              $('flight-dash').css({
+              angular.element('flight-dash').css({
                 opacity: 1,
                 bottom: "0px"
               });
