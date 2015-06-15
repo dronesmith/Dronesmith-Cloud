@@ -64,10 +64,11 @@ body {
 
 */
 
-#eeduLink section {
+#eeduLink {
   /*height: 2vh;
   width: 100vh;*/
-  position: absolute;
+  z-index: 10000;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -77,5 +78,7 @@ body {
   DEFINE ADDITIONAL PARTIAL/VIEW STYLES HERE
 
   ALWAYS SEPARATE BY IDS
+
+  MOD STYLES GO IN THEIR RESPECTED MOD
 
 */
