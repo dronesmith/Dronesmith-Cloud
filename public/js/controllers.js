@@ -116,6 +116,7 @@
               .success(function(js) {
 
                 // Load mod!
+                // HACK
                 angular.element('#activeModScript').html('<script>' + js + '</script>');
                 registerController('Forge', $scope.activeMod.controller);
                 angular.element('#activeMod').html($compile(data)($scope));

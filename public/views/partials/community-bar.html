@@ -1,23 +1,18 @@
-  <section class="row">
-    <div class="col-xs-5" style="padding-left: 15px">
-      <a href="#" onClick="toggleMenu()" class="pull-left">
-        <img src="img/forgeicon.png" >
-      </a>
-    </div>
-    <div class="col-xs-2">
-      <p class="text-center" style="margin-top: 20px"><strong>DRONE FORGE</strong></p>
-    </div>
-    <div class="col-sm-5" style="padding-right: 15px">
-      <ul class="nav pull-right">
-        <li><a href="#">{{userInfo.username}}</a></li>
-        <li><a href="" ng-click="logout()">Log Out</a></li>
-      </ul>
-      <div class="hidden-xs">
-        <img class="user-img pull-right" src="img/avatar.png" >
-        <a href="#" data-toggle="popover" data-placement="left" data-content="Welcom aboard on Forge" class="pull-right" style="margin-top:20px">
-          <span class="badge pull-right" style="margin-top: 20px; margin-right: 5px">1</span>
-          <img src="img/mail.png" style="width:30px; margin-top: 10px;">
-        </a>
-      </div>
-    </div>
-  </section>
+<section id="communityBar" class="bg-darkest">
+  <div class="navbar-header">
+    <button class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" type="button">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="">
+      <img alt="Brand" src="img/forgeicon.png" class="img-responsive">
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="navbar-collapse">
+    <ul class="nav navbar-nav pull-right">
+      <li><a href="#">{{userInfo.username}}</a></li>
+      <li><a href="" ng-click="logout()">Log Out</a></li>
+    </ul>
+  </div>
+</section>
