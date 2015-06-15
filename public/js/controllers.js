@@ -30,6 +30,11 @@
     .controller('ForgeCtrl', function($scope, $log, $state, Session, Sync) {
       $scope.userInfo = null;
 
+      // Events going to modView
+      $scope.$on('modView', function(ev, data) {
+        $scope.$broadcast(data.from, data.action);
+      })
+
       Session
         .get({}, function(data) {
           $scope.userInfo = data.userData || null;
@@ -87,6 +92,12 @@
         $scope.userInfo = sessionData;
       });
 
+      $scope.toggleSidePanel = function() {
+        // emit event to modView
+        $scope.$emit('modView',
+          {from: 'communityBar', action: 'toggleSidePanel'});
+      }
+
       $scope.logout = function() {
         Session
           .authenticate({deauth: true})
@@ -103,6 +114,7 @@
     .controller('ModViewCtrl', function($scope, Session, $http, $compile) {
       $scope.mods = [];
       $scope.activeMod = null;
+      $scope.showSidePanel = true;
 
       $scope.changeActiveMod = function(view) {
         $scope.activeMod = $scope.mods[view];
@@ -133,6 +145,12 @@
         if (!$scope.activeMod && $scope.mods.length > 0) {
           // TODO this is pref data to be synced.
           $scope.activeMod = $scope.mods[0];
+        }
+      });
+
+      $scope.$on('communityBar', function(ev, data) {
+        if (data == 'toggleSidePanel') {
+          $scope.showSidePanel = !$scope.showSidePanel;
         }
       });
     })

@@ -1,7 +1,7 @@
 
 <section id="modView">
   <div class="row">
-    <aside id="menu" class="col-sm-1">
+    <aside ng-show="showSidePanel" id="menu" class="col-sm-1 col-xs-2 bg-semidark">
       <ul ng-show="mods.length > 0" class="list-group">
         <li class="list-item" ng-repeat="mod in mods" >
           <a href="" ng-click="changeActiveMod($index)">
@@ -11,13 +11,13 @@
         </li>
       </ul>
     </aside>
-    <div class="col-sm-11">
+    <article class="col-sm-11 col-xs-10">
       <div id="activeModScript"></div>
       <div id="activeMod"></div>
       <hgroup class="text-center" ng-hide="mods.length > 0">
         <h1>Your Forge has no mods.</h1>
         <p class="lead"><a href="">Add some?</a></p>
       </hgroup>
-    </div>
+    </article>
   </div>
 </section>
