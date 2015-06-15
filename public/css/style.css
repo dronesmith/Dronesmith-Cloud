@@ -4,6 +4,10 @@
 
 */
 
+body {
+    overflow:hidden;
+}
+
 .bg-mid {
   background-color: #777;
 }
@@ -51,7 +55,7 @@
 #modView aside {
   /*min-height: 480px;
   max-height: 1800px;*/
-  height: 86vh;
+  height: 80vh;
 }
 
 /*
@@ -61,8 +65,11 @@
 */
 
 #eeduLink section {
-  height: 7vh;
-  width: 100vh;
+  /*height: 2vh;
+  width: 100vh;*/
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 /*

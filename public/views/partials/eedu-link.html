@@ -1,37 +1,40 @@
+<section id="eeduLink" class="bg-darkest">
+  <div class="row">
+    <div id="flightStatus" class="col-sm-4">
+      <div class="row">
+        <div class="col-xs-4 well well-sm">
+          <p class="text-center">Disconnected</p>
+          <h4 class="text-center">Status</h4>
+        </div>
+        <div class="col-xs-4 well well-sm">
+          <p class="text-center">0g</p>
+          <h4 class="text-center">Payload</h4>
+        </div>
+        <div class="col-xs-4 well well-sm">
+          <p class="text-center">Manual</p>
+          <h4 class="text-center">FlightMode</h4>
+        </div>
+      </div>
+    </div>
 
-<section id="eeduLink">
-	<div class="row">
-		<div class="col-xs-5">
-			<div class="row">
-				<div class="left">
-					<div class="grey-box">
-						<p class="text-center orange">{{primary.status}}Off</p>
-						<div class="text-center grey-box-line">STATUS</div>
-					</div>
-					<div class="grey-box">
-						<p class="text-center green">{{primary.payload + "45g"}}</p>
-						<div class="text-center grey-box-line">PAYLOAD</div>
-					</div>
-					<div class="grey-box">
-						<p class="text-center red">{{primary.flightmode}}Auto</p>
-						<div class="text-center grey-box-line">Flight Mode</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    <div id="missionStatus" class="col-sm-4">
+      <!-- <p class="text-center lead">Mission Time</p> -->
+      <p class="text-center lead">00:00:00<br>No target defined</p>
+    </div>
 
-		<div id="flightTime" class="col-xs-2 flight-time">
-			<p class="text-center">Flight Time</p>
-			<p class="text-center"> 00:00:00 </p>
-		</div>
-
-		<div class="col-xs-5">
-			<div id="battery" ng-click="batteryLevel()">
-				<div class="battery-low"></div>
-				<div class="battery-medium"></div>
-				<div class="battery-high"></div>
-			</div>
-		</div>
-	</div>
-	<flight-dash></flight-dash>
+    <div id="connectivity" class="col-sm-4">
+      <div class="row">
+        <div class="col-xs-8">
+        </div>
+        <div class="col-xs-2 well well-sm">
+          <p class="text-center">RSSI</p>
+          <p class="text-center">0%</p>
+        </div>
+        <div class="col-xs-2 well well-sm">
+          <p class="text-center">Bat %</p>
+          <p class="text-center">0%</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
