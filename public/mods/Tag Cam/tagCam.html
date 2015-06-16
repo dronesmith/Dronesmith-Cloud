@@ -1,4 +1,4 @@
-<section id="tagModule">
+<section id="tagModule" ng-controller="TagCamCtrl">
 	<div class="row">
 		<div class="col-sm-7">
 			<div>
@@ -34,15 +34,11 @@
 				<select class="form-control">
 					<option>Eedu</option>
 				</select>
-				<div layout='row' style="margin-top: 10px">
-					<div flex='50'>
+				<fieldset class="form-group">
 						<button class="btn btn-default">Find Apps</button>
-					</div>
-					<div flex='50'>
-						<button class="btn btn-primary">Play</button>
-					</div>
-				</div>
-			</from>
+						<button class="btn btn-primary" ng-click="startLaserTag()">Play</button>
+				</fieldset>
+			</form>
 		</div>
 	</div>
 
