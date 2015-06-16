@@ -1,45 +1,121 @@
 (function(){
 	'use strict';
 
-	return forgeApp
+	forgeApp
 		.controller('HangarCtrl', ['$scope', function($scope) {
 
-			console.log('in controller');
+			$scope.sidePanelSelect = 'inventory';
 
-			$scope.hangar = {
-				title: "Hangar",
-				subMenus: []
+			$scope.CONTROLLER_VALS = [
+				'Throttle', 'Yaw', 'Roll', 'Pitch', 'AUX1', 'AUX2', 'AUX3'
+			];
+
+			// TODO load this info from DB.
+			$scope.eeduSelect = [
+				{
+					_id: 'dsfgfsdjgfdsjgklfds',
+					name: 'eedu1',
+					type: 'UAV',
+					img: 'mods/Hangar/eedu.png',
+					meta:
+						{
+							'Maker': 'Skyworks Aerial Systems',
+							'Serial': '9384903943534SYD283',
+							'Firmware': '1.3.4',
+							'Last Usage': new Date()
+						},
+					config: {
+						status: 'Unknown',
+						calibration: {
+							esc: false,
+							imu: false,
+							pid: {
+								P: 1.0325,
+								I: 0.9367,
+								D: 1.0351
+							}
+						}
+					}
+				}
+			];
+			$scope.selectedEedu = $scope.eeduSelect[0];
+
+			// TODO load this info from DB.
+			$scope.controllerSelect = [
+				{
+					_id: 'kdsgljfklgjlksfdjgkl',
+					name: 'DSM Spektrum',
+					type: 'Controller',
+					img: '',
+					meta:
+						{
+							'Maker': 'DSM',
+							'Connectivity': 'Command & Control Radio',
+							'Last Usage': new Date()
+						},
+					config: {
+						keymap: [
+							'Thumb1X', 'Thumb1Y', 'Thumb2X', 'Thumb2Y',
+							'Aux1', 'Aux2', 'Aux3', 'Aux4'],
+							keybinding: {}
+						}
+
+				},
+
+				{
+					_id: 'dgjdksgjfdskgjdafhjkdfjkh',
+					name: 'Playstation Gamepad',
+					img: '',
+					type: 'Controller',
+					meta:
+						{
+							'Maker': 'Sony Computer Entertainment',
+							'Connectivity': 'Bluetooth Radio',
+							'Last Usage': new Date()
+						},
+					config: {
+						pairedEedus: [],
+						// FIXME note, for some reason, the UI fails to show this array
+						// if it goes beyond a certain size. Ah, web development, where the
+						// developer has to spend 30 minutes to otherwise what should be a 3
+						// second problem because apparently displaying errors is a big no-no.
+						// #retarded
+						keymap: [
+							'Square', 'Triangle', 'Circle', 'Cross'],
+						keybinding: {}
+					}
+				}
+			];
+			$scope.selectedController = $scope.controllerSelect[0];
+
+			// TODO load this info from DB.
+			$scope.sensorSelect = [
+				{
+					_id: 'fdgjfidsgsfjlk',
+					name: 'GROVEBarometer',
+					img: 'mods/Hangar/baro.jpg',
+					type: 'Sensor',
+					meta:
+						{
+							'Maker': 'SEEED Studios',
+							'Interface': 'I2C',
+							'Last Usage': new Date()
+						},
+					config: {
+						pairedEedus: []
+					}
+
+				}
+			];
+			$scope.selectedSensor = $scope.sensorSelect[0];
+
+
+			$scope.selectedDevice = $scope.selectedEedu;
+
+
+			$scope.changeDev = function(dev) {
+				$scope.selectedDevice = angular.copy(dev);
 			}
-
-			$scope.logs = [
-				{'log': 'Fifth Flight', 'time': '5/5/15'},
-				{'log': 'Fourth Flight', 'time': '4/5/15'},
-				{'log': 'Thrid Flight', 'time': '3/5/15'},
-				{'log': 'Second Flight', 'time': '2/5/15'},
-				{'log': 'First Flight', 'time': '1/5/15'}
-				];
-
-			$scope.devices = [
-				{"name": "eedu One"},
-				{"name": "eedu Two"},
-				{"name": "eedu Three"},
-				{"name": "eedu Four"}
-				]
-			$scope.defaultDevice = $scope.devices[0];
-			// console.log('loaded controller sucessfully....');
-			//
-      //       $scope.connectToEedu = function(event){
-      //           var deviceName = $scope.device.name;
-			//
-      //           $mdDialog.show(
-      //               $mdDialog.alert()
-      //                   .parent(angular.element(document.body))
-      //                   .title('Connection')
-      //                   .content(deviceName + ' is connected')
-      //                   .ok("Ok")
-      //                   .targetEvent(event)
-      //           )
-      //       };
 		}])
 
 		;

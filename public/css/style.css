@@ -52,6 +52,10 @@ body {
 
 */
 
+#modView article {
+  height: 100% !important;
+}
+
 #modView aside {
   /*min-height: 480px;
   max-height: 1800px;*/
