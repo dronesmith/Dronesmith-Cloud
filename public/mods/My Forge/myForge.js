@@ -30,7 +30,7 @@
             $scope.addNewProject = function(){
                 $scope.projects.push(
                     {"projectName" : $scope.projectName,
-                     "projectType" : $scope.projectType, 
+                     "projectType" : $scope.projectType,
                      "projectCraft" : $scope.projectCraft});
                 $scope.projectName = "";
                 $scope.projectType = "";
