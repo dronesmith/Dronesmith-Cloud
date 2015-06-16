@@ -5,7 +5,7 @@
         ];
 
 	forgeApp
-        .controller('UpProjectCtrl', ['$scope', function($scope){
+        .controller('MyForgeCtrl', ['$scope', function($scope){
             //avoid Angular runs dirty checking
             angular.forEach(Projects,function(){
                 $scope.projects = Projects;
@@ -13,6 +13,13 @@
             $scope.removeProject = function(index){
                 $scope.projects.splice(index, 1);
             };
+            $scope.topProjects = [
+                {'name': 'Follow Me Robot', 'user': 'Greg'},
+                {'name': 'Laser Tag X2', 'user': 'Rara'},
+                {'name': '3D Vision Racer', 'user': 'Paul'},
+                {'name': 'Acro D12', 'user': 'Nolan'},
+                {'name': 'Gimbal Stabilizer', 'user': 'Adam'}
+                ];
         }])
 
         .controller('ProjectCtrl', ['$scope', function($scope){
@@ -23,22 +30,12 @@
             $scope.addNewProject = function(){
                 $scope.projects.push(
                     {"projectName" : $scope.projectName,
-                     "projectType" : $scope.projectType, 
+                     "projectType" : $scope.projectType,
                      "projectCraft" : $scope.projectCraft});
                 $scope.projectName = "";
                 $scope.projectType = "";
                 $scope.projectCraft = "";
             };
-        }])
-        
-        .controller('TopProjectCtrl', ['$scope', function($scope){
-            $scope.projects = [
-				{'name': 'Follow Me Robot', 'user': 'Greg'},
-				{'name': 'Laser Tag X2', 'user': 'Rara'},
-				{'name': '3D Vision Racer', 'user': 'Paul'},
-				{'name': 'Acro D12', 'user': 'Nolan'},
-				{'name': 'Gimbal Stabilizer', 'user': 'Adam'}
-				];
         }])
 
         ;

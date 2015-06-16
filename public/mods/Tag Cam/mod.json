@@ -1,0 +1,6 @@
+{
+  "name": "Tag Cam",
+  "icon": "laser.png",
+  "index": "tagCam",
+  "controller": "TagCamCtrl"
+}

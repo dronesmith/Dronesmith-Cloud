@@ -1,6 +1,3 @@
-(function() {
-  'use strict';
-
   // Utilities
   Object.byString = function(o, s) {
     s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
@@ -35,23 +32,19 @@ function registerController(moduleName, controllerName) {
     }
 }
 
-  angular
-    .module('Forge', [
-      'Forge.controllers',
-      'Forge.services',
-      'Forge.directives',
-      'Forge.filters',
+  var forgeApp = angular.module('Forge', [
       'ngRoute',
       'ngResource',
       'ui.router',
       'ngAnimate',
-      'ui.bootstrap'
+      'ui.bootstrap',
+      'ui.ace' // TODO should this be contained in a mods module? Or should libs be global?
     ], function($controllerProvider) {
       // Part of the above HACK
       controllerProvider = $controllerProvider;
     })
 
-    .config(function(
+  forgeApp.config(function(
       $httpProvider,
       $provide,
       $stateProvider,
@@ -112,4 +105,3 @@ function registerController(moduleName, controllerName) {
       $httpProvider.interceptors.push('ServerErrorInterceptor');
     })
   ;
-})();

@@ -4,6 +4,10 @@
 
 */
 
+body {
+    overflow:hidden;
+}
+
 .bg-mid {
   background-color: #777;
 }
@@ -48,10 +52,14 @@
 
 */
 
+#modView article {
+  height: 100% !important;
+}
+
 #modView aside {
   /*min-height: 480px;
   max-height: 1800px;*/
-  height: 86vh;
+  height: 80vh;
 }
 
 /*
@@ -60,9 +68,13 @@
 
 */
 
-#eeduLink section {
-  height: 7vh;
-  width: 100vh;
+#eeduLink {
+  /*height: 2vh;
+  width: 100vh;*/
+  z-index: 10000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 /*
@@ -70,5 +82,7 @@
   DEFINE ADDITIONAL PARTIAL/VIEW STYLES HERE
 
   ALWAYS SEPARATE BY IDS
+
+  MOD STYLES GO IN THEIR RESPECTED MOD
 
 */

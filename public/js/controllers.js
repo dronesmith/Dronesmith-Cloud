@@ -1,11 +1,8 @@
 (function() {
   'use strict';
 
-  angular
-    .module('Forge.controllers', [])
-
+  forgeApp
     // View Controllers
-
     .controller('ErrorCtrl', function($scope, $rootScope) {
       $scope.error = $rootScope.ServerError
         || "The server didn't send back anything.";
@@ -32,6 +29,11 @@
 
     .controller('ForgeCtrl', function($scope, $log, $state, Session, Sync) {
       $scope.userInfo = null;
+
+      // Events going to modView
+      $scope.$on('modView', function(ev, data) {
+        $scope.$broadcast(data.from, data.action);
+      })
 
       Session
         .get({}, function(data) {
@@ -90,6 +92,12 @@
         $scope.userInfo = sessionData;
       });
 
+      $scope.toggleSidePanel = function() {
+        // emit event to modView
+        $scope.$emit('modView',
+          {from: 'communityBar', action: 'toggleSidePanel'});
+      }
+
       $scope.logout = function() {
         Session
           .authenticate({deauth: true})
@@ -106,17 +114,28 @@
     .controller('ModViewCtrl', function($scope, Session, $http, $compile) {
       $scope.mods = [];
       $scope.activeMod = null;
+      $scope.showSidePanel = true;
 
       $scope.changeActiveMod = function(view) {
         $scope.activeMod = $scope.mods[view];
 
         // dynamically add mod view.
         $http
-          .get($scope.activeMod.index)
+          .get($scope.activeMod.index + '.html')
           .success(function(data) {
+            $http
+              .get($scope.activeMod.index + '.js')
+              .success(function(js) {
 
-            // Load mod!
-            angular.element('#activeMod').html($compile(data)($scope));
+                // Load mod!
+                // HACK
+                angular.element('#activeModScript').html('<script>' + js + '</script>');
+                registerController('Forge', $scope.activeMod.controller);
+                // FIXME just adding this here for demo purposes. We need to add controller deps as array.
+                // Extremely ugly, needs to be cleared after demo.
+                if ($scope.activeMod.name == 'Tag Cam') registerController('Forge', 'TagModalCtrl');
+                angular.element('#activeMod').html($compile(data)($scope));
+              })
           })
           .error(function(data) {
             angular.element('#activeMod').append('Failed to load ' + $scope.activeMod.index);
@@ -129,6 +148,12 @@
         if (!$scope.activeMod && $scope.mods.length > 0) {
           // TODO this is pref data to be synced.
           $scope.activeMod = $scope.mods[0];
+        }
+      });
+
+      $scope.$on('communityBar', function(ev, data) {
+        if (data == 'toggleSidePanel') {
+          $scope.showSidePanel = !$scope.showSidePanel;
         }
       });
     })
