@@ -5,7 +5,7 @@
       <ul ng-show="mods.length > 0" class="list-group">
         <li class="list-item" ng-repeat="mod in mods" >
           <a href="" ng-click="changeActiveMod($index)">
-          <img ng-src="{{mod.icon}}" class="center-block">
+          <img ng-src="{{mod.icon}}" height="32" width="32" class="img-responsive center-block">
           <p class="text-center">{{mod.name}}</p>
           </a>
         </li>

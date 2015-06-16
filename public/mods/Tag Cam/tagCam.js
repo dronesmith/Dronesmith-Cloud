@@ -12,9 +12,8 @@
 		}])
 	;
 
-    function DialogController($scope, $mdDialog){
+    function DialogController($scope){
         $scope.close = function(){
-            $mdDialog.hide();
         };
     }
 })();
