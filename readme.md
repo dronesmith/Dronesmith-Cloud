@@ -22,7 +22,7 @@ In addition, it also uses the following:
 
 # Architecture
 
-Forge is architected as a ODM-driven Route-oriented Model-Controller with two-way binding views compiled client side. The following is an explanation of each layer:
+Forge is architected as an ODM-driven Route-oriented Model-Controller with two-way binding views compiled client side. The following is an explanation of each layer.
 
 ### View Layer  
 The view layer is standard HTML/CSS/Javascript. Behavior is bounded both ways, so changes in the Client Control layer will update this layer and vice-versa, via Angular's `$scope` injection. 
@@ -41,20 +41,114 @@ Standard CSS should be defined in the `public/css` directory. You probably don't
 
 Talk about angular controllers/directives/filters/etc here
 
-This layer involves controlling the behavior on the frontend. 
+This layer involves controlling the behavior on the frontend. If you are not familiar with **AngularJS**, I suggest you spend some time learning/reading about it before beginning work here. 
+
+We framework the client frontend with Angular. Forge spends a great deal of its functionality in the client side. It's not an ordinary web page, and shouldn't be treated as such. 
+
+404s are handled by an angular-less html page. 500s handled gracefully by an angular page and **do show serverside errors.** 400s are intercepted by angular and shown as a red banner at the top of the page.
+
+**Controllers** these control the behavior of a particular view. We are following the convention of one controller per view. This includes directives. Remember that in angular binding is bidirectional, and is resolved via the **$scope** data structure. Services can be used via dependency injection. Please structure your controllers in the follow order:
+
+1. internal variables
+2. internal functions
+3. $scope variables (do **not** define them with ng-init).
+4. $scope functions
+5. event listeners (**$on**)
+6. event emitters (**$emit**, **$broadcast**)
+
+The controller hiearchey is as follows:
+
+               AppCtrl 
+                  |
+      	      ForgeCtrl
+                  |
+        |---------|--------|
+    Community  EeduLink  ModView
+                           |
+                      |----|----|      
+              Additional mod controllers
+              
+
+**Services** are singletons that contain code that should be uniform to all controllers. Forge uses the ngResource mod to create RESTful endpoints of backend models. As such, if you need to communicate with the backend, please use the ngResource designed services to do so. Basic methods are `.get()/.query()` (GET {} or GET []), `.put()` (PUT {}), `.save()` (POST {} requires instantiation), and `.delete()` (DELETE). Forge comes with middlewares for resolving PUT/DELETE requests on crappy browsers that do not support them. Query strings are created automatically by ngResource.  
+
+**Directives** are angular templates defined as custom HTML attribs/elements. Directives should be used in Forge whereever possible, and much of the code can already be refactored with them. 
+
+**Filters** are functions that convert one form of input or output into another. Use filters to properly display internal data. 
+
+Controllers currently communicate using events. Some events, like saving an app, or compiling code on Terminal, may take a while and should be deferred. We are currently looking into **WebWorkers** for this job. More to come on this as Forge matures.   
+
+### Mod Packaging
+
+The packaging and distribution of mods is still under development. For demo purposes, we are using a very rudimentary client side JQuery DOM injection. However, in the future, it will be better to either server templates (using ejs) from server side, or use some kind of specialized framework, like webpack. Any and all critiques are welcomed here.
 
 ### Routing Layer 
 
-Talk about node express here. RESTful stuff.
+Servside endpoints are integrated via routes. Forge is built on top of **Express**, and as such, follows its routing format in similar fashion. Currently, most of the basic RESTful routing is contained in `routes/index.js`. All actual executable code should go in `lib/controllers`. The routes are strictly for API documentation and serve as RESTful endpoints, and middleware control. As Forge grows, this seemingly simple layer will no-doubt expand. Handling realtime websocket links is also an engineering issue that still needs to be discussed. 
+
+Forge has 4 main APIs it employs:
+
+**Community API**
+Interacts with external web services and serves as a basic REST endpoint for the dronesmith community. This api is public. 
+
+**Eedu Link API**
+Handles connections with Eedu. The Eedu in question must "phone home" to Forge after it has been configured. During flights and missions, this must use a realtime connection system, like websockets. 
+
+**Mod API**
+The mods will be able to communicate with each other. It is currently a relatively lax event oriented system completely clientside, however due to the way mods will be loaded and packaged, this will probably make its way serverside. 
+
+**Private REST API**
+Simple API for Session/User management. It is special in the sense it reguarly syncs data to Forge.
 
 ### Server Control Layer
 
-Talk about serverside of Forge.
+Server controllers handle Forge's behavior and interact with the model. Controllers are found ing `lib/controllers`. All controllers serve as behavior for implementing API actions from routes, and for interfacing with models. Since requests may not be completely immediately, to avoid callback hell, Forge is packaged with **Q**, which provides promises and futures, **async** for easily implementing asynchronous actions in code, and **underscore**, which provides functional programming interfaces.
 
-### DB Layer
+MapReduce is your best friend, please abuse her.
 
-Talk about ODM, Redis and Mongo, and schema layout
+### Model Layer
 
+Forge uses **MongoDB** for most data, and **Redis** for storing sessions. All model data is contained in `lib/models`. **Mongoose** is used for `User` model, but other models may employ an ODM-less system and instead use **pmongo** (Promised mongo) and DAO for data. This pattern makes sense for things like mods, where the data schema is variable. A CDN service will probably be used for the distributing of mods in the future. 
+
+Since users essentially have the freedom to store whatever they want on our backend, space-limiting middleware will need to be employed to keep the user from flooding our DB cluster. 
+
+Below is a rough outline of the current Schema. 
+
+		Session (Key-Value/Redis)
+			=> Ref to User
+			- Session Metadata 
+		
+		User (ODM/Mongoose)
+			- Basic use account data
+  			{ User Account information }
+  			{ Syncable Forge Preferences }
+  			[ Mods ]
+  			[ Eedus ]
+		
+		Mod (DAO/PMongo)
+			- Mod meta data
+			{ Mixed Data \ depends on mod. This is syncable. }
+		
+		Eedu (ODM/Mongoose)
+			Note that since this document is created by virtue of the server, it is automatically synced. 
+			- Eedu meta data
+			[Flights]
+			[Missions]
+			[Controllers]
+			[Sensors]
+			{Calibration}
+			
+		Flight ()
+		
+		Mission ()
+		
+		Controller ()
+		
+		Sensor ()
+		
+		Calibration ()
+		
+
+** If you have only used SQL, please remember MongoDB is not designed to be normalized. Calm your tits. **
 
 
 # Running
