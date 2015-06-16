@@ -1,113 +1,130 @@
 (function(){
 	'use strict';
 
-	forgeApp.controller('terminalCtrl', ['$scope','$timeout', function($scope, $timeout, UAVManager){
-		$scope.languages = [
-			{'name': 'Javascript',
-			 'sampleCode': 	"var word = 'Hello World';\n" +
-			 				"console.log(word);\n"
-			},
-			// {'name': 'HTML',
-			//  'sampleCode': 	"<!DOCTYPE html>\n" +
-			// 				"<html>\n" +
-			// 				"<body>\n" +
-			// 				"<h1>This is heading 1</h1>\n" +
-			// 				"</body>\n" +
-			// 				"</html>"},
-			{'name': 'C/C++',
-			 'sampleCode': 	"#include <iostream>\n\n" +
-							"int main(int argc, char* argv[]) {\n\n" +
-							"	std::cout << \"Hello World\\r\\n\";\n\n" +
-							"	return 0;\n" +
-							"}"}
-			];
+	forgeApp
+		.controller('terminalCtrl', ['$scope','$timeout',
+			function($scope, $timeout) {
 
-		$scope.language = $scope.languages[0];
+				$scope.world = "";
 
-		// ============== editor setting =============== //
-		$scope.aceOption = {
-			mode: $scope.language.name.toLowerCase(),
-			onLoad: function (_ace){
-				$scope.languageChanged = function(){
-					if($scope.language.name === 'C/C++'){
-						_ace.getSession().setMode("ace/mode/" + 'c_cpp');
+				// TODO this needs to be reafactored.
+				// For now, just got the terminal in order.
+
+				$scope.languages = [
+					{'name': 'Javascript',
+					 'sampleCode': 	"var text = 'Hello World';\n" +
+					 				"console.log(text);\n"
+					},
+					{'name': 'C/C++',
+					 'sampleCode': 	"#include <iostream>\n\n" +
+									"int main(int argc, char* argv[]) {\n\n" +
+									"	std::cout << \"Hello World\\r\\n\";\n\n" +
+									"	return 0;\n" +
+									"}"
 					}
-					else{
-						_ace.getSession().setMode("ace/mode/" + $scope.language.name.toLowerCase());
+				];
+
+				$scope.language = $scope.languages[0];
+				var editor = null;
+				var con = null;
+
+				$scope.editorOptions = {
+					theme:'twilight',
+					animatedScroll: true,
+					showPrintMargin: false,
+					mode: $scope.language.name.toLowerCase(),
+					onLoad: function (_editor) {
+						editor = _editor;
+						var _session = _editor.getSession();
+						var _renderer = _editor.renderer;
+
+						_editor.setUndoManager(new ace.UndoManager());
+						_eidtor.getUndoManager().reset();
+
+						_editor.setShowPrintMargin(false);
+
+						$scope.languageChanged = function() {
+							console.log(_session);
+							if($scope.language.name === 'C/C++'){
+								_session.setMode("ace/mode/" + 'c_cpp');
+							}
+							else{
+								_session.setMode("ace/mode/" + $scope.language.name.toLowerCase());
+							}
+						};
 					}
 				};
-			}
-		};
 
-		// /* 	There is error here because ace.edit is looking for 
-		//		"div id="editor" at the modView layer, not the current active layer
-		// */
-		// var editor = ace.edit($scope.editor);
-
-		// editor.setTheme('ace/theme/twilight');
-		// editor.setShowPrintMargin(false);
-
-		$scope.undos = new ace.UndoManager();
-		$scope.undos.reset();
-
-		var oldLog = console.log;
-		console.log = function (message) {
-			$scope.world.push(message);
-			oldLog.apply(console, arguments);
-		};
-		// ============== editor setting =============== //
+				$scope.consoleOptions = {
+					theme:'twilight',
+					animatedScroll: true,
+					showPrintMargin: false,
+					showLineNumbers: false,
+					readonly: true,
+					onLoad: function (_editor) {
+						con = _editor;
+					}
+				};
 
 
-		// undo button
-		$scope.undoBtn = function() {
-			editor.undo();
-		};
+				// HACK! Need to fix this
+				var oldLog = console.log;
+				console.log = function (message) {
+					$scope.world += message + '\n';
+					oldLog.apply(console, arguments);
+				};
 
-		$scope.redoBtn = function() {
-			editor.redo();
-		}
 
-		// run and reset button
-		$scope.run = function(){
-			if($scope.language.name === 'C/C++') {
-				$scope.world = [];
-				$scope.world.push("[ERROR] C/C++ currently not supported by forge.\r\n");
-				return;
-			}
-			if( $('div.ace_error').is(':visible') ){
-				$scope.dynamic = 100;
-				$scope.type = 'danger';
-				$scope.message = 'compile error'
-				$timeout(function(){$scope.world = 'Syntax error'}, 600);
-			}
-			else{
-				$scope.dynamic = 100;
-				$scope.message = 'Compiled Sucess :)';
-				$scope.type = 'success';
-				$scope.world = [];
+				// undo button
+				$scope.undoBtn = function() {
+					editor.undo();
+				};
 
-				// quick and dirty.
-
-				try {
-					(new Function (editor.getSession().getValue()))();
-				} catch(e) {
-					$scope.world.push("[Error] " + e);
-					$scope.dynamic = 100;
-					$scope.type = 'danger';
-					$scope.message = 'Compiler Error :(';
+				$scope.redoBtn = function() {
+					editor.redo();
 				}
 
-				// $timeout(function(){$scope.world = 'Hello World'}, 600);
-			}
-		};
-		$scope.reset = function(){
-			$scope.dynamic = 0;
-			$scope.type = null;
-			$scope.world = [];
-		};
-		// above section is for running or resetting terminal
+				// run and reset button
+				$scope.run = function(){
+					if($scope.language.name === 'C/C++') {
+						$scope.world = [];
+						$scope.world.push("[ERROR] C/C++ currently not supported by forge.\r\n");
+						return;
+					}
+					if( $('div.ace_error').is(':visible') ){
+						$scope.dynamic = 100;
+						$scope.type = 'danger';
+						$scope.message = 'compile error'
+						$timeout(function(){$scope.world = 'Syntax error'}, 600);
+					}
+					else{
+						$scope.dynamic = 100;
+						$scope.message = 'Compiled Sucess :)';
+						$scope.type = 'success';
+						$scope.world = [];
+
+						// HACK
+						// quick and dirty.
+						try {
+							(new Function (editor.getSession().getValue()))();
+						} catch(e) {
+							$scope.world = '';
+							$scope.world += "[Error] " + e;
+							$scope.dynamic = 100;
+							$scope.type = 'danger';
+							$scope.message = 'Compiler Error :(';
+						}
+
+					}
+				};
+
+				$scope.reset = function(){
+					$scope.dynamic = 0;
+					$scope.type = null;
+					$scope.world = '';
+				};
 
 
-        }])
-        ;
+    }])
+  ;
 })();
