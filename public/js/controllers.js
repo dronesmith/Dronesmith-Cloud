@@ -35,7 +35,7 @@
           console.log('got here');
           $scope.alerts.shift();
           $scope.timers.shift();
-        }, 2000));
+        }, 5000));
       };
 
 
