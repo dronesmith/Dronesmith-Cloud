@@ -15,7 +15,7 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
       <div class="panel panel-default">
-        <ng-form class="panel-body" name="loginForm" novalidate>
+        <form class="panel-body" name="loginForm" novalidate>
           <fieldset class="form-group">
             <label class="control-label" for="email">Username or Email</label>
             <input
@@ -41,8 +41,8 @@
               >
           </fieldset>
 
-          <button type="submit" class="center-block btn btn-primary" ng-click="login()">Login to my Forge</button>
-        </ng-form>
+          <input type="submit" class="center-block btn btn-primary" ng-click="login()" value="Login to my Forge">
+        </form>
         <p class="text-center"><em><small><a href="" ui-sref="signup">Don't have an account?</a></small></em></p>
     </div>
     </div>
