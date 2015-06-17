@@ -26,11 +26,41 @@
         });
       }])
 
+    .factory('Defer', ['$q',
+      function($q) {
+        var jobs = {};
+
+
+
+        return function(script) {
+            var worker
+            var defer = $q.defer();
+
+            if (!window.Worker) {
+              throw Error('Forge requires Web Worker support.' +
+                'Please use a more modern browser such as Chrome or Firefox.');
+            }
+
+            if (jobs.hasOwnProperty(script)) {
+              delete jobs[script];
+            }
+
+            jobs[script] = new Worker(script);
+            jobs[script].addEventListener('message', function(e) {
+              defer.resolve(e.data);
+            }, false);
+
+            // worker.
+
+            return defer.promise;
+          };
+    }])
+
     .factory('Sync', ['Session', '$interval',
       function(Session, $interval) {
         var user = {},
           timer = null,
-          SYNC_TIME = 5000*3;
+          SYNC_TIME = 5000*6;
 
         return {
           // This should be called when the mod has an event driven item
