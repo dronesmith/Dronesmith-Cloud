@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-sm-4"></div>
   <div class="col-sm-4 panel">
-    <ng-form class="panel-body" name="signUpForm" novalidate>
+    <form class="panel-body" name="signUpForm" novalidate>
 
 
       <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.username.$invalid && signUpForm.username.$dirty}">
@@ -60,9 +60,9 @@
           required
           >
       </fieldset>
-      <button type="submit" class="pull-left btn btn-danger" ui-sref="login">Cancel</button>
       <button type="submit" class="pull-right btn btn-primary" ng-click="signup()">Sign Up</button>
-    </ng-form>
+      <button class="pull-left btn btn-danger" ui-sref="login">Cancel</button>
+    </form>
   </div>
   <div class="col-sm-4"></div>
 </div>
