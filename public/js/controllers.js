@@ -8,8 +8,9 @@
         || "The server didn't send back anything.";
     })
 
-    .controller('AppCtrl', function($scope, $rootScope) {
+    .controller('AppCtrl', function($scope, $rootScope, $timeout) {
       $scope.alerts = [];
+      $scope.timers = [];
 
       $scope.$on('alert:fail', function(ev, data) {
         $scope.addAlert(data.error || data);
@@ -21,7 +22,20 @@
 
       $scope.addAlert = function(msg, kind) {
         $scope.alerts.push(
-          {type: kind || 'danger', msg: msg || 'bad request'});
+          {type: kind || 'danger',
+          msg: msg || 'bad request',
+          position: {'border-radius': '5px',
+          'position': 'absolute',
+          'z-index': '10000',
+          'margin-left': '5px',
+          // 'padding': '5px 5px 5px 5px',
+          'margin-top': +(5+$scope.alerts.length*76)}});
+
+        $scope.timers.push($timeout(function() {
+          console.log('got here');
+          $scope.alerts.shift();
+          $scope.timers.shift();
+        }, 2000));
       };
 
 

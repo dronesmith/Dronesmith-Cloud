@@ -24,7 +24,7 @@
 <body ng-controller="AppCtrl">
 
   <!-- HTTP request statuses -->
-  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  <alert class="repeated-item" ng-style="alert.position" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
   <main ui-view></main>
 
