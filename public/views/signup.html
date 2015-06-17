@@ -53,6 +53,8 @@
           class="form-control"
           id="confirmPassword"
           name="confirmPassword"
+          ui-validate=" '$value==password' "
+          ui-validate-watch=" 'password' "
           ng-model="signUpInfo.confirmPassword"
           ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
           required
