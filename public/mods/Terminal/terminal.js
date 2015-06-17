@@ -94,12 +94,12 @@
 					if( $('div.ace_error').is(':visible') ){
 						$scope.dynamic = 100;
 						$scope.type = 'danger';
-						$scope.message = 'compile error'
+						$scope.message = 'Compiler Error :('
 						$timeout(function(){$scope.world = 'Syntax error'}, 600);
 					}
 					else{
 						$scope.dynamic = 100;
-						$scope.message = 'Compiled Sucess :)';
+						$scope.message = 'Compiled Successfully :)';
 						$scope.type = 'success';
 						$scope.world = [];
 
@@ -122,6 +122,7 @@
 					$scope.dynamic = 0;
 					$scope.type = null;
 					$scope.world = '';
+					$scope.message = '';
 				};
 
 
