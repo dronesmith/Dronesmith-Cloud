@@ -104,9 +104,50 @@
 		</div>
 		</div>
 
+		<div class="col-xs-2">
+	<div class="panel panel-default" ng-init="updateCloudBit()" style="border-radius: 10px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);"
+		data-drag="true"
+		data-jqyoui-options="{revert: 'invalid'}"
+		ng-model="list1"
+		jqyoui-draggable="{animate:true}"
+		ng-hide="!list1.title">
+
+		<h2 class="text-center">Cloudbit</h2>
+
+		<form name="cloudbitform" novalidate>
+			<fieldset class="form-group">
+				<label for="proportion">Percent</label>
+				<input
+					type="number"
+					class="form-control"
+					id="proportion"
+					name="proportion"
+					ng-model="cloudbitParams.percent">
+			</fieldset>
+
+			<fieldset class="form-group">
+				<label for="proportion">Time to Live</label>
+				<input
+					type="number"
+					class="form-control"
+					id="proportion"
+					name="proportion"
+					ng-model="cloudbitParams.timeToLive">
+			</fieldset>
+
+			<button type="submit" class="center-block btn btn-primary" ng-click="postCloudBit()">Update</button>
+		</form>
+
+		<p>Input Value</p>
+		<progressbar max="100" value="updateValue"></progressbar>
+
+	</div>
+	</div>
+
 			</div>
 			<div class="row">
 				<div class="col-xs-5"></div>
+				<div class="col-xs-2"></div>
 
 				<div class="col-xs-2">
 				<div class="panel panel-default" style="border-radius: 10px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);"
