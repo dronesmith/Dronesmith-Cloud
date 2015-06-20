@@ -2,7 +2,19 @@
 	'use strict';
 
 	forgeApp
-		.controller('HangarCtrl', ['$scope', function($scope) {
+		.controller('HangarCtrl', ['$scope', '$modal', function($scope, $modal) {
+
+			$scope.configMotors = function() {
+				var modalInstance = $modal.open({
+					templateUrl: 'mods/Hangar/calibModal.html',
+					controller: 'CalibModalCtrl'
+				});
+
+				modalInstance.result.then(function (selectedItem) {
+				}, function () {
+					$log.info('Modal dismissed at: ' + new Date());
+				});
+			};
 
 			$scope.sidePanelSelect = 'inventory';
 
@@ -117,6 +129,12 @@
 				$scope.selectedDevice = angular.copy(dev);
 			}
 		}])
+
+		.controller('CalibModalCtrl', function($scope, $modalInstance) {
+			$scope.close = function () {
+				$modalInstance.dismiss('cancel');
+			};
+		})
 
 		;
 })();

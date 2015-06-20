@@ -1,10 +1,165 @@
 <section id="ModBlocks" ng-controller="BlocksCtrl">
-	<div class="row">
-		<div class="col-xs-1"></div>
-		<div class="col-xs-10">
-			<h2 class="text-center">Coming soon, GUI Programming!</h2>
-			<img class="img-responsive img-thumbnail" src="mods/Blocks/blockspreview.png">
+	<div class="row"></div>
+			<!-- <h2 class="text-center">Coming soon, GUI Programming!</h2>
+			<img class="img-responsive img-thumbnail" src="mods/Blocks/blockspreview.png"> -->
+
+			<div class="row">
+				<div class="col-xs-2">
+			<div class="panel panel-default" style="border-radius: 10px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);"
+				data-drag="true"
+				data-jqyoui-options="{revert: 'invalid'}"
+				ng-model="list1"
+				jqyoui-draggable="{animate:true}"
+				ng-hide="!list1.title">
+
+				<h2 class="text-center">Temperature Sensor</h2>
+
+				<ng-form class="" name="eeduCalibForm" novalidate>
+					<fieldset class="form-group">
+						<label for="proportion">Adjust Threshold</label>
+						<input
+							type="number"
+							class="form-control"
+							id="proportion"
+							name="proportion"
+							ng-model="selectedDevice.config.calibration.pid.P">
+							</select>
+					</fieldset>
+					<fieldset class="form-group">
+						<label for="integral">Temperate (C)</label>
+						<input
+							type="number"
+							class="form-control"
+							id="integral"
+							name="integral"
+							ng-model="selectedDevice.config.calibration.pid.I">
+							</select>
+					</fieldset>
+					<fieldset class="form-group">
+						<label for="derivative">Input</label>
+						<!-- <label  class="input-group-addon"> -->
+	        <input type="radio" aria-label="...">
+	      </span>
+					</fieldset>
+					<fieldset class="form-group">
+						<label for="derivative">Ouput</label>
+						<!-- <label  class="input-group-addon"> -->
+	        <input type="radio" aria-label="...">
+	      </span>
+					</fieldset>
+					<button type="submit" class="btn btn-default" ng-click="">Advanced</button>
+				</ng-form>
+
+			</div>
+			</div>
+
+			<div class="col-xs-2"></div>
+
+			<div class="col-xs-2">
+		<div class="panel panel-default" style="border-radius: 10px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);"
+			data-drag="true"
+			data-jqyoui-options="{revert: 'invalid'}"
+			ng-model="list1"
+			jqyoui-draggable="{animate:true}"
+			ng-hide="!list1.title">
+
+			<h2 class="text-center">Servo Motor</h2>
+
+			<ng-form class="" name="eeduCalibForm" novalidate>
+				<fieldset class="form-group">
+					<label for="proportion">Adjust Threshold</label>
+					<input
+						type="number"
+						class="form-control"
+						id="proportion"
+						name="proportion"
+						ng-model="selectedDevice.config.calibration.pid.P">
+						</select>
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="integral">Throttle (rpm)</label>
+					<input
+						type="number"
+						class="form-control"
+						id="integral"
+						name="integral"
+						ng-model="selectedDevice.config.calibration.pid.I">
+						</select>
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="derivative">Input</label>
+					<!-- <label  class="input-group-addon"> -->
+				<input type="radio" aria-label="...">
+			</span>
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="derivative">Ouput</label>
+					<!-- <label  class="input-group-addon"> -->
+				<input type="radio" aria-label="...">
+			</span>
+				</fieldset>
+				<button type="submit" class="btn btn-default" ng-click="">Advanced</button>
+			</ng-form>
+
 		</div>
-		<div class="col-xs-1"></div>
-	</div>
+		</div>
+
+			</div>
+			<div class="row">
+				<div class="col-xs-5"></div>
+
+				<div class="col-xs-2">
+				<div class="panel panel-default" style="border-radius: 10px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);"
+					data-drag="true"
+					data-jqyoui-options="{revert: 'invalid'}"
+					ng-model="list1"
+					jqyoui-draggable="{animate:true}"
+					ng-hide="!list1.title">
+
+					<h2 class="text-center">Data Collector</h2>
+
+					<ng-form class="" name="eeduCalibForm" novalidate>
+						<fieldset class="form-group">
+							<label for="proportion">From</label>
+							<select
+								class="form-control">
+								<option>Temperature Sensor</option>
+								</select>
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="integral">Backend Connection</label>
+							<input
+								type="text"
+								class="form-control"
+								id="integral"
+								name="integral"
+								ng-model="selectedDevice.config.calibration.pid.I">
+								</select>
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="derivative">Input</label>
+							<!-- <label  class="input-group-addon"> -->
+		        <input type="radio" aria-label="...">
+		      </span>
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="derivative">Ouput</label>
+							<!-- <label  class="input-group-addon"> -->
+		        <input type="radio" aria-label="...">
+		      </span>
+						</fieldset>
+						<button type="submit" class="btn btn-default" ng-click="">Advanced</button>
+					</ng-form>
+
+				</div>
+			</div>
+
+
+
+			<!-- <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:50px;'> -->
+  <!-- <div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.title">{{list2.title}}</div> -->
+<!-- </div>
+		</div> -->
+		<!-- <div class="col-xs-5"></div> -->
+	<!-- </div> -->
 </section>

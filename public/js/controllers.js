@@ -145,9 +145,12 @@
                 // HACK
                 angular.element('#activeModScript').html('<script>' + js + '</script>');
                 registerController('Forge', $scope.activeMod.controller);
+
                 // FIXME just adding this here for demo purposes. We need to add controller deps as array.
                 // Extremely ugly, needs to be cleared after demo.
                 if ($scope.activeMod.name == 'Tag Cam') registerController('Forge', 'TagModalCtrl');
+                if ($scope.activeMod.name == 'Hangar') registerController('Forge', 'CalibModalCtrl');
+
                 angular.element('#activeMod').html($compile(data)($scope));
               })
           })

@@ -38,6 +38,8 @@ function registerController(moduleName, controllerName) {
       'ui.router',
       'ngAnimate',
       'ui.bootstrap',
+      'ui.utils',
+      'ngDragDrop',
       'ui.ace' // TODO should this be contained in a mods module? Or should libs be global?
     ], function($controllerProvider) {
       // Part of the above HACK
