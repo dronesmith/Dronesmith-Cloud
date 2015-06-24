@@ -84,7 +84,7 @@
 							battery: {
 								name: "Battery Remaining",
 								value: 89,
-								base: 89,
+								base: 50,
 								unit: "%",
 								style: {
 									'color': '#00FF99',

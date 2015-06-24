@@ -22,6 +22,7 @@
 							class="form-control"
 							id="proportion"
 							name="proportion"
+							ng-init="selectedDevice.config.calibration.pid.P = 100"
 							ng-model="selectedDevice.config.calibration.pid.P">
 							</select>
 					</fieldset>
@@ -32,6 +33,7 @@
 							class="form-control"
 							id="integral"
 							name="integral"
+							ng-init="selectedDevice.config.calibration.pid.I = 20.3"
 							ng-model="selectedDevice.config.calibration.pid.I">
 							</select>
 					</fieldset>
