@@ -2,7 +2,8 @@
 
 var passport = require('passport'),
   user = require('../lib/controllers/user'),
-  session = require('../lib/controllers/session');
+  session = require('../lib/controllers/session'),
+  cloudbit = require('../lib/controllers/cloudbit');
 
 module.exports = function(app, route) {
     // catchall route
@@ -22,6 +23,9 @@ module.exports = function(app, route) {
         .get('/api/session', session.poll)
 
         .put('/api/session', session.sync)
+
+        .get('/api/cloudbit', cloudbit.get)
+        .post('/api/cloudbit', cloudbit.output)
     ;
 
     if (app.get('env') === 'development') {

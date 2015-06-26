@@ -26,6 +26,16 @@
         });
       }])
 
+    .factory('Cloudbit', ['$resource',
+      function($resource) {
+        return $resource('/api/cloudbit', {
+        }, {
+          output: {
+            method: 'POST'
+          }
+        });
+      }])
+
     .factory('Defer', ['$q',
       function($q) {
         var jobs = {};

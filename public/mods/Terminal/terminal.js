@@ -12,8 +12,20 @@
 
 				$scope.languages = [
 					{'name': 'Javascript',
-					 'sampleCode': 	"var text = 'Hello World';\n" +
-					 				"console.log(text);\n"
+					 'sampleCode': 	"console.log('Hello, Eedu, this is Forge!')\n" +
+					 				"\n" +
+									"var LEDState  = false;\n" +
+									"try { \n" +
+									"\t\tvar LEDPin = new io.Gpio(13); // create a new GPIO connection\n" +
+									"\t\tLEDPin.dir(io.DIR_OUT); // set GPIO to output mode\n" +
+									"\t} catch(e) {\n" +
+									"\t}\n" +
+									"\n" +
+									"\t// perform a periodic task (every 1 second)\n" +
+									"\tsetInterval(function() {\n" +
+									"\t\tLEDPin.write(+state); // write digital signal to GPIO pin\n" +
+									"\t\tLEDState = !LEDState; // alternate state low and high\n" +
+									"\t}, 1000);\n\n"
 					},
 					{'name': 'C/C++',
 					 'sampleCode': 	"#include <iostream>\n\n" +
