@@ -1,69 +1,66 @@
+<section id="singupPane">
+  <div class="signupPannel">
+    <h3 class="signupTitle"> Sign up with Forge </h3>
+    <form name="signUpForm" novalidate>
+    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.username.$invalid && signUpForm.username.$dirty}">
+      <label class="control-label" for="username"></label>
+      <input
+        type="text"
+        class="signupEntry"
+        id="username"
+        name="username"
+        ng-model="signUpInfo.username"
+        ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
+        required
+        placeholder="Username"
+        >
+    </fieldset>
 
-<section id="signup">
-<div class="row">
-    <h3 class="text-center">Sign up for your Forge</h3>
-</div>
-<div class="row">
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4 panel">
-    <form class="panel-body" name="signUpForm" novalidate>
+    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}">
+      <label class="control-label" for="email"></label>
+      <input
+        type="email"
+        class="signupEntry"
+        id="email"
+        name="email"
+        ng-model="signUpInfo.email"
+        ng-pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$"
+        required
+        placeholder="Email"
+        >
+    </fieldset>
 
+    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}">
+      <label class="control-label" for="password"></label>
+      <input
+        type="password"
+        class="signupEntry"
+        id="password"
+        name="password"
+        ng-model="signUpInfo.password"
+        ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{8,20}$/"
+        required
+        placeholder="Password"
+        >
+    </fieldset>
 
-      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.username.$invalid && signUpForm.username.$dirty}">
-        <label class="control-label" for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          id="username"
-          name="username"
-          ng-model="signUpInfo.username"
-          required
-          >
-      </fieldset>
-
-      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}">
-        <label class="control-label" for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          ng-model="signUpInfo.email"
-          required
-          >
-      </fieldset>
-
-      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}">
-        <label class="control-label" for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          ng-model="signUpInfo.password"
-          ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
-          required
-          >
-      </fieldset>
-
-      <fieldset class="form-group control-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
-        <label class="control-label" for="confirmPassword">Confirm Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="confirmPassword"
-          name="confirmPassword"
-          ui-validate=" '$value==password' "
-          ui-validate-watch=" 'password' "
-          ng-model="signUpInfo.confirmPassword"
-          ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
-          required
-          >
-      </fieldset>
-      <button type="submit" class="pull-right btn btn-primary" ng-click="signup()">Sign Up</button>
-      <button class="pull-left btn btn-danger" ui-sref="login">Cancel</button>
-    </form>
+    <fieldset class="confirmPassword" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
+      <label class="control-label" for="confirmPassword"></label>
+      <input
+        type="password"
+        class="signupEntry"
+        id="confirmPassword"
+        name="confirmPassword"
+        ui-validate=" '$value==password' "
+        ui-validate-watch=" 'password' "
+        ng-model="signUpInfo.confirmPassword"
+        ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{8,20}$/"
+        required
+        placeholder="Confirm Password"
+        >
+    </fieldset>
+    <button type="submit" class="createAccount" ng-click="signup()"> Create Account </button>
+    <button class="cancelBtn" ui-sref="login"> Cancel </button>
+  </form>
   </div>
-  <div class="col-sm-4"></div>
-</div>
 </section>

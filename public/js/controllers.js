@@ -11,6 +11,12 @@
     .controller('AppCtrl', function($scope, $rootScope, $timeout) {
       $scope.alerts = [];
       $scope.timers = [];
+      $scope.appLoaded = false;
+      $scope.vodBlur = {};
+
+      $scope.$on('blur', function(ev, data) {
+        $scope.vodBlur = data;
+      });
 
       $scope.$on('alert:fail', function(ev, data) {
         $scope.addAlert(data.error || data);
@@ -32,7 +38,6 @@
           'margin-top': +(5+$scope.alerts.length*76)}});
 
         $scope.timers.push($timeout(function() {
-          console.log('got here');
           $scope.alerts.shift();
           $scope.timers.shift();
         }, 5000));
@@ -55,6 +60,7 @@
           if (!$scope.userInfo) {
             $state.go('login');
           } else {
+            angular.element('#appLoaded').remove();
             $scope.$broadcast('session:update', $scope.userInfo);
             Sync.launch();
           }
@@ -63,12 +69,23 @@
 
     .controller('LoginCtrl', function($scope, $log, $state, Session) {
 
+      $scope.updateVodBlur = function(blur) {
+        // $scope.vodBlur = { '-webkit-animation': '0.5s blurOnLogin'};
+        // $scope.clsName = {'filter': 'blur(20px)' };
+
+        $scope.$emit('blur', blur ? {'-webkit-animation': '3s blurOnLogin forwards' } :
+        { } );
+
+        // $scope.vodBlur = {'-webkit-animation': '2s blurOnLogin forwards' };
+      };
+
       $scope.login = function() {
         // TODO probably some kind of auth service that rests on top of session resource.
         Session
           .authenticate($scope.loginInfo)
           .$promise
           .then(function(data) {
+            angular.element('#appLoaded').remove();
             $state.go('forge');
           })
         ;
@@ -86,7 +103,7 @@
               .authenticate($scope.signUpInfo)
               .$promise
               .then(function(data) {
-
+                angular.element('#appLoaded').remove();
                 $state.go('forge');
 
               })
@@ -99,7 +116,7 @@
 
     // Directive Controllers
 
-    .controller('CommunityBarCtrl', function($scope, $state, Session) {
+    .controller('CommunityBarCtrl', function($scope, $state, Session, Sync) {
       $scope.userInfo = null;
 
       $scope.$on('session:update', function(ev, sessionData) {
@@ -119,7 +136,8 @@
           .then(function(data) {
             if (!data.userData) {
               $state.go('login');
-              Sync.exit();
+              Sync.end();
+                // angular.element().html('<video autoplay poster="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" preload="none" muted loop> <source src="vod/forgenoblur.mp4" type="video/mp4"> <img src="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" alt="video-fallback"> </video>');
             }
           });
       };
