@@ -8,6 +8,21 @@ body {
     overflow:hidden;
 }
 
+video {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    /*-webkit-filter: contrast(200%);*/
+    /*top: 50%;
+    left: 50%;*/
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    /*transform: translateX(-50%)*/
+  }
+
 .bg-mid {
   background-color: #777;
 }
@@ -59,7 +74,7 @@ body {
 #modView aside {
   /*min-height: 480px;
   max-height: 1800px;*/
-  height: 85vh;
+  height: 80vh;
 }
 
 /*
@@ -86,3 +101,177 @@ body {
   MOD STYLES GO IN THEIR RESPECTED MOD
 
 */
+
+body {
+  background-image: url("../img/computerChip.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: #ffffff;
+  display: block;
+  font-family: Lato;
+  font-size: 15px;
+  margin-left: 30px;
+  margin-right: auto;
+  margin-top: -40px;
+  padding: 9.5px 29.5px 9.5px 29.5px;
+}
+
+.confirmPassword signUpForm.confirmPassword.ng-invalid {
+  border: 3px solid red;
+}
+
+.createAccount {
+  background-color: #27A9E1;
+  border: 0;
+  border-radius: 5px;
+  color: #ffffff;
+  display: block;
+  font-family: Lato;
+  font-size: 15px;
+  margin-left: auto;
+  margin-right: 30px;
+  margin-top: 40px;
+  padding: 10px 30px 10px 30px;
+  width: 165px;
+}
+
+.forgeIcon {
+  display: block;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+}
+
+.forgeIcon img {
+  height: 100%;
+  width: 100%;
+}
+
+.forgeTitle {
+  font-family: Lato;
+  font-size: 25px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.loginBtn {
+  background-color: #27A9E1;
+  border: 0;
+  border-radius: 5px;
+  color: #ffffff;
+  display: block;
+  font-family: Lato;
+  font-size: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 145px 10px 145px;
+}
+
+.loginPass {
+  border-radius: 0px 0px 5px 5px;
+  color: #4C4C4C;
+  display: block;
+  font-family: Lato;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 150px 8px 10px;
+}
+
+.loginUser {
+  border-radius: 5px 5px 0px 0px;
+  color: #4C4C4C;
+  display: block;
+  font-family: Lato;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  padding: 8px 150px 8px 10px;
+}
+
+.mainPannel {
+  background: rgba(76,76,76,0.75);
+  border-radius: 5px 5px 0px 0px;
+  display: block;
+  height: 355px;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  padding-top: 20px;
+  width: 400px;
+}
+
+.secondaryPannel{
+  background-color: rgba(46, 46, 46, 0.75);
+  border-radius: 0px 0px 5px 5px;
+  display: block;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+
+.signup {
+  font-style: italic;
+  padding: 20px 0px 10px 0px;
+  text-align: center;
+}
+
+.signupBtn {
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: #ffffff;
+  display: block;
+  font-family: Lato;
+  font-size: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 145px 10px 145px;
+}
+
+.signupEntry {
+  border-radius: 5px;
+  color: #4C4C4C;
+  display: block;
+  font-family: Lato;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  padding: 8px 150px 8px 10px;
+}
+
+.signupPannel {
+  background: rgba(76,76,76,0.75);
+  display: block;
+  height: 505px;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  padding-top: 20px;
+  width: 400px;
+}
+
+.signupTitle {
+  font-family: Lato;
+  font-size: 25px;
+  letter-spacing: 2px;
+  margin-bottom: -10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.validateEntry input.ng-invalid.ng-touched {
+  border: 3px solid red;
+}

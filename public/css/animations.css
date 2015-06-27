@@ -55,6 +55,17 @@
   animation:0.5s my_animation;
 }
 
+.video-blur {
+  -webkit-animation:2s blurOnLogin forwards;
+  -moz-animation:2s blurOnLogin forwards;
+  -o-animation:2s blurOnLogin forwards;
+  animation:2s blurOnLogin forwards;
+
+  /*-webkit-filter: contrast(200%);*/
+}
+
+/* Route */
+
 @keyframes my_animation {
   from { opacity:1; }
   to { opacity:0; }
@@ -73,4 +84,15 @@
 @-o-keyframes my_animation {
   from { opacity:1; }
   to { opacity:0; }
+}
+
+/* Blur */
+@keyframes blurOnLogin {
+  from { -webkit-filter: contrast(100%); }
+  to { -webkit-filter: contrast(400%); }
+}
+
+@-webkit-keyframes blurOnLogin {
+  from { -webkit-filter: contrast(100%); }
+  to { -webkit-filter: contrast(400%); }
 }
