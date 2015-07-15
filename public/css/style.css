@@ -136,7 +136,7 @@ body {
   font-size: 15px;
   margin-left: auto;
   margin-right: 30px;
-  margin-top: 40px;
+  margin-top: 20px;
   padding: 10px 30px 10px 30px;
   width: 165px;
 }
@@ -253,13 +253,14 @@ body {
 .signupEntry {
   border-radius: 5px;
   color: #4C4C4C;
+  background-color: #777;
   display: block;
   font-family: Lato;
   font-size: 16px;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
-  padding: 8px 150px 8px 10px;
+  padding: 20px 10px 20px 10px;
 }
 
 .signupPannel {
@@ -290,6 +291,21 @@ body {
   font-weight: 100;
   color: #FFF;
 
+}
+
+.signupRadio {
+  font-size: 20px;
+  font-weight: 300 !important;
+  width: 120px;
+  margin-left: 30px;
+}
+
+.signupRadioOther {
+  font-size: 20px;
+  font-weight: 300 !important;
+  width: 320px;
+  padding: 0px 15px 15px 15px;
+  margin-left: 30px;
 }
 
 .signupTitle {

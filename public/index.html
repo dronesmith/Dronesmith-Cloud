@@ -26,6 +26,10 @@
 </head>
 <body ng-controller="AppCtrl">
 
+  <!-- HTTP request statuses -->
+  <alert class="repeated-item" ng-style="alert.position" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+
   <section id="appLoaded" ng-hide="appLoaded">
     <video ng-style="vodBlur"
       autoplay
@@ -35,13 +39,10 @@
     </video>
   </section>
 
-  <!-- HTTP request statuses -->
-  <alert class="repeated-item" ng-style="alert.position" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-
   <main ui-view></main>
 
   <footer class="logincite">
-    <em><a href="http://www.skyworksas.com">Made with ♥ by Skyworks Aerial Systems</a></em>
+    <em><a href="http://www.skyworksas.com">Made with ♥  by Skyworks Aerial Systems</a></em>
   </footer>
 
   <script src="vendor/angular-ace/ace.js"></script>
