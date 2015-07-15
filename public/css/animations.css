@@ -55,14 +55,14 @@
   animation:0.5s my_animation;
 }
 
-.video-blur {
+/*.video-blur {
   -webkit-animation:2s blurOnLogin forwards;
   -moz-animation:2s blurOnLogin forwards;
   -o-animation:2s blurOnLogin forwards;
   animation:2s blurOnLogin forwards;
 
   /*-webkit-filter: contrast(200%);*/
-}
+}*/
 
 /* Route */
 
@@ -87,7 +87,7 @@
 }
 
 /* Blur */
-@keyframes blurOnLogin {
+/*@keyframes blurOnLogin {
   from { -webkit-filter: contrast(100%); }
   to { -webkit-filter: contrast(400%); }
 }
@@ -95,4 +95,4 @@
 @-webkit-keyframes blurOnLogin {
   from { -webkit-filter: contrast(100%); }
   to { -webkit-filter: contrast(400%); }
-}
+}*/

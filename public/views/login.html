@@ -1,39 +1,46 @@
 <section id="loginPane">
 
   <div class="mainPannel">
-    <div class="forgeIcon">
-    <img src="img/forgelogo.png"/>
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3">
+        <div class="forgeIcon">
+          <img src="img/forgelogo.png"/>
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <h1 class="text-center">Forge</h1>
+      </div>
     </div>
     <div>
-    <h3 class="forgeTitle"> Welcome to Forge </h3>
+      <h3 class="forgeTitle"> Drone development.<br>Hardware agnostic. </h3>
     </div>
     <form name="loginForm" novalidate>
     <fieldset class="form-group">
       <input
         type="text"
-        class="loginUser"
+        class="form-control loginUser"
         id="email"
         name="email"
-        placeholder="Username or Email"
+        placeholder="Email"
         ng-model="loginInfo.email"
         required>
 
-      <p> <input
+      <input
         type="password"
-        class="loginPass"
+        class="form-control loginPass"
         id="password"
         name="password"
         placeholder="Password"
         ng-model="loginInfo.password"
         ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
-        required
-        > </p>
+        required>
     </fieldset>
-    <input type="submit" class="loginBtn" ng-mouseover="updateVodBlur(true)" ng-mouseleave="updateVodBlur(false)" ng-click="login()" value="Log in">
+    <input type="submit" class="btn btn-primary loginBtn" ng-mouseover="updateVodBlur(true)" ng-mouseleave="updateVodBlur(false)" ng-click="login()" value="Log in">
   </form>
   </div>
   <div class="secondaryPannel">
-    <p class="signup"> Don't have an account? </p>
-    <a href="" ui-sref="signup"> <input type="submit" class="signupBtn" value="Sign up"> </a>
+    <p class="signup"> Join the next generation of drone developers. </p>
+    <a href="" ui-sref="signup"> <input type="submit" class="signupBtn" value="Signup for Early Access"> </a>
   </div>
 </section>
