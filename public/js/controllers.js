@@ -92,6 +92,20 @@
       }
     })
 
+    .controller('ConfirmCtrl', function($scope, $log, $state, $stateParams, $timeout) {
+      if ($stateParams.onWaitList) {
+        $scope.messageHeader = "You've missed the early access!";
+        $scope.message = "We've put you on the waitlist, however. We may extend the early access to you, and we'll be sure to send you updates as Forge matures.";
+      } else {
+        $scope.messageHeader = "Thanks for signing up!";
+        $scope.message = "We've emailed you your early access code. You'll need to verify your account in order be apart of the early access.";
+      }
+
+      $scope.goLogin = function() {
+        $state.go('login');
+      }
+    })
+
     .controller('SignUpCtrl', function($scope, $log, $state, $timeout, Users, Session) {
 
       $scope.signup = function() {
@@ -99,15 +113,18 @@
         user
           .$save()
           .then(function(data) {
-            Session
-              .authenticate($scope.signUpInfo)
-              .$promise
-              .then(function(data) {
-                angular.element('#appLoaded').remove();
-                $state.go('forge');
 
-              })
-            ;
+            $state.go('confirm', data);
+
+            // Session
+            //   .authenticate($scope.signUpInfo)
+            //   .$promise
+            //   .then(function(data) {
+            //     angular.element('#appLoaded').remove();
+            //     $state.go('forge');
+            //
+            //   })
+            // ;
           })
         ;
       };
