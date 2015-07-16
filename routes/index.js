@@ -3,6 +3,8 @@
 var passport = require('passport'),
   user = require('../lib/controllers/user'),
   session = require('../lib/controllers/session'),
+  mongoose = require('mongoose'),
+  User = mongoose.model('User'),
   cloudbit = require('../lib/controllers/cloudbit');
 
 module.exports = function(app, route) {
@@ -11,6 +13,33 @@ module.exports = function(app, route) {
         .all('*', function (request, response, next) {
             // placeholder for catching each request
             next();
+        })
+
+        // Check for global query strings
+        .get('/', function(req, res, next) {
+          if (req.query.code) {
+            User
+              .findOne({_id: req.query.code})
+              .then(function(data, error) {
+                if (error || !data) {
+                  return res.redirect('/');
+                } else {
+                  if (req.query.waitlist) {
+                    return res
+                      .status(400)
+                      .json({"error": "Uh oh, you missed your chance for early access! :("});
+                    ;
+                  } else {
+                    return res
+                      .json({"status": "ok"});
+                    ;
+                  }
+                }
+              })
+            ;
+          } else {
+            return res.redirect('/');
+          }
         })
 
         // User creation
