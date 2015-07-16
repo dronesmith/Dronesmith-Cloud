@@ -26,6 +26,8 @@ module.exports = function(app, route) {
 
         .get('/api/cloudbit', cloudbit.get)
         .post('/api/cloudbit', cloudbit.output)
+
+        .get('/:type([A-Z|a-z|0-9]{24})', user.confirm);
     ;
 
     if (app.get('env') === 'development') {
