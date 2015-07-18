@@ -37,9 +37,9 @@
         ng-model="loginInfo.password"
         ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
         required>
-      </fieldset>  
+      </fieldset>
     </fieldset>
-    <input type="submit" class="btn btn-primary loginBtn" ng-click="login()" value="Log in">
+    <input type="submit" class="btn btn-primary loginBtn" ng-click="login() && loginForm.$valid" value="Log in">
   </form>
   </div>
   <div class="secondaryPannel">
