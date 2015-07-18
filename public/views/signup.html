@@ -16,7 +16,7 @@
         >
     </fieldset> -->
 
-    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty, 'has-success': signUpForm.email.$dirty && signUpForm.email.$valid}">
+    <fieldset class="form-group" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty, 'has-success': signUpForm.email.$dirty && signUpForm.email.$valid}">
       <label class="control-label" for="email"></label>
       <input
         type="email"
@@ -28,10 +28,10 @@
         required
         placeholder="Email"
         >
+        <div class="errorMessage" ng-if="signUpForm.email.$invalid && signUpForm.email.$dirty"> Please enter a valid email</div>
     </fieldset>
 
-    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty, 'has-success': signUpForm.password.$valid && signUpForm.password.$dirty}">
-      <label class="control-label" for="password"></label>
+    <fieldset class="form-group" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty, 'has-success': signUpForm.password.$valid && signUpForm.password.$dirty}">
       <input
         type="password"
         class="form-control signupEntry"
@@ -40,12 +40,12 @@
         ng-model="signUpInfo.password"
         ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{8,20}$/"
         required
-        placeholder="Password"
+        placeholder="Password (8-20 characters)"
         >
+        <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain number and special character </div>
     </fieldset>
 
-    <fieldset class="confirmPassword" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty, 'has-success': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
-      <label class="control-label" for="confirmPassword"></label>
+    <fieldset class="form-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty, 'has-success': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
       <input
         type="password"
         class="form-control signupEntry"
@@ -58,6 +58,7 @@
         required
         placeholder="Confirm Password"
         >
+        <div class="errorMessage" ng-if="signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty"> Passwords do not match</div>
     </fieldset>
 
     <fieldset class="radio">

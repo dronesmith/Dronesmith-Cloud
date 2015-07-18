@@ -95,7 +95,7 @@
           $scope.login();
         }
         else {
-          alert("Please enter a valid username/email and password");
+          alert("Please enter a valid email and password");
         }
       };
     })
@@ -141,7 +141,7 @@
           $scope.signUp();
         }
         else {
-          alert("Please enter a valid email and password");
+          alert("Please fill out all fields");
         }
       };
     })
