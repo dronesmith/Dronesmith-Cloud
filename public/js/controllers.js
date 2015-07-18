@@ -89,7 +89,15 @@
             $state.go('forge');
           })
         ;
-      }
+      };
+      $scope.logInValid = function(valid) {
+        if(valid){
+          $scope.login();
+        }
+        else {
+          alert("Please enter a valid username/email and password");
+        }
+      };
     })
 
     .controller('ConfirmCtrl', function($scope, $log, $state, $stateParams, $timeout) {
@@ -128,7 +136,14 @@
           })
         ;
       };
-
+      $scope.signUpValid = function(valid) {
+        if(valid){
+          $scope.signUp();
+        }
+        else {
+          alert("Please enter a valid email and password");
+        }
+      };
     })
 
     // Directive Controllers
