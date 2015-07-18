@@ -4,7 +4,7 @@
     <form name="signUpForm" novalidate>
     <!-- <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.username.$invalid && signUpForm.username.$dirty}">
       <label class="control-label" for="username"></label>
-      <input
+      <input;
         type="text"
         class="form-control signupEntry"
         id="username"
@@ -16,7 +16,7 @@
         >
     </fieldset> -->
 
-    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}">
+    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty, 'has-success': signUpForm.email.$dirty && signUpForm.email.$valid}">
       <label class="control-label" for="email"></label>
       <input
         type="email"
@@ -30,7 +30,7 @@
         >
     </fieldset>
 
-    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}">
+    <fieldset class="validateEntry" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty, 'has-success': signUpForm.password.$valid && signUpForm.password.$dirty}">
       <label class="control-label" for="password"></label>
       <input
         type="password"
@@ -44,7 +44,7 @@
         >
     </fieldset>
 
-    <fieldset class="confirmPassword" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
+    <fieldset class="confirmPassword" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty, 'has-success': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
       <label class="control-label" for="confirmPassword"></label>
       <input
         type="password"
