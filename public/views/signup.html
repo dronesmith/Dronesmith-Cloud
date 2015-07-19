@@ -37,28 +37,28 @@
         class="form-control signupEntry"
         id="password"
         name="password"
+        ng-maxlength="20"
+        ng-minlength="8"
         ng-model="signUpInfo.password"
-        ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{8,20}$/"
+        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/"
         required
-        placeholder="Password (8-20 characters)"
+        placeholder="Password (4-20 characters)"
         >
-        <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain number and special character </div>
+        <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain one upper and lowercase letter and one number </div>
     </fieldset>
 
-    <fieldset class="form-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty, 'has-success': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
+    <fieldset class="form-group" ng-class="{'has-error': !confirmValid(signUpForm.confirmPassword.$dirty) && signUpForm.confirmPassword.$dirty, 'has-success': confirmValid(signUpForm.confirmPassword.$dirty) && signUpForm.confirmPassword.$dirty}">
       <input
         type="password"
         class="form-control signupEntry"
         id="confirmPassword"
         name="confirmPassword"
-        ui-validate=" '$value==password' "
-        ui-validate-watch=" 'password' "
         ng-model="signUpInfo.confirmPassword"
-        ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{8,20}$/"
+        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/"
         required
         placeholder="Confirm Password"
         >
-        <div class="errorMessage" ng-if="signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty"> Passwords do not match</div>
+        <div class="errorMessage" ng-if="!confirmValid() && signUpForm.confirmPassword.$dirty"> Passwords do not match</div>
     </fieldset>
 
     <fieldset class="radio">
@@ -85,11 +85,11 @@
 
       <label class="control-label signupRadioOther" for="usage">
         <input type="radio" ng-model="signUpInfo.kind" name="usage" id="optionsRadios1" value="other" checked>
-        Other <input type="text" style="margin-top: 5px;" ng-model="signUpInfo.Otherkind" class="form-control" placeholder="">
+        Other <input type="text" style="margin-top: 5px;" ng-maxlength="25" ng-model="signUpInfo.Otherkind" class="form-control" placeholder="">
       </label>
     </fieldset>
 
-    <button type="submit" class="createAccount" ng-click="signUpValid(signUpForm.$valid)"> Create Account </button>
+    <button type="submit" class="createAccount" ng-click="signUpValid(signUpForm.$valid, confirmValid())"> Create Account </button>
     <button class="cancelBtn" ui-sref="login"> Cancel </button>
   </form>
   </div>

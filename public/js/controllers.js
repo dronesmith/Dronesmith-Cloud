@@ -95,7 +95,7 @@
           $scope.login();
         }
         else {
-          alert("Please enter a valid email and password");
+          //alert("Please enter a valid email and password"); TODO see signUpValid()
         }
       };
     })
@@ -136,12 +136,22 @@
           })
         ;
       };
-      $scope.signUpValid = function(valid) {
-        if(valid){
+
+       $scope.confirmValid = function(modified) {
+      if(modified) {
+        if($scope.signUpInfo.confirmPassword == $scope.signUpInfo.password)
+          return true;
+        else
+          return false;
+        }
+      };
+
+      $scope.signUpValid = function(valid, samePass) {
+        if(valid && samePass){
           $scope.signUp();
         }
         else {
-          alert("Please fill out all fields");
+          //alert("Please fill out all fields"); TODO probably error next to login button (ngif triggered by variable set true here)
         }
       };
     })

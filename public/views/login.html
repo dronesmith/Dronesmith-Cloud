@@ -18,14 +18,14 @@
     <form name="loginForm" novalidate>
     <fieldset class="form-group" ng-class="{'has-error': loginForm.email.$dirty && loginForm.email.$invalid, 'has-success': loginForm.email.$dirty && loginForm.email.$valid}">
       <input
-        type="text"
+        type="email"
         class="form-control loginUser"
         id="email"
         name="email"
         placeholder="Email"
         ng-model="loginInfo.email"
         required>
-      <div class="errorMessage" ng-if="loginForm.email.$dirty && loginForm.email.$invalid"> Please enter a valid username </div>
+      <div class="errorMessage" ng-if="loginForm.email.$dirty && loginForm.email.$invalid"> Please enter a valid email </div>
       </fieldset>
     <fieldset class="form-group" ng-class="{'has-error': loginForm.password.$dirty && loginForm.password.$invalid, 'has-success': loginForm.password.$dirty && loginForm.password.$valid}">
       <input
@@ -35,7 +35,7 @@
         name="password"
         placeholder="Password"
         ng-model="loginInfo.password"
-        ng-pattern="/^[A-Za-z0-9!@#$%^&*()_]{6,30}$/"
+        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/"
         required>
       <div class="errorMessage" ng-if="loginForm.password.$dirty && loginForm.password.$invalid"> Please enter a valid password </div>
     </fieldset>
