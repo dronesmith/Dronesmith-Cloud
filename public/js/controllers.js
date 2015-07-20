@@ -35,7 +35,7 @@
           'z-index': '10000',
           'margin-left': '5px',
           // 'padding': '5px 5px 5px 5px',
-          'margin-top': +(5+$scope.alerts.length*76)}});
+          'margin-top': +(-90+$scope.alerts.length*76)}});
 
         $scope.timers.push($timeout(function() {
           $scope.alerts.shift();

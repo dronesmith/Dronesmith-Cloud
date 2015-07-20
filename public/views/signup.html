@@ -16,7 +16,7 @@
         >
     </fieldset> -->
 
-    <fieldset class="form-group" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty, 'has-success': signUpForm.email.$dirty && signUpForm.email.$valid}">
+    <fieldset class="form-group" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}">
       <label class="control-label" for="email"></label>
       <input
         type="email"
@@ -28,10 +28,10 @@
         required
         placeholder="Email"
         >
-        <div class="errorMessage" ng-if="signUpForm.email.$invalid && signUpForm.email.$dirty"> Please enter a valid email</div>
+        <!-- <div class="errorMessage" ng-if="signUpForm.email.$invalid && signUpForm.email.$dirty"> Please enter a valid email</div> -->
     </fieldset>
 
-    <fieldset class="form-group" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty, 'has-success': signUpForm.password.$valid && signUpForm.password.$dirty}">
+    <fieldset class="form-group" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}">
       <input
         type="password"
         class="form-control signupEntry"
@@ -42,12 +42,12 @@
         ng-model="signUpInfo.password"
         ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required
-        placeholder="Password (6-20 characters)"
+        placeholder="Password (6 characters min)"
         >
-        <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain one upper and lowercase letter and one number </div>
+        <!-- <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain one upper and lowercase letter and one number </div> -->
     </fieldset>
 
-    <fieldset class="form-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty, 'has-success': signUpForm.confirmPassword.$valid && signUpForm.confirmPassword.$dirty}">
+    <fieldset class="form-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
       <input
         type="password"
         class="form-control signupEntry"

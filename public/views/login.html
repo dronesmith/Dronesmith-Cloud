@@ -16,7 +16,7 @@
       <h3 class="forgeTitle"> Drone development.<br>Hardware agnostic. </h3>
     </div>
     <form name="loginForm" novalidate>
-    <fieldset class="form-group" ng-class="{'has-error': loginForm.email.$dirty && loginForm.email.$invalid, 'has-success': loginForm.email.$dirty && loginForm.email.$valid}">
+    <fieldset class="form-group" ng-class="{'has-error': loginForm.email.$dirty && loginForm.email.$invalid}">
       <input
         type="email"
         class="form-control loginUser"
@@ -25,9 +25,9 @@
         placeholder="Email"
         ng-model="loginInfo.email"
         required>
-      <div class="errorMessage" ng-if="loginForm.email.$dirty && loginForm.email.$invalid"> Please enter a valid email </div>
+      <!-- <div class="errorMessage" ng-if="loginForm.email.$dirty && loginForm.email.$invalid"> Please enter a valid email </div> -->
       </fieldset>
-    <fieldset class="form-group" ng-class="{'has-error': loginForm.password.$dirty && loginForm.password.$invalid, 'has-success': loginForm.password.$dirty && loginForm.password.$valid}">
+    <fieldset class="form-group" ng-class="{'has-error': loginForm.password.$dirty && loginForm.password.$invalid}">
       <input
         type="password"
         class="form-control loginPass"
@@ -37,9 +37,9 @@
         ng-model="loginInfo.password"
         ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required>
-      <div class="errorMessage" ng-if="loginForm.password.$dirty && loginForm.password.$invalid"> Please enter a valid password </div>
+      <!-- <div class="errorMessage" ng-if="loginForm.password.$dirty && loginForm.password.$invalid"> Please enter a valid password </div> -->
     </fieldset>
-    <input type="submit" class="btn btn-primary loginBtn" ng-click="logInValid(loginForm.$valid)" value="Log in">
+    <input type="submit" class="btn btn-primary loginBtn" ng-click="login()" value="Log in">
   </form>
   </div>
   <div class="secondaryPannel">

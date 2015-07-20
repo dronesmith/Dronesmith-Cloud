@@ -187,7 +187,7 @@ body {
 
 .loginPass {
   border-radius: 0px 0px 5px 5px;
-  color: #4C4C4C;
+  color: #CCC;
   background-color: #777;
   display: block;
   font-family: Lato;
@@ -200,7 +200,7 @@ body {
 
 .loginUser {
   border-radius: 5px 5px 0px 0px;
-  color: #4C4C4C;
+  color: #CCC;
   background-color: #777;
   display: block;
   font-family: Lato;
@@ -256,7 +256,7 @@ body {
 
 .signupEntry {
   border-radius: 5px;
-  color: #4C4C4C;
+  color: #FFF;
   background-color: #777;
   display: block;
   font-family: Lato;
