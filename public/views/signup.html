@@ -47,7 +47,7 @@
         <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain one upper and lowercase letter and one number </div>
     </fieldset>
 
-    <fieldset class="form-group" ng-class="{'has-error': !confirmValid(signUpForm.confirmPassword.$dirty) && signUpForm.confirmPassword.$dirty, 'has-success': confirmValid(signUpForm.confirmPassword.$dirty) && signUpForm.confirmPassword.$dirty}">
+    <fieldset class="form-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty, 'has-success': signUpForm.confirmPassword.$valid && signUpForm.confirmPassword.$dirty}">
       <input
         type="password"
         class="form-control signupEntry"
@@ -57,8 +57,10 @@
         ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/"
         required
         placeholder="Confirm Password"
+        ui-validate=" '$value==password' "
+        ui-validate-watch= " 'password' "
         >
-        <div class="errorMessage" ng-if="!confirmValid() && signUpForm.confirmPassword.$dirty"> Passwords do not match</div>
+        <div class="errorMessage" ng-if="signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty"> Passwords do not match</div>
     </fieldset>
 
     <fieldset class="radio">
@@ -89,7 +91,7 @@
       </label>
     </fieldset>
 
-    <button type="submit" class="createAccount" ng-click="signUpValid(signUpForm.$valid, confirmValid())"> Create Account </button>
+    <button type="submit" class="createAccount" ng-click="signUpValid(signUpForm.$valid)"> Create Account </button>
     <button class="cancelBtn" ui-sref="login"> Cancel </button>
   </form>
   </div>

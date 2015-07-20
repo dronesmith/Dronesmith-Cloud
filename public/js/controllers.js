@@ -137,17 +137,8 @@
         ;
       };
 
-       $scope.confirmValid = function(modified) {
-      if(modified) {
-        if($scope.signUpInfo.confirmPassword == $scope.signUpInfo.password)
-          return true;
-        else
-          return false;
-        }
-      };
-
-      $scope.signUpValid = function(valid, samePass) {
-        if(valid && samePass){
+      $scope.signUpValid = function(valid) {
+        if(valid){
           $scope.signUp();
         }
         else {
