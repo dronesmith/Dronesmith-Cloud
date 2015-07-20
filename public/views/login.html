@@ -35,7 +35,7 @@
         name="password"
         placeholder="Password"
         ng-model="loginInfo.password"
-        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/"
+        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required>
       <div class="errorMessage" ng-if="loginForm.password.$dirty && loginForm.password.$invalid"> Please enter a valid password </div>
     </fieldset>

@@ -40,9 +40,9 @@
         ng-maxlength="20"
         ng-minlength="8"
         ng-model="signUpInfo.password"
-        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/"
+        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required
-        placeholder="Password (4-20 characters)"
+        placeholder="Password (6-20 characters)"
         >
         <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain one upper and lowercase letter and one number </div>
     </fieldset>
@@ -54,7 +54,7 @@
         id="confirmPassword"
         name="confirmPassword"
         ng-model="signUpInfo.confirmPassword"
-        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/"
+        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required
         placeholder="Confirm Password"
         ui-validate=" '$value==password' "
