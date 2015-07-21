@@ -60,7 +60,7 @@
           if (!$scope.userInfo) {
             $state.go('login');
           } else {
-            angular.element('#appLoaded').remove();
+            angular.element('#appLoaded').empty();
             $scope.$broadcast('session:update', $scope.userInfo);
             Sync.launch();
           }
@@ -85,7 +85,7 @@
           .authenticate($scope.loginInfo)
           .$promise
           .then(function(data) {
-            angular.element('#appLoaded').remove();
+            angular.element('#loginVideo').empty();
             $state.go('forge');
           })
         ;
@@ -171,7 +171,11 @@
             if (!data.userData) {
               $state.go('login');
               Sync.end();
-                // angular.element().html('<video autoplay poster="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" preload="none" muted loop> <source src="vod/forgenoblur.mp4" type="video/mp4"> <img src="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" alt="video-fallback"> </video>');
+              angular.element("#appLoaded").html(
+              '<video id="loginVideo" autoplay poster="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" preload="none" muted loop>'+
+              '<source src="vod/forgenoblur.mp4" type="video/mp4">'+
+              '<img src="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" alt="video-fallback">'+
+              '</video>');
             }
           });
       };

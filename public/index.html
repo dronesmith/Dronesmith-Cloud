@@ -29,7 +29,6 @@
   <!-- HTTP request statuses -->
   <alert class="repeated-item" ng-style="alert.position" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
-
   <section id="appLoaded" ng-hide="appLoaded">
     <video ng-style="vodBlur"
       autoplay
