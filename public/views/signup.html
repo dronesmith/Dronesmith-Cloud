@@ -55,13 +55,13 @@
         ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required
         placeholder="Confirm Password"
-        ui-validate=" '$value==password' "
-        ui-validate-watch= " 'password' "
+        ui-validate=" '$value==signUpInfo.password' "
+        ui-validate-watch= " 'signUpInfo.password' "
         >
         <div class="errorMessage" ng-if="signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty"> Passwords do not match</div>
     </fieldset>
 
-    <fieldset class="radio">
+    <fieldset class="radio" ng-init="signUpInfo.kind='developer'">
       <p style="font-weight: 300; font-size: 24px;" class="text-center">I am a...</P>
       <label class="control-label signupRadio" for="usage">
         <input type="radio" ng-model="signUpInfo.kind" name="usage" id="optionsRadios1" value="developer" checked>
