@@ -90,14 +90,15 @@
           })
         ;
       };
-      $scope.logInValid = function(valid) {
-        if(valid){
-          $scope.login();
-        }
-        else {
-          //alert("Please enter a valid email and password"); TODO see signUpValid()
-        }
-      };
+      //not used
+      // $scope.logInValid = function(valid) {
+      //   if(valid){
+      //     $scope.login();
+      //   }
+      //   else {
+      //     //alert("Please enter a valid email and password"); TODO see signUpValid()
+      //   }
+      // };
     })
 
     .controller('ConfirmCtrl', function($scope, $log, $state, $stateParams, $timeout) {
@@ -136,15 +137,15 @@
           })
         ;
       };
-
-      $scope.signUpValid = function(valid) {
-        if(valid){
-          $scope.signUp();
-        }
-        else {
-          //alert("Please fill out all fields"); TODO probably error next to login button (ngif triggered by variable set true here)
-        }
-      };
+      //not used
+      // $scope.signUpValid = function(valid) {
+      //   if(valid){
+      //     $scope.signUp();
+      //   }
+      //   else {
+      //     //alert("Please fill out all fields"); TODO probably error next to login button (ngif triggered by variable set true here)
+      //   }
+      // };
     })
 
     // Directive Controllers

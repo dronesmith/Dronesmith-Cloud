@@ -28,7 +28,6 @@
         required
         placeholder="Email"
         >
-        <!-- <div class="errorMessage" ng-if="signUpForm.email.$invalid && signUpForm.email.$dirty"> Please enter a valid email</div> -->
     </fieldset>
 
     <fieldset class="form-group" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}">
@@ -37,14 +36,11 @@
         class="form-control signupEntry"
         id="password"
         name="password"
-        ng-maxlength="20"
-        ng-minlength="8"
         ng-model="signUpInfo.password"
         ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required
         placeholder="Password (6 characters min)"
         >
-        <!-- <div class="errorMessage" ng-if="signUpForm.password.$invalid && signUpForm.password.$dirty"> Password must contain one upper and lowercase letter and one number </div> -->
     </fieldset>
 
     <fieldset class="form-group" ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
@@ -91,7 +87,7 @@
       </label>
     </fieldset>
 
-    <button type="submit" class="createAccount" ng-click="signUpValid(signUpForm.$valid)"> Create Account </button>
+    <button type="submit" class="createAccount" ng-click="signUp()"> Create Account </button>
     <button class="cancelBtn" ui-sref="login"> Cancel </button>
   </form>
   </div>
