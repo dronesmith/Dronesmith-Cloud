@@ -36,6 +36,8 @@
         class="form-control signupEntry"
         id="password"
         name="password"
+        ng-maxlength="20"
+        ng-minlength="6"
         ng-model="signUpInfo.password"
         ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
         required
@@ -87,7 +89,7 @@
       </label>
     </fieldset>
 
-    <button type="submit" class="createAccount" ng-click="signUp()"> Create Account </button>
+    <input type="submit" class="createAccount" ng-click="signup()" value="Create Account">
     <button class="cancelBtn" ui-sref="login"> Cancel </button>
   </form>
   </div>
