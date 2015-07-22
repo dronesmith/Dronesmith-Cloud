@@ -45,6 +45,9 @@ module.exports = function(app, route) {
         // User creation
         .post('/api/user', user.create)
 
+        // Add event when user clicks something
+        .put('/api/user', user.update)
+
         // Authenticate a session (allows logins)
         .post('/api/session', session.authenticate)
 

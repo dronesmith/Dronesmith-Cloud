@@ -62,7 +62,7 @@
           } else {
             angular.element('#appLoaded').empty();
             $scope.$broadcast('session:update', $scope.userInfo);
-            Sync.launch();
+            // Sync.launch();
           }
         });
     })
@@ -181,13 +181,30 @@
       };
     })
 
-    .controller('ModViewCtrl', function($scope, Session, $http, $compile) {
+    .controller('ModViewCtrl', function($scope, Session, Users, $http, $compile) {
       $scope.mods = [];
       $scope.activeMod = null;
       $scope.showSidePanel = true;
 
+      $scope.userInfo = null;
+
+      $scope.$on('session:update', function(ev, sessionData) {
+        $scope.userInfo = sessionData;
+      });
+
       $scope.changeActiveMod = function(view) {
         $scope.activeMod = $scope.mods[view];
+
+        console.log($scope.userInfo);
+
+        $scope.userInfo.events.push({
+          kind: 'Mod Select',
+          params: {
+            name: $scope.activeMod
+          }
+        });
+
+        Users.update({id: $scope.userInfo.id}, $scope.userInfo);
 
         // dynamically add mod view.
         $http
