@@ -60,9 +60,10 @@
           if (!$scope.userInfo) {
             $state.go('login');
           } else {
+
             angular.element('#appLoaded').empty();
             $scope.$broadcast('session:update', $scope.userInfo);
-            // Sync.launch();
+            Sync.launch();
           }
         });
     })
@@ -195,7 +196,7 @@
       $scope.changeActiveMod = function(view) {
         $scope.activeMod = $scope.mods[view];
 
-        console.log($scope.userInfo);
+        // console.log($scope.userInfo);
 
         $scope.userInfo.events.push({
           kind: 'Mod Select',
