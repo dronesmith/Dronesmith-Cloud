@@ -15,10 +15,10 @@
 @gray-lighter:           lighten(@gray-base, 93.5%); // #eee
 
 @brand-primary:         #27A9E1;
-@brand-success:         #8BC53F;
+@brand-success:         #00FF00;
 @brand-info:            #87bccc;
 @brand-warning:         #ff9600;
-@brand-danger:          #ff0700;
+@brand-danger:          #FC1501;
 
 
 //== Scaffolding
@@ -490,9 +490,9 @@
 //
 //## Define colors for form feedback states and, by default, alerts.
 
-@state-success-text:             #3c763d;
+@state-success-text:             @brand-success;
 @state-success-bg:               @brand-success;
-@state-success-border:           darken(spin(@state-success-bg, -10), 5%);
+@state-success-border:           @brand-success;
 
 @state-info-text:                #31708f;
 @state-info-bg:                  @brand-info;
@@ -502,9 +502,9 @@
 @state-warning-bg:               @brand-warning;
 @state-warning-border:           darken(spin(@state-warning-bg, -10), 5%);
 
-@state-danger-text:              #FFFFFF;
-@state-danger-bg:                @brand-danger;
-@state-danger-border:            darken(spin(@state-danger-bg, -10), 5%);
+@state-danger-text:              @brand-danger;
+@state-danger-bg:                darken(spin(@brand-danger, -10), -30%);
+@state-danger-border:            darken(spin(@brand-danger, -10), 15%);
 
 
 //== Tooltips

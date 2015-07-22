@@ -26,6 +26,9 @@
 </head>
 <body ng-controller="AppCtrl">
 
+  <!-- HTTP request statuses -->
+  <alert class="repeated-item" ng-style="alert.position" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
   <section id="appLoaded" ng-hide="appLoaded">
     <video ng-style="vodBlur"
       autoplay
@@ -35,10 +38,11 @@
     </video>
   </section>
 
-  <!-- HTTP request statuses -->
-  <alert class="repeated-item" ng-style="alert.position" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-
   <main ui-view></main>
+
+  <footer class="logincite">
+    <em><a href="http://www.skyworksas.com">Made with ♥  by Skyworks Aerial Systems</a></em>
+  </footer>
 
   <script src="vendor/angular-ace/ace.js"></script>
   <script src="vendor/jquery.min.js"></script>
@@ -60,6 +64,17 @@
   <script src="js/services.js"></script>
   <script src="js/directives.js"></script>
   <script src="js/filters.js"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55870929-4', 'auto');
+    ga('send', 'pageview');
+
+  </script>
 
 </body>
 </html>

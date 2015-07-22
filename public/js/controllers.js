@@ -35,7 +35,7 @@
           'z-index': '10000',
           'margin-left': '5px',
           // 'padding': '5px 5px 5px 5px',
-          'margin-top': +(5+$scope.alerts.length*76)}});
+          'margin-top': +(-90+$scope.alerts.length*76)}});
 
         $scope.timers.push($timeout(function() {
           $scope.alerts.shift();
@@ -60,7 +60,9 @@
           if (!$scope.userInfo) {
             $state.go('login');
           } else {
-            angular.element('#appLoaded').remove();
+
+            angular.element('#appLoaded').empty();
+            ga('set', '&uid', $scope.userInfo.id);
             $scope.$broadcast('session:update', $scope.userInfo);
             Sync.launch();
           }
@@ -85,10 +87,33 @@
           .authenticate($scope.loginInfo)
           .$promise
           .then(function(data) {
-            angular.element('#appLoaded').remove();
+            angular.element('#loginVideo').empty();
             $state.go('forge');
           })
         ;
+      };
+      //not used
+      // $scope.logInValid = function(valid) {
+      //   if(valid){
+      //     $scope.login();
+      //   }
+      //   else {
+      //     //alert("Please enter a valid email and password"); TODO see signUpValid()
+      //   }
+      // };
+    })
+
+    .controller('ConfirmCtrl', function($scope, $log, $state, $stateParams, $timeout) {
+      if ($stateParams.onWaitList) {
+        $scope.messageHeader = "You've missed the early access!";
+        $scope.message = "We've put you on the waitlist, however. We may extend the early access to you, and we'll be sure to send you updates as Forge matures.";
+      } else {
+        $scope.messageHeader = "Thanks for signing up!";
+        $scope.message = "We've emailed you your early access code. You'll need to verify your account in order be apart of the early access.";
+      }
+
+      $scope.goLogin = function() {
+        $state.go('login');
       }
     })
 
@@ -99,19 +124,30 @@
         user
           .$save()
           .then(function(data) {
-            Session
-              .authenticate($scope.signUpInfo)
-              .$promise
-              .then(function(data) {
-                angular.element('#appLoaded').remove();
-                $state.go('forge');
 
-              })
-            ;
+            $state.go('confirm', data);
+
+            // Session
+            //   .authenticate($scope.signUpInfo)
+            //   .$promise
+            //   .then(function(data) {
+            //     angular.element('#appLoaded').remove();
+            //     $state.go('forge');
+            //
+            //   })
+            // ;
           })
         ;
       };
-
+      //not used
+      // $scope.signUpValid = function(valid) {
+      //   if(valid){
+      //     $scope.signUp();
+      //   }
+      //   else {
+      //     //alert("Please fill out all fields"); TODO probably error next to login button (ngif triggered by variable set true here)
+      //   }
+      // };
     })
 
     // Directive Controllers
@@ -137,19 +173,40 @@
             if (!data.userData) {
               $state.go('login');
               Sync.end();
-                // angular.element().html('<video autoplay poster="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" preload="none" muted loop> <source src="vod/forgenoblur.mp4" type="video/mp4"> <img src="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" alt="video-fallback"> </video>');
+              angular.element("#appLoaded").html(
+              '<video id="loginVideo" autoplay poster="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" preload="none" muted loop>'+
+              '<source src="vod/forgenoblur.mp4" type="video/mp4">'+
+              '<img src="http://skyworksas.com/wp-content/uploads/2014/11/mainbg-e1432778362398-2560x1344.jpg" alt="video-fallback">'+
+              '</video>');
             }
           });
       };
     })
 
-    .controller('ModViewCtrl', function($scope, Session, $http, $compile) {
+    .controller('ModViewCtrl', function($scope, Session, Users, $http, $compile) {
       $scope.mods = [];
       $scope.activeMod = null;
       $scope.showSidePanel = true;
 
+      $scope.userInfo = null;
+
+      $scope.$on('session:update', function(ev, sessionData) {
+        $scope.userInfo = sessionData;
+      });
+
       $scope.changeActiveMod = function(view) {
         $scope.activeMod = $scope.mods[view];
+
+        // console.log($scope.userInfo);
+
+        $scope.userInfo.events.push({
+          kind: 'Mod Select',
+          params: {
+            name: $scope.activeMod
+          }
+        });
+
+        Users.update({id: $scope.userInfo.id}, $scope.userInfo);
 
         // dynamically add mod view.
         $http

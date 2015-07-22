@@ -12,7 +12,7 @@ video {
     position: absolute;
     top: 0px;
     left: 0px;
-    /*-webkit-filter: contrast(200%);*/
+    -webkit-filter: contrast(200%);
     /*top: 50%;
     left: 50%;*/
     min-width: 100%;
@@ -103,9 +103,9 @@ video {
 */
 
 body {
-  background-image: url("../img/computerChip.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  /*background-image: url("../img/computerChip.png");*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
 }
 
 .cancelBtn {
@@ -136,9 +136,13 @@ body {
   font-size: 15px;
   margin-left: auto;
   margin-right: 30px;
-  margin-top: 40px;
+  margin-top: 20px;
   padding: 10px 30px 10px 30px;
   width: 165px;
+}
+
+.errorMessage {
+  margin-left: 30px;
 }
 
 .forgeIcon {
@@ -152,6 +156,13 @@ body {
 .forgeIcon img {
   height: 100%;
   width: 100%;
+}
+
+.forgeH2 {
+  font-family: Lato;
+  font-size: 40px;
+  letter-spacing: 2px;
+  text-align: center;
 }
 
 .forgeTitle {
@@ -176,32 +187,36 @@ body {
 
 .loginPass {
   border-radius: 0px 0px 5px 5px;
-  color: #4C4C4C;
+  color: #CCC;
+  background-color: #777;
   display: block;
   font-family: Lato;
   font-size: 16px;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
-  padding: 8px 150px 8px 10px;
+  padding: 20px 10px 20px 10px;
 }
 
 .loginUser {
   border-radius: 5px 5px 0px 0px;
-  color: #4C4C4C;
+  color: #CCC;
+  background-color: #777;
   display: block;
   font-family: Lato;
   font-size: 16px;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
-  padding: 8px 150px 8px 10px;
+  margin-top: 20px;
+  padding: 20px 10px 20px 10px;
 }
 
 .mainPannel {
-  background: rgba(76,76,76,0.75);
+  background: rgba(76,76,76,0.95);
   border-radius: 5px 5px 0px 0px;
   display: block;
-  height: 355px;
+  height: 400px;
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
@@ -211,7 +226,7 @@ body {
 }
 
 .secondaryPannel{
-  background-color: rgba(46, 46, 46, 0.75);
+  background-color: rgba(46, 46, 46, 0.95);
   border-radius: 0px 0px 5px 5px;
   display: block;
   height: 150px;
@@ -236,31 +251,65 @@ body {
   font-size: 15px;
   margin-left: auto;
   margin-right: auto;
-  padding: 10px 145px 10px 145px;
+  padding: 10px 90px 10px 90px;
 }
 
 .signupEntry {
   border-radius: 5px;
-  color: #4C4C4C;
+  color: #FFF;
+  background-color: #777;
   display: block;
   font-family: Lato;
   font-size: 16px;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
-  padding: 8px 150px 8px 10px;
+  padding: 20px 10px 20px 10px;
 }
 
 .signupPannel {
-  background: rgba(76,76,76,0.75);
+  background: rgba(76,76,76,0.95);
+  border-radius: 5px;
   display: block;
-  height: 505px;
+  height: 535px;
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
   padding-top: 20px;
   width: 400px;
+}
+
+.logincite {
+  text-align: right;
+  padding: 15px 15px 15px 15px;
+  width:100%;
+  height:45px;
+  position:absolute;
+  bottom:0;
+  left:0;
+}
+
+.logincite a {
+  font-family: Lato;
+  font-weight: 100;
+  color: #FFF;
+
+}
+
+.signupRadio {
+  font-size: 20px;
+  font-weight: 300 !important;
+  width: 120px;
+  margin-left: 30px;
+}
+
+.signupRadioOther {
+  font-size: 20px;
+  font-weight: 300 !important;
+  width: 85%;
+  padding: 0px 15px 15px 15px;
+  margin-left: 30px;
 }
 
 .signupTitle {

@@ -98,6 +98,10 @@ function registerController(moduleName, controllerName) {
           templateUrl:  'views/signup.html',
           controller:   'SignUpCtrl'
         })
+        .state('confirm', {
+          templateUrl:  'views/confirm.html',
+          controller:   'ConfirmCtrl'
+        })
       ;
 
       // FIXME not sure why this isn't working...

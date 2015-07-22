@@ -79,6 +79,7 @@ app.use(lessMiddleware(path.join(__dirname, 'theme'), {
   debug: false
 }));
 
+
 // Check for session, later authorization
 app.use(function (req, res, next) {
   if (!req.session) {

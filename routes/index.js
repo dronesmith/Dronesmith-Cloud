@@ -3,6 +3,8 @@
 var passport = require('passport'),
   user = require('../lib/controllers/user'),
   session = require('../lib/controllers/session'),
+  mongoose = require('mongoose'),
+  User = mongoose.model('User'),
   cloudbit = require('../lib/controllers/cloudbit');
 
 module.exports = function(app, route) {
@@ -13,8 +15,38 @@ module.exports = function(app, route) {
             next();
         })
 
+        // Check for global query strings
+        .get('/', function(req, res, next) {
+          if (req.query.code) {
+            User
+              .findOne({_id: req.query.code})
+              .then(function(data, error) {
+                if (error || !data) {
+                  return res.redirect('/');
+                } else {
+                  if (req.query.waitlist) {
+                    return res
+                      .status(400)
+                      .json({"error": "Uh oh, you missed your chance for early access! :("});
+                    ;
+                  } else {
+                    return res
+                      .json({"status": "ok"});
+                    ;
+                  }
+                }
+              })
+            ;
+          } else {
+            return res.redirect('/');
+          }
+        })
+
         // User creation
         .post('/api/user', user.create)
+
+        // Add event when user clicks something
+        .put('/api/user', user.update)
 
         // Authenticate a session (allows logins)
         .post('/api/session', session.authenticate)
@@ -26,6 +58,8 @@ module.exports = function(app, route) {
 
         .get('/api/cloudbit', cloudbit.get)
         .post('/api/cloudbit', cloudbit.output)
+
+        .get('/:type([A-Z|a-z|0-9]{24})', user.confirm);
     ;
 
     if (app.get('env') === 'development') {

@@ -2,7 +2,7 @@
     "application": {
         "name": "Forge Core",
         "script": "./app.js",
-        "port": "3000",
+        "port": "4000",
         "env": {
             "NODE_ENV": "development"
         }
