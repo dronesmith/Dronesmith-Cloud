@@ -62,6 +62,7 @@
           } else {
 
             angular.element('#appLoaded').empty();
+            ga('set', '&uid', $scope.userInfo.id);
             $scope.$broadcast('session:update', $scope.userInfo);
             Sync.launch();
           }
