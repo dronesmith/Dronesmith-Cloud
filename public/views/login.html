@@ -34,7 +34,7 @@
         name="password"
         placeholder="Password"
         ng-model="loginInfo.password"
-        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
+        ng-pattern="/^(?=.*[a-z]).{6,20}$/"
         required>
     </fieldset>
     <input type="submit" class="btn btn-primary loginBtn" ng-click="login()" value="Log in">

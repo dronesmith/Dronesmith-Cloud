@@ -36,10 +36,8 @@
         class="form-control signupEntry"
         id="password"
         name="password"
-        ng-maxlength="20"
-        ng-minlength="6"
         ng-model="signUpInfo.password"
-        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
+        ng-pattern="/^(?=.*[a-z]).{6,20}$/"
         required
         placeholder="Password (6 characters min)"
         >
@@ -52,7 +50,7 @@
         id="confirmPassword"
         name="confirmPassword"
         ng-model="signUpInfo.confirmPassword"
-        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
+        ng-pattern="/^(?=.*[a-z]).{6,20}$/"
         required
         placeholder="Confirm Password"
         ui-validate=" '$value==signUpInfo.password' "
