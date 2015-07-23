@@ -37,9 +37,9 @@
         id="password"
         name="password"
         ng-model="signUpInfo.password"
-        ng-pattern="/^(?=.*[a-z]).{6,20}$/"
+        ng-pattern="/^(?=.*[a-z]).{8,20}$/"
         required
-        placeholder="Password (6 characters min)"
+        placeholder="Password (8 characters min)"
         >
     </fieldset>
 
@@ -50,7 +50,7 @@
         id="confirmPassword"
         name="confirmPassword"
         ng-model="signUpInfo.confirmPassword"
-        ng-pattern="/^(?=.*[a-z]).{6,20}$/"
+        ng-pattern="/^(?=.*[a-z]).{8,20}$/"
         required
         placeholder="Confirm Password"
         ui-validate=" '$value==signUpInfo.password' "
