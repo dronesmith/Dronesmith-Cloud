@@ -22,6 +22,9 @@
           },
           authenticate: {
             method: 'POST'
+          },
+          isEmail: {
+            method: 'PUT'
           }
         });
       }])

@@ -43,13 +43,19 @@ module.exports = function(app, route) {
         })
 
         // User creation
-        .post('/api/user', user.create)
+       .post('/api/user', user.create)
 
         // Add event when user clicks something
         .put('/api/user', user.update)
 
+        //Authenticate an email for password link
+        .put('/api/session', session.isEmail)
+
         // Authenticate a session (allows logins)
         .post('/api/session', session.authenticate)
+
+        //Check if email exists, if it does send reset password link
+        // .get('/api/user?userId=<mongo id>', user.checkEmail)
 
         // See if user still has a running session
         .get('/api/session', session.poll)
@@ -60,6 +66,7 @@ module.exports = function(app, route) {
         .post('/api/cloudbit', cloudbit.output)
 
         .get('/:type([A-Z|a-z|0-9]{24})', user.confirm);
+
     ;
 
     if (app.get('env') === 'development') {

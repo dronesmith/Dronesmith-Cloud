@@ -92,6 +92,9 @@
           })
         ;
       };
+      $scope.forgotPassword = function() {
+        $state.go('forgotpassword');
+      };
       //not used
       // $scope.logInValid = function(valid) {
       //   if(valid){
@@ -116,6 +119,17 @@
         $state.go('login');
       }
     })
+
+    .controller('ForgotCtrl', function($scope, $log, $state, $timeout, Users, Session){
+      $scope.goLogin = function() {
+        $state.go('login');
+      };
+
+      $scope.forgotPassword = function() {
+
+        Session.isEmail($scope.forgotInfo);
+};
+      })
 
     .controller('SignUpCtrl', function($scope, $log, $state, $timeout, Users, Session) {
 
