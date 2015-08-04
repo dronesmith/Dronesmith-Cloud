@@ -102,6 +102,14 @@ function registerController(moduleName, controllerName) {
           templateUrl:  'views/confirm.html',
           controller:   'ConfirmCtrl'
         })
+        .state('forgotpassword', {
+          templateUrl: 'views/forgotpassword.html',
+          controller: 'ForgotCtrl'
+        })
+        .state('confirmResetPassword', {
+          templateUrl: 'views/confirmReset.html',
+          controller: 'ForgotCtrl'
+        })
       ;
 
       // FIXME not sure why this isn't working...

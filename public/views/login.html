@@ -34,11 +34,14 @@
         name="password"
         placeholder="Password"
         ng-model="loginInfo.password"
-        ng-pattern="/^(?=.*[a-z]).{6,20}$/"
+        ng-pattern="/^(?=.*[a-z]).{8,20}$/"
         required>
     </fieldset>
     <input type="submit" class="btn btn-primary loginBtn" ng-click="login()" value="Log in">
   </form>
+    <div>
+      <p class="forgotPassword"><a href="" ui-sref="forgotpassword">Forgot password?</a></p>
+    </div>
   </div>
   <div class="secondaryPannel">
     <p class="signup"> Join the next generation of drone developers. </p>

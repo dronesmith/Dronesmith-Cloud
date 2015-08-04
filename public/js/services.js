@@ -9,6 +9,9 @@
         }, {
           update: {
             method: 'PUT'
+          },
+          forgotPassword: {
+            method: 'PUT'
           }
         });
       }])
