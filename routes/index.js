@@ -45,11 +45,11 @@ module.exports = function(app, route) {
         // User creation
        .post('/api/user', user.create)
 
+        //Send new password
+       .put('/api/user', user.forgotPassword)
+
         // Add event when user clicks something
         .put('/api/user', user.update)
-
-        //Authenticate an email for password link
-        .put('/api/session', session.isEmail)
 
         // Authenticate a session (allows logins)
         .post('/api/session', session.authenticate)

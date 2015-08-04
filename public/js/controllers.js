@@ -126,9 +126,21 @@
       };
 
       $scope.forgotPassword = function() {
+        Users
+          .forgotPassword($scope.forgotInfo)
+          .$promise
+          .then(function(data) {
+            $state.go('confirmResetPassword');
+          });
+        };
 
-        Session.isEmail($scope.forgotInfo);
-};
+      $scope.messageHeader = "Your password is on its way!";
+      $scope.message = "We've emailed a new password to the email on file. Use this new password to login to Forge. ";
+
+      $scope.goLogin = function() {
+        $state.go('login');
+      };
+
       })
 
     .controller('SignUpCtrl', function($scope, $log, $state, $timeout, Users, Session) {

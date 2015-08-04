@@ -9,6 +9,9 @@
         }, {
           update: {
             method: 'PUT'
+          },
+          forgotPassword: {
+            method: 'PUT'
           }
         });
       }])
@@ -22,9 +25,6 @@
           },
           authenticate: {
             method: 'POST'
-          },
-          isEmail: {
-            method: 'PUT'
           }
         });
       }])
