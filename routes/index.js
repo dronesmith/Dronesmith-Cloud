@@ -53,9 +53,9 @@ module.exports = function(app, route) {
         .put('/api/user', user.update)
 
         // Get all users
-        .get('/api/user/all', user.findAll)
+        .get('/api/user', user.findAll)
 
-        // Find user by email
+        // Find user by id
         .get('/api/user/:id', user.find)
 
         // Update user info
