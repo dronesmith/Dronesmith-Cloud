@@ -52,6 +52,21 @@ module.exports = function(app, route) {
         // Add event when user clicks something
         .put('/api/user', user.update)
 
+        // Get all users
+        .get('/api/user/all', user.findAll)
+
+        // Find user by email
+        .get('/api/user/:id', user.find)
+
+        // Update user info
+        .put('/api/user/updateInfo/:id', user.updateInfo)
+
+        // Delete user
+        .delete('/api/user/remove/:email', user.remove)
+
+        // Create a new user
+        .post('/api/user/new', user.createUser)
+
         // Authenticate a session (allows logins)
         .post('/api/session', session.authenticate)
 
