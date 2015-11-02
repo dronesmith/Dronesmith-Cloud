@@ -52,11 +52,14 @@ module.exports = function(app, route) {
         // Add event when user clicks something
         .put('/api/user', user.update)
 
+        // Find user by id
+        .get('/api/user/:id', user.find)
+
         // Get all users
         .get('/api/user', user.findAll)
 
-        // Find user by id
-        .get('/api/user/:id', user.find)
+        .post('/admin/user/updatepassword', user.updatePassword)
+        .post('/admin/user/generateUser', user.generateUser)
 
         // Update user info
         .put('/api/user/updateInfo/:id', user.updateInfo)

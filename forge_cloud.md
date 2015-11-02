@@ -59,36 +59,19 @@ The response for a successful log out will be `{ "userData": null }`.
 
 Querying the user's session can be dones by sending the user's id. It returns the user's status
 
-	GET /session/id
+	GET /session/
 	
 Return **200**:
 
 	{
-		id: sessionId,
 		status: "active",
 		lastLogin: Date,
-		isInMission: Boolean
+		userData: {	
+			...	
+		}
 	}
 	
 A `{ "status": "expired" }` indicates the user is currently not online.
-
-<hr> 
-
-**NOTE**: This section is currently still up for debate is not implemented in exposed publically. 
-
-~~#### Developer-Defined Session Variables~~
-
-~~`isInMission` is an example of a developer-defined variable you wish the session to keep track of. These only exist as long as the session does, and they are entirely up to the developer. Please don't abuse them. To add developer defined variables to the session, simply send the `session` object a PUT request:~~
-
-	PUT /sesssion/id
-	
-	PUT Body
-	{
-		isInMission : true,
-		missionName : "droneMission04"
-	}
-	
-~~On success, the server will echo back the session object for that user. For security reasons, a maximum of 50 of these are supported, and only JSON types of `Boolean`, `Number`, and `String` are supported; other JSON types are ignored. ~~
 
 ### User
 The `/user/` endpoint provides information for querying user accounts. Currently, you may only query a restricted subset of user information via get requests. 
@@ -100,7 +83,7 @@ Here is the public schema:
 	company		: String <optional>,
 	kind 		: enumeration,
 	created 	: Date,
-	updated 	: Date,
+	lastLogin 	: Date,
 	userAgent 	: String,
 	ipAddr		: String,
 	drones 		: [Drone] <optional>
