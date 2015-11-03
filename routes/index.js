@@ -68,6 +68,9 @@ module.exports = function(app, route) {
         // Delete user
         .delete('/api/user/remove/:email', user.remove)
 
+        .put('/api/user/:id/:drone_id', user.addDrone)
+        .delete('/api/user/:id/:drone_id', user.removeDrone)
+
         // Create a new user
         .post('/api/user/new', user.createUser)
 
