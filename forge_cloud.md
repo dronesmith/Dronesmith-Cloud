@@ -189,7 +189,7 @@ Find a drone by a specific id. `id` is not required.
 
 Example: Get a list of all drones with UAVCAN disabled:
 
-	GET /drone?parameters[UAVCAN_ENABLE]=0
+	GET /drone?parameters.UAVCAN_ENABLE=0
 	
 Return **200**:
 
@@ -329,7 +329,7 @@ Find a drone by a specific id. `id` is not required.
 
 Example: Get a list of all missions with UAVCAN disabled:
 
-	GET /mission?parameters[UAVCAN_ENABLE]=0
+	GET /mission?parameters.UAVCAN_ENABLE=0
 	
 Return **200**:
 

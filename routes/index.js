@@ -4,6 +4,7 @@ var passport = require('passport'),
   user = require('../lib/controllers/user'),
   session = require('../lib/controllers/session'),
   flight = require('../lib/controllers/flight'),
+  drone = require('../lib/controllers/drone'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   cloudbit = require('../lib/controllers/cloudbit');
@@ -80,6 +81,13 @@ module.exports = function(app, route) {
         .get('/api/session', session.poll)
 
         .put('/api/session', session.sync)
+
+        // drone CRUD
+        .get('/api/drone/:id', drone.find)
+        .post('/api/drone', drone.create)
+        .delete('/api/drone/:id', drone.remove)
+        .put('/api/drone/:id', drone.update)
+        .get('/api/drone', drone.findAll)
 
         // Upload/Download mission data
         .get('/api/flight/:userid', flight.findMission)
