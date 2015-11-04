@@ -77,7 +77,7 @@ if (process.argv.length < 3) {
           stream.write(JSON.stringify({
             time:         new Date(),
             systemId:     msg.system,
-            componentId:  msg.componentId,
+            componentId:  msg.component,
             message:      msg.id,
             payload:      msg.payload,
             sequence:     msg.sequence
