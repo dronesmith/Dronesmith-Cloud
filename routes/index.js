@@ -5,6 +5,7 @@ var passport = require('passport'),
   session = require('../lib/controllers/session'),
   flight = require('../lib/controllers/flight'),
   drone = require('../lib/controllers/drone'),
+  mission = require('../lib/controllers/mission'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   cloudbit = require('../lib/controllers/cloudbit');
@@ -65,14 +66,8 @@ module.exports = function(app, route) {
         // Update user info
         .put('/api/user/updateInfo/:id', user.updateInfo)
 
-        // Delete user
-        .delete('/api/user/remove/:email', user.remove)
-
         .put('/api/user/:id/:drone_id', user.addDrone)
         .delete('/api/user/:id/:drone_id', user.removeDrone)
-
-        // Create a new user
-        .post('/api/user/new', user.createUser)
 
         // Authenticate a session (allows logins)
         .post('/api/session', session.authenticate)
@@ -83,7 +78,7 @@ module.exports = function(app, route) {
         // See if user still has a running session
         .get('/api/session', session.poll)
 
-        .put('/api/session', session.sync)
+        // .put('/api/session', session.sync)
 
         // drone CRUD
         .get('/api/drone/:id', drone.find)
@@ -91,6 +86,9 @@ module.exports = function(app, route) {
         .delete('/api/drone/:id', drone.remove)
         .put('/api/drone/:id', drone.update)
         .get('/api/drone', drone.findAll)
+
+        // mission CRUD
+        .post('/api/mission/', mission.addMission)
 
         // Upload/Download mission data
         .get('/api/flight/:userid', flight.findMission)

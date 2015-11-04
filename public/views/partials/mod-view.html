@@ -1,7 +1,7 @@
 
 <section id="modView">
   <div class="row">
-    <aside ng-show="showSidePanel" id="menu" class="col-sm-1 col-xs-2 bg-semidark">
+    <!-- <aside ng-show="showSidePanel" id="menu" class="col-sm-1 col-xs-2 bg-semidark">
       <ul ng-show="mods.length > 0" class="list-group">
         <li class="list-item" ng-repeat="mod in mods" >
           <a href="" ng-click="changeActiveMod($index)">
@@ -10,13 +10,39 @@
           </a>
         </li>
       </ul>
-    </aside>
-    <article class="col-sm-11 col-xs-10">
+    </aside> -->
+    <article>
       <div id="activeModScript"></div>
       <div id="activeMod"></div>
       <hgroup class="text-center" ng-hide="mods.length > 0">
-        <h1>Your Forge has no mods.</h1>
-        <p class="lead"><a href="">Add some?</a></p>
+        <!-- <h1>Your Forge has no mods.</h1>
+        <p class="lead"><a href="">Add some?</a></p> -->
+
+        <h1>Welcome to Forge Cloud.</h1>
+
+        <form>
+          <fieldset class="form-group">
+            <label for="mavlogField">
+              Upload a flight log file.
+            </label>
+            <input id="mavlogField" type="file" nv-file-select="px4log" uploader="uploader" class="file-upload-input center-block">
+          </fieldset>
+
+          <fieldset class="form-group">
+            <button
+              type="submit"
+              class="btn btn-default"
+              ng-click="uploader.uploadAll()"
+              ng-disabled="!uploader.getNotUploadedItems().length"
+              >
+                Upload
+              </button>
+          </fieldset>
+        </form>
+        <div class="progress" ng-hide="uploaded" style="">
+          <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+        </div>
+        <span ng-show="uploaded">{{uploadStatus}}</span>
       </hgroup>
     </article>
   </div>

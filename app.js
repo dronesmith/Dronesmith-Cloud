@@ -19,6 +19,7 @@ var express = require('express'),
 
 // Init internal modules
 require('./lib/db');
+// require('./lib/sdlog'); // For testing only
 var passport = require('./lib/passport')();
 
 // get root path

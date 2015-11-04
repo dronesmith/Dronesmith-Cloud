@@ -162,7 +162,7 @@ Returns the first 50 entries of the user list who logged in last sorted in ascen
 
 #### Add a drone to a user `PUT /user/id/drone_id`
 
-It is recommended though not required that drone be associated with a specific user. This can be by issuing a PUT request with the user id, followed by the drone id. `{ "status" : "ok" }` is returned. 	
+It is recommended though not required that a drone be associated with a specific user. This can be by issuing a PUT request with the user id, followed by the drone id. `{ "status" : "ok" }` is returned. 	
 
 #### Remove a drone from a user `DELETE /user/id/drone_id`
 
@@ -400,3 +400,8 @@ When not querying with `id` you can use **sort** option to sort by one of the at
 	
 Returns the first 50 entries of the drone list who've been updated last sorted in ascending order. All sort options ***must*** be prefixed with a + for ascending order, or - for descending order.  
 
+#### Add a Mission `POST /mission/`
+
+Note that for uploading missions, you **must** include a drone and user to associate with. 
+
+#### Remove a Mission `DELETE /mission/id`

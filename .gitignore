@@ -45,3 +45,5 @@ creative_assets
 dump.rdb
 .s3npm.json
 mediadb.dump.sql
+
+samplelog.*

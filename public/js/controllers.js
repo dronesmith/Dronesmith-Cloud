@@ -57,14 +57,15 @@
       Session
         .get({}, function(data) {
           $scope.userInfo = data.userData || null;
+          // console.log("got here");
           if (!$scope.userInfo) {
             $state.go('login');
           } else {
 
             angular.element('#appLoaded').empty();
             ga('set', '&uid', $scope.userInfo.id);
-            $scope.$broadcast('session:update', $scope.userInfo);
-            Sync.launch();
+            // $scope.$broadcast('session:update', $scope.userInfo);
+            // Sync.launch();
           }
         });
     })
@@ -209,12 +210,39 @@
       };
     })
 
-    .controller('ModViewCtrl', function($scope, Session, Users, $http, $compile) {
+    .controller('ModViewCtrl', function($scope, Session, Users, $http, $compile, FileUploader) {
       $scope.mods = [];
       $scope.activeMod = null;
       $scope.showSidePanel = true;
 
       $scope.userInfo = null;
+
+      $scope.uploadStatus = "Unknown";
+
+      $scope.uploaded = false;
+
+      var uploader = $scope.uploader = new FileUploader({
+           url: '/api/mission/'
+       });
+
+       uploader.onProgressItem = function(fileItem, progress) {
+            console.info('onProgressItem', fileItem, progress);
+            if (progress == 100) {
+              $scope.uploaded = true;
+            }
+        };
+
+        uploader.onProgressAll = function(progress) {
+            console.info('onProgressAll', progress);
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+            $scope.uploadStatus = response;
+        };
+        uploader.onErrorItem = function(fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+            $scope.uploadStatus = response;
+        };
 
       $scope.$on('session:update', function(ev, sessionData) {
         $scope.userInfo = sessionData;
@@ -263,7 +291,7 @@
       $scope.$on('session:update', function(ev, sessionData) {
         $scope.mods = sessionData.mods;
 
-        if (!$scope.activeMod && $scope.mods.length > 0) {
+        if (!$scope.activeMod && $scope.mods && $scope.mods.length > 0) {
           // TODO this is pref data to be synced.
           $scope.activeMod = $scope.mods[0];
         }
