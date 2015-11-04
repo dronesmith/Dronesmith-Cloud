@@ -18,6 +18,7 @@
     "express-restify-mongoose": "^1.0.3",
     "express-session": "^1.11.2",
     "express-validator": "^2.11.0",
+    "formidable": "^1.0.17",
     "less-middleware": "^2.0.1",
     "littlebits-cloud-http": "^0.3.4",
     "log4js": "^0.6.25",

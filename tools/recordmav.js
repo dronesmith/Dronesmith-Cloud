@@ -46,24 +46,30 @@ if (process.argv.length < 3) {
     process.exit(-1);
   }
 
-  var stream = fs.createWriteStream(filedest);
+  var stream = {
+    flight: [],
+    parameters: {}
+  };
 
-  stream.on('error', function(err) {
-    console.log(err + '\t\t\t\t:(');
-    process.exit(-1);
-  });
+  // var stream = fs.createWriteStream(filedest);
 
-  stream.once('open', function(fd) {
+  // stream.on('error', function(err) {
+  //   console.log(err + '\t\t\t\t:(');
+  //   process.exit(-1);
+  // });
+
+  // stream.once('open', function(fd) {
     serialPort.on('open', function() {
       var mav = new mavlink(1,1);
 
       mav.on('ready', function() {
         console.log("Recording for", time, "seconds...");
-        stream.write(JSON.stringify({start: new Date()}));
+
+        stream['start'] = new Date();
 
         setTimeout(function() {
-          stream.write(JSON.stringify({end: new Date()}));
-          stream.end();
+          stream['end'] = new Date();
+          fs.writeFileSync(filedest, JSON.stringify(stream));
           console.log("Done.\t\t\t\t:)");
           process.exit(0);
         }, time * 1000);
@@ -72,17 +78,299 @@ if (process.argv.length < 3) {
           mav.parse(data);
         });
 
-        mav.on('message', function(msg) {
-          // console.log(msg);
-          stream.write(JSON.stringify({
+        mav.on('HEARTBEAT', function(msg, data) {
+          stream.flight.push({
             time:         new Date(),
             systemId:     msg.system,
             componentId:  msg.component,
             message:      msg.id,
-            payload:      msg.payload,
-            sequence:     msg.sequence
-          }));
+            payload:      data
+          });
         });
+
+        mav.on('STATUSTEXT', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('COMMAND_LONG', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('SYS_STATUS', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('HIGHRES_IMU', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('ATTITUDE', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('ATTITUDE_QUATERNION', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('VFR_HUD', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('GPS_RAW_INT', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('GLOBAL_POSITION_INT', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('LOCAL_POSITION_NED', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('VICON_POSITION_ESTIMATE', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('GPS_GLOBAL_ORIGIN', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('SERVO_OUTPUT_RAW_0', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('SERVO_OUTPUT_RAW_1', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('SERVO_OUTPUT_RAW_2', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('SERVO_OUTPUT_RAW_3', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('HIL_CONTROLS', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('POSITION_TARGET_GLOBAL_INT', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('POSITION_TARGET_LOCAL_NED', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('ATTITUDE_TARGET', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('RC_CHANNELS_RAW', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('MANUAL_CONTROL', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('OPTICAL_FLOW', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('ATTITUDE_CONTROLS', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('NAMED_VALUE_FLOAT', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('CAMERA_CAPTURE', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+        mav.on('DISTANCE_SENSOR', function(msg, data) {
+          stream.flight.push({
+            time:         new Date(),
+            systemId:     msg.system,
+            componentId:  msg.component,
+            message:      msg.id,
+            payload:      data
+          });
+        });
+
+
+
+        // mav.on('message', function(msg) {
+        //   // console.log(msg);
+        //   stream.write(JSON.stringify({
+        //     time:         new Date(),
+        //     systemId:     msg.system,
+        //     componentId:  msg.component,
+        //     message:      msg.id,
+        //     payload:      msg.payload,
+        //     sequence:     msg.sequence
+        //   }));
+        // });
       });
     });
 
@@ -90,5 +378,5 @@ if (process.argv.length < 3) {
       console.log(err + '\t\t\t\t:(');
       process.exit(-1);
     });
-  });
+  // });
 }
