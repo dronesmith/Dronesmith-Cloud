@@ -29,6 +29,19 @@
           </fieldset>
 
           <fieldset class="form-group">
+            <select
+              class="form-control center-block"
+              style="width: 200px;"
+              ng-init="uploadKind='mavlink'"
+              ng-model="uploadKind"
+              ng-change="changeUploader(uploadKind)"
+            >
+              <option value="mavlink">MAVLink Log</option>
+              <option value="sdlog">Binary Log</option>
+            </select>
+          </fieldset>
+
+          <fieldset class="form-group">
             <button
               type="submit"
               class="btn btn-default"
@@ -42,7 +55,7 @@
         <div class="progress" ng-hide="uploaded" style="">
           <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
         </div>
-        <span ng-show="uploaded">{{uploadStatus}}</span>
+        <span ng-show="uploaded">{{uploadStatus | json}}</span>
       </hgroup>
     </article>
   </div>

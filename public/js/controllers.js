@@ -216,14 +216,19 @@
       $scope.showSidePanel = true;
 
       $scope.userInfo = null;
+      $scope.uploadKind = 'mavlink';
 
       $scope.uploadStatus = "Unknown";
 
       $scope.uploaded = false;
 
       var uploader = $scope.uploader = new FileUploader({
-           url: '/api/mission/'
+           url: '/api/mission/' + $scope.uploadKind
        });
+
+       $scope.changeUploader = function(name) {
+         uploader.url = '/api/mission/' + name;
+       }
 
        uploader.onProgressItem = function(fileItem, progress) {
             console.info('onProgressItem', fileItem, progress);

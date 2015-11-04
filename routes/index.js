@@ -88,7 +88,7 @@ module.exports = function(app, route) {
         .get('/api/drone', drone.findAll)
 
         // mission CRUD
-        .post('/api/mission/', mission.addMission)
+        .post('/api/mission/:format', mission.addMission)
 
         // Upload/Download mission data
         .get('/api/flight/:userid', flight.findMission)
