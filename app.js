@@ -111,18 +111,35 @@ var router = require('./routes/index')(app, Router);
 // validate api keys
 app.use('/api/', function(req, res, next) {
 
-  req.assert('user-email',    'User email required for api authentication.').notEmpty();
-  req.assert('user-password', 'User password required for api authentication.').notEmpty();
-  req.assert('user-key', 'User api required for api authentication.').notEmpty();
+  if (req.headers['user-email'] && req.headers['user-key']) {
+    var User = require('mongoose').model('User');
 
-  var errors = req.validationErrors();
-
-  if (errors) {
-    log.error(errors);
-    return res.status(400).send(errors);
+    User
+      .findOne({email: req.headers['user-email']})
+      .select({apiKey: 1})
+      .exec(function(err, key) {
+        if (err || !key) {
+          return res.status(401).send();
+        } else {
+          if (req.headers['user-key'] !== key.apiKey) {
+            return res.status(401).send();
+          } else {
+            next();
+          }
+        }
+      });
+  } else {
+    return res.status(401).send();
   }
+});
 
-  next();
+// validate admin
+app.use('/admin/', function(req, res, next) {
+  if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
+    next();
+  } else {
+    return res.status(401).send();
+  }
 });
 
 // Index routes should always have a session.

@@ -123,6 +123,8 @@ module.exports = function(app, route) {
         //
         .post   ('/admin/user/updatepassword',    user.updatePassword)
         .post   ('/admin/user/generateUser',      user.generateUser)
+        .get    ('/admin/user/generateKey',       user.generateKey)
+        .post   ('/admin/user/generateUserKey/:id', user.generateUserKey)
 
         // .get('/api/cloudbit', cloudbit.get)
         // .post('/api/cloudbit', cloudbit.output)

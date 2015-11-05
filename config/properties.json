@@ -31,5 +31,6 @@
         "port": 6379,
         "prefix": "forge.sess::",
         "pass": ""
-    }
+    },
+    "adminKey": ""
 }

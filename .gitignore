@@ -47,3 +47,5 @@ dump.rdb
 mediadb.dump.sql
 
 samplelog.*
+
+admin.txt
