@@ -123,7 +123,6 @@ function registerController(moduleName, controllerName) {
 
   // Simple way to determine if angular failed to strap.
   // FIXME
-  // console.log(forgeApp);
   // if (forgeApp._invokeQueue) {
   //   $('alert')
   //     .css('background-color', '#CC0000')
