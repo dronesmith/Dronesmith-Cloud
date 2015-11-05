@@ -26,6 +26,10 @@
 </head>
 <body ng-controller="AppCtrl">
 
+  <noscript style="background-color: #CC0000;">
+    Forge requires JavaScript to run properly. Please enable JavaScript or use a browser that supports JavaScript.
+  </noscript>
+
   <!-- HTTP request statuses -->
   <alert class="repeated-item" ng-style="alert.position" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
@@ -44,7 +48,7 @@
     <!-- <em><a href="http://www.skyworksas.com">Made with ♥  by Skyworks Aerial Systems</a></em> -->
   <!-- </footer> -->
 
-  <script src="vendor/angular-ace/ace.js"></script>
+  <!-- <script src="vendor/angular-ace/ace.js"></script> -->
   <script src="vendor/jquery.min.js"></script>
   <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
   <script src="vendor/bootstrap.min.js"></script>
@@ -53,11 +57,11 @@
   <script src="vendor/angular-resource.min.js"></script>
   <script src="vendor/angular-ui-router.min.js"></script>
   <script src="vendor/angular-animate.min.js"></script>
-  <script src="vendor/angular-ace/ui-ace.min.js"></script>
+  <!-- <script src="vendor/angular-ace/ui-ace.min.js"></script> -->
   <script src="vendor/ui-bootstrap.min.js"></script>
   <script src="vendor/ui-bootstrap-tpls.min.js"></script>
   <script src="vendor/ui-utils.min.js"></script>
-  <script src="vendor/angular-dragdrop.min.js"></script>
+  <!-- <script src="vendor/angular-dragdrop.min.js"></script> -->
   <script src="vendor/angular-file-upload.min.js"></script>
 
   <script src="js/app.js"></script>

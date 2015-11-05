@@ -39,9 +39,9 @@ function registerController(moduleName, controllerName) {
       'ngAnimate',
       'ui.bootstrap',
       'ui.utils',
-      'ngDragDrop',
-      'angularFileUpload',
-      'ui.ace' // TODO should this be contained in a mods module? Or should libs be global?
+      // 'ngDragDrop',
+      'angularFileUpload'
+      // 'ui.ace' // TODO should this be contained in a mods module? Or should libs be global?
     ], function($controllerProvider) {
       // Part of the above HACK
       controllerProvider = $controllerProvider;
@@ -120,3 +120,12 @@ function registerController(moduleName, controllerName) {
       $httpProvider.interceptors.push('ServerErrorInterceptor');
     })
   ;
+
+  // Simple way to determine if angular failed to strap.
+  // FIXME
+  // console.log(forgeApp);
+  // if (forgeApp._invokeQueue) {
+  //   $('alert')
+  //     .css('background-color', '#CC0000')
+  //     .text("Critical: Forge could not initialize. This often means your browser encountered a problem fetching critical resources. Try refreshing this page.");
+  // }

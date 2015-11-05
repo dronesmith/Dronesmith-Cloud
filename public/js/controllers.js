@@ -35,7 +35,7 @@
           'z-index': '10000',
           'margin-left': '5px',
           // 'padding': '5px 5px 5px 5px',
-          'margin-top': +(-90+$scope.alerts.length*76)}});
+          'margin-top': +(5+$scope.alerts.length*76)}});
 
         $scope.timers.push($timeout(function() {
           $scope.alerts.shift();
@@ -193,8 +193,12 @@
       }
 
       $scope.logout = function() {
+        // console.log($scope.userInfo);
         Session
-          .authenticate({deauth: true})
+          .authenticate({
+            email: $scope.userInfo.email,
+            deauth: true
+          })
           .$promise
           .then(function(data) {
             if (!data.userData) {
@@ -226,12 +230,25 @@
            url: '/api/mission/' + $scope.uploadKind
        });
 
+       $scope.resetUploader = function() {
+         uploader.destroy();
+         uploader = $scope.uploader = new FileUploader({
+              url: '/api/mission/' + $scope.uploadKind
+          });
+
+          $scope.uploadStatus = "Unknown";
+          $scope.uploaded = false;
+       };
+
        $scope.changeUploader = function(name) {
+         $scope.uploadKind = name;
+         uploader.clearQueue();
          uploader.url = '/api/mission/' + name;
+        //  $scope.uploader = uploader;
        }
 
        uploader.onProgressItem = function(fileItem, progress) {
-            console.info('onProgressItem', fileItem, progress);
+            // console.info('onProgressItem', fileItem, progress);
             if (progress == 100) {
               $scope.uploaded = true;
             }
@@ -241,11 +258,11 @@
             console.info('onProgressAll', progress);
         };
         uploader.onSuccessItem = function(fileItem, response, status, headers) {
-            console.info('onSuccessItem', fileItem, response, status, headers);
+            // console.info('onSuccessItem', fileItem, response, status, headers);
             $scope.uploadStatus = response;
         };
         uploader.onErrorItem = function(fileItem, response, status, headers) {
-            console.info('onErrorItem', fileItem, response, status, headers);
+            // console.info('onErrorItem', fileItem, response, status, headers);
             $scope.uploadStatus = response;
         };
 

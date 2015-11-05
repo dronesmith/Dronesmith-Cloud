@@ -1,34 +1,15 @@
 
 <section id="modView">
   <div class="row">
-    <!-- <aside ng-show="showSidePanel" id="menu" class="col-sm-1 col-xs-2 bg-semidark">
-      <ul ng-show="mods.length > 0" class="list-group">
-        <li class="list-item" ng-repeat="mod in mods" >
-          <a href="" ng-click="changeActiveMod($index)">
-          <img ng-src="{{mod.icon}}" height="32" width="32" class="img-responsive center-block">
-          <p class="text-center">{{mod.name}}</p>
-          </a>
-        </li>
-      </ul>
-    </aside> -->
     <article>
       <div id="activeModScript"></div>
       <div id="activeMod"></div>
       <hgroup class="text-center" ng-hide="mods.length > 0">
-        <!-- <h1>Your Forge has no mods.</h1>
-        <p class="lead"><a href="">Add some?</a></p> -->
-
         <h1>Welcome to Forge Cloud.</h1>
 
         <form>
           <fieldset class="form-group">
-            <label for="mavlogField">
-              Upload a flight log file.
-            </label>
-            <input id="mavlogField" type="file" nv-file-select="px4log" uploader="uploader" class="file-upload-input center-block">
-          </fieldset>
-
-          <fieldset class="form-group">
+            <label>Format</label>
             <select
               class="form-control center-block"
               style="width: 200px;"
@@ -42,9 +23,25 @@
           </fieldset>
 
           <fieldset class="form-group">
+            <label for="mavlogField">
+              Upload a flight log file.
+            </label>
+            <input
+              id="mavlogField"
+              type="file"
+              nv-file-select="px4log"
+              uploader="uploader"
+              ng-model="file"
+              ng-change="resetUploader()"
+              class="file-upload-input center-block">
+          </fieldset>
+
+
+
+          <fieldset class="form-group">
             <button
               type="submit"
-              class="btn btn-default"
+              class="btn btn-primary btn-lg"
               ng-click="uploader.uploadAll()"
               ng-disabled="!uploader.getNotUploadedItems().length"
               >
@@ -52,10 +49,14 @@
               </button>
           </fieldset>
         </form>
-        <div class="progress" ng-hide="uploaded" style="">
+        <div class="progress" ng-hide="!uploader.progress || uploaded" style="">
           <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
         </div>
-        <span ng-show="uploaded">{{uploadStatus | json}}</span>
+        <p ng-show="uploaded">
+          <span ng-show="uploadStatus.error">Error: {{uploadStatus.error}}</span>
+          <span ng-show="uploadStatus.status">Sucessfully uploaded!</span>
+          <span ng-show="uploadStatus=='Unknown'">Working...</span>
+        </p>
       </hgroup>
     </article>
   </div>
