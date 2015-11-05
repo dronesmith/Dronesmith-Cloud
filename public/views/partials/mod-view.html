@@ -23,6 +23,18 @@
           </fieldset>
 
           <fieldset class="form-group">
+            <label>Drone</label>
+            <select
+              class="form-control center-block"
+              style="width: 200px;"
+              ng-model="selectedDrone"
+              ng-init="selectedDrone=user.drones[0]"
+              ng-options="drone as drone.systemId for drone in user.drones track by drone._id"
+            >
+            </select>
+          </fieldset>
+
+          <fieldset class="form-group">
             <label for="mavlogField">
               Upload a flight log file.
             </label>

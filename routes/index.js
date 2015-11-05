@@ -87,6 +87,8 @@ module.exports = function(app, route) {
         .delete('/api/drone/:id', drone.remove)
         .put('/api/drone/:id', drone.update)
         .get('/api/drone', drone.findAll)
+        .put('/api/drone/removeMission/:id', drone.removeMission)
+        .put('/api/drone/addMission/:id', drone.addMission)
 
         // mission CRUD
         .post('/api/mission/:format', mission.addMission)

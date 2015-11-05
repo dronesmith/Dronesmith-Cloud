@@ -315,16 +315,38 @@
         };
         uploader.onSuccessItem = function(fileItem, response, status, headers) {
             // console.info('onSuccessItem', fileItem, response, status, headers);
-            $scope.uploadStatus = response;
+
+            $http
+              .put('/api/drone/addMission/' + $scope.selectedDrone._id, {missionId: response.id})
+              .success(function(res) {
+                $scope.uploadStatus = response;
+              })
+              .error(function(res) {
+                $scope.uploadStatus = {error: "Could not complete."};
+              })
+            ;
         };
         uploader.onErrorItem = function(fileItem, response, status, headers) {
             // console.info('onErrorItem', fileItem, response, status, headers);
             $scope.uploadStatus = response;
         };
 
-      $scope.$on('session:update', function(ev, sessionData) {
-        $scope.userInfo = sessionData;
-      });
+        // uploader.onAfterAddingFile = function(item) {
+        //   // uploader.formData.push($scope.selectedDrone._id);
+        //   console.log(uploader);
+        // }
+
+        Session.get({}, function(data) {
+          $scope.userInfo = data.userData;
+
+          Users
+            .get({id: $scope.userInfo.id})
+            .$promise
+            .then(function(data) {
+              $scope.user = data;
+              $scope.selectedDrone = $scope.user.drones[0];
+            });
+        });
 
       $scope.changeActiveMod = function(view) {
         $scope.activeMod = $scope.mods[view];
