@@ -108,6 +108,36 @@ app.use(function (req, res, next) {
 var Router = express.Router();
 var router = require('./routes/index')(app, Router);
 
+// validate api keys
+app.use('/api/', function(req, res, next) {
+
+  req.assert('user-email',    'User email required for api authentication.').notEmpty();
+  req.assert('user-password', 'User password required for api authentication.').notEmpty();
+  req.assert('user-key', 'User api required for api authentication.').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    log.error(errors);
+    return res.status(400).send(errors);
+  }
+
+  next();
+});
+
+// Index routes should always have a session.
+app.use('/index/', function(req, res, next) {
+
+  // ...with the exception of /session/ which handles this itself.
+  if (req.path == '/session') {
+    next();
+  } else if (!req.session.userData) {
+    res.status(400).json({error: "Not logged in."});
+  } else {
+    next();
+  }
+});
+
 app.use('/', router);
 
 // Handle 404s

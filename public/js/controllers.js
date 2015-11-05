@@ -283,13 +283,13 @@
       $scope.uploaded = false;
 
       var uploader = $scope.uploader = new FileUploader({
-           url: '/api/mission/' + $scope.uploadKind
+           url: '/index/mission/' + $scope.uploadKind
        });
 
        $scope.resetUploader = function() {
          uploader.destroy();
          uploader = $scope.uploader = new FileUploader({
-              url: '/api/mission/' + $scope.uploadKind
+              url: '/index/mission/' + $scope.uploadKind
           });
 
           $scope.uploadStatus = "Unknown";
@@ -299,7 +299,7 @@
        $scope.changeUploader = function(name) {
          $scope.uploadKind = name;
          uploader.clearQueue();
-         uploader.url = '/api/mission/' + name;
+         uploader.url = '/index/mission/' + name;
         //  $scope.uploader = uploader;
        }
 
@@ -317,7 +317,7 @@
             // console.info('onSuccessItem', fileItem, response, status, headers);
 
             $http
-              .put('/api/drone/addMission/' + $scope.selectedDrone._id, {missionId: response.id})
+              .put('/index/drone/addMission/' + $scope.selectedDrone._id, {missionId: response.id})
               .success(function(res) {
                 $scope.uploadStatus = response;
               })
@@ -335,6 +335,22 @@
         //   // uploader.formData.push($scope.selectedDrone._id);
         //   console.log(uploader);
         // }
+
+
+        // FIXME don't want session polling twice. But sometimes event
+        // does not emit leading to undefined behavior.
+
+        // $scope.$on('session:update', function(data) {
+        //   $scope.userInfo = data;
+        //
+        //   Users
+        //     .get({id: $scope.userInfo.id})
+        //     .$promise
+        //     .then(function(data) {
+        //       $scope.user = data;
+        //       $scope.selectedDrone = $scope.user.drones[0];
+        //     });
+        // });
 
         Session.get({}, function(data) {
           $scope.userInfo = data.userData;

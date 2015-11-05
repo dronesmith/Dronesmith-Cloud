@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ *
+ * Routing table
+ *
+ */
+
 var passport = require('passport'),
   user = require('../lib/controllers/user'),
   session = require('../lib/controllers/session'),
@@ -45,65 +51,85 @@ module.exports = function(app, route) {
           }
         })
 
-        // User creation
-       .post('/api/user', user.create)
-
-        //Send new password
-       .put('/api/user/forgotpassword', user.forgotPassword)
-       .put('/api/user/:id', user.update)
-
-        // // Add event when user clicks something
-        // .put('/api/user', user.update)
-
-        // Find user by id
-        .get('/api/user/:id', user.find)
-
-        // Get all users
-        .get('/api/user', user.findAll)
-
-        .post('/admin/user/updatepassword', user.updatePassword)
-        .post('/admin/user/generateUser', user.generateUser)
-
-        // Update user info
-        .put('/api/user/updateInfo/:id', user.updateInfo)
-
-        .put('/api/user/:id/:drone_id', user.addDrone)
-        .delete('/api/user/:id/:drone_id', user.removeDrone)
+        //
+        // Index routes. These are accesible by the frontend and do not
+        // require api keys.
+        //
 
         // Authenticate a session (allows logins)
-        .post('/api/session', session.authenticate)
+        .post   ('/index/session',                session.authenticate)
 
-        //Check if email exists, if it does send reset password link
-        // .get('/api/user?userId=<mongo id>', user.checkEmail)
-
-        // See if user still has a running session
-        .get('/api/session', session.poll)
+        // Get user info
+        .get    ('/index/session',                session.poll)
 
         // .put('/api/session', session.sync)
 
+        //
+        .get    ('/index/user/',                  user.getSessionUser)
+
+        // User creation
+        .post   ('/index/user',                   user.create)
+
+        // Send new password
+        .put    ('/index/user/forgotpassword',    user.forgotPassword)
+
+        // Update user account
+        .put    ('/index/user/',                  user.update)
+
+        // NOTE
+        // We'll let some methods also be index, so the user can upload flights.
+        .post   ('/index/mission/:format',        mission.addMission)
+        .put    ('/index/drone/addMission/:id',   drone.addMission)
+
+
+        //
+        // Forge Cloud API routes. An API key is required.
+        //
+
+        // User CRUD. Limiting these to read-only methods.
+        .get    ('/api/user/:id',                 user.find)
+        .get    ('/api/user',                     user.findAll)
+
+        // Add / remove drones
+        .put    ('/api/user/:id/:drone_id',       user.addDrone)
+        .delete ('/api/user/:id/:drone_id',       user.removeDrone)
+
         // drone CRUD
-        .get('/api/drone/:id', drone.find)
-        .post('/api/drone', drone.create)
-        .delete('/api/drone/:id', drone.remove)
-        .put('/api/drone/:id', drone.update)
-        .get('/api/drone', drone.findAll)
-        .put('/api/drone/removeMission/:id', drone.removeMission)
-        .put('/api/drone/addMission/:id', drone.addMission)
+        .get    ('/api/drone/:id',                drone.find)
+        .get    ('/api/drone',                    drone.findAll)
+        .post   ('/api/drone',                    drone.create)
+        .delete ('/api/drone/:id',                drone.remove)
+        .put    ('/api/drone/:id',                drone.update)
+
+        // add / remove missions
+        .put    ('/api/drone/removeMission/:id',  drone.removeMission)
+        .put    ('/api/drone/addMission/:id',     drone.addMission)
 
         // mission CRUD
-        .post('/api/mission/:format', mission.addMission)
-        .get('/api/mission/:id', mission.find)
-        .get('/api/mission', mission.findAll)
-        .delete('/api/mission/:id', mission.remove)
+        .get    ('/api/mission/:id',              mission.find)
+        .get    ('/api/mission',                  mission.findAll)
+        .post   ('/api/mission/:format',          mission.addMission)
+        .delete ('/api/mission/:id',              mission.remove)
 
-        // Upload/Download mission data
-        .get('/api/flight/:userid', flight.findMission)
-        .post('/api/flight/:userid', flight.addMission)
+        //
+        // XXX
+        // Legacy support for parrot bro and the flight schema.
+        //
+        .get    ('/legacy/flight/:userid',        flight.findMission)
+        .post   ('/legacy/flight/:userid',        flight.addMission)
 
-        .get('/api/cloudbit', cloudbit.get)
-        .post('/api/cloudbit', cloudbit.output)
+        //
+        // Admin routes. These require the master key.
+        //
+        .post   ('/admin/user/updatepassword',    user.updatePassword)
+        .post   ('/admin/user/generateUser',      user.generateUser)
 
-        .get('/:type([A-Z|a-z|0-9]{24})', user.confirm)
+        // .get('/api/cloudbit', cloudbit.get)
+        // .post('/api/cloudbit', cloudbit.output)
+
+        // Confirm Route. This is used by new user accounts to verify their
+        // account.
+        .get    ('/:type([A-Z|a-z|0-9]{24})',     user.confirm)
     ;
 
     if (app.get('env') === 'development') {

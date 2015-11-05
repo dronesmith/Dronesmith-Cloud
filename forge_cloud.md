@@ -4,10 +4,9 @@
 ### Access & API Key
 API keys are currently private and only given by special request. Any given API key should not be public. The following headers are required to make a valid request to the API.
 
-	curl -h \
-		user-email=<your-email> \ 
-		user-pass=<mypass> \
-	 	user-key=<apikey> \
+	curl -H user-email=<your-email> \ 
+		 -H user-pass=<mypass> \
+	 	 -H user-key=<apikey> \
 	 		stage.dronesmith.io/cloud/user/123abc
 	 		
 Without a valid api key and account, the server will respond with code `403` (not authorized).

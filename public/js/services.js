@@ -4,25 +4,20 @@
   forgeApp
     .factory('Users', ['$resource',
       function($resource) {
-        return $resource('/api/user/:id', {
-          userId: '@_id'
-        }, {
+        return $resource('/index/user/', null, {
           update: {
-            method: 'PUT',
-            params: {
-                id: "@id",
-            }
+            method: 'PUT'
           },
           forgotPassword: {
             method: 'PUT',
-            url: '/api/user/forgotPassword'
+            url: '/index/user/forgotPassword'
           }
         });
       }])
 
     .factory('Session', ['$resource',
       function($resource) {
-        return $resource('/api/session', {
+        return $resource('/index/session', {
         }, {
           sync: {
             method: 'PUT'
@@ -33,15 +28,15 @@
         });
       }])
 
-    .factory('Cloudbit', ['$resource',
-      function($resource) {
-        return $resource('/api/cloudbit', {
-        }, {
-          output: {
-            method: 'POST'
-          }
-        });
-      }])
+    // .factory('Cloudbit', ['$resource',
+    //   function($resource) {
+    //     return $resource('/api/cloudbit', {
+    //     }, {
+    //       output: {
+    //         method: 'POST'
+    //       }
+    //     });
+    //   }])
 
     .factory('Defer', ['$q',
       function($q) {
