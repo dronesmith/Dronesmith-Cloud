@@ -90,6 +90,9 @@ module.exports = function(app, route) {
 
         // mission CRUD
         .post('/api/mission/:format', mission.addMission)
+        .get('/api/mission/:id', mission.find)
+        .get('/api/mission', mission.findAll)
+        .delete('/api/mission/:id', mission.remove)
 
         // Upload/Download mission data
         .get('/api/flight/:userid', flight.findMission)
@@ -98,8 +101,7 @@ module.exports = function(app, route) {
         .get('/api/cloudbit', cloudbit.get)
         .post('/api/cloudbit', cloudbit.output)
 
-        .get('/:type([A-Z|a-z|0-9]{24})', user.confirm);
-
+        .get('/:type([A-Z|a-z|0-9]{24})', user.confirm)
     ;
 
     if (app.get('env') === 'development') {
