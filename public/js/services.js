@@ -8,10 +8,14 @@
           userId: '@_id'
         }, {
           update: {
-            method: 'PUT'
+            method: 'PUT',
+            params: {
+                id: "@id",
+            }
           },
           forgotPassword: {
-            method: 'PUT'
+            method: 'PUT',
+            url: '/api/user/forgotPassword'
           }
         });
       }])

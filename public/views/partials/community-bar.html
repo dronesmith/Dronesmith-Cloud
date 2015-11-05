@@ -14,9 +14,44 @@
       <!-- <p class="text-center">Forge</p> -->
       <ul class="nav navbar-nav pull-right">
         <!-- <li><a href="#" style="padding-top: 20px;"><em>Forge</em></a></li> -->
-        <li><a href="#" style="padding-top: 20px; font-size: 15px;"><em>{{userInfo.email}}</em></a></li>
-        <li><a href="" ng-click="logout()" style="padding-top: 20px; font-size: 15px;"><em>Log Out</em></a></li>
+        <li><a href="#" style="padding-top: 20px; font-size: 15px;" ng-click="editAccount()">Account</a></li>
+        <li><a href="" ng-click="logout()" style="padding-top: 20px; font-size: 15px;">Log Out</a></li>
       </ul>
     </div>
   <!-- </nav> -->
 </section>
+<script type="text/ng-template" id="editAccountModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Edit Account</h3>
+        </div>
+        <div class="modal-body">
+          <h4 class="text-center">{{userAccount.email}}</h4>
+          <form>
+            <fieldset class="form-group">
+              <label>Password <small>(required)</small></label>
+              <input type="password" class="form-control" ng-model="userAccount.password" required>
+            </fieldset>
+            <fieldset class="form-group">
+              <label>New Password</label>
+              <input type="password" class="form-control" ng-model="userAccount.newPassword">
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Confirm Password</label>
+              <input type="password" class="form-control" ng-model="userAccount.confirmPassword">
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Company Name</label>
+              <input type="text" class="form-control" ng-model="userAccount.company">
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Full Name</label>
+              <input type="text" class="form-control" ng-model="userAccount.fullName">
+            </fieldset>
+          </form>
+          <p ng-show="status">{{status}}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Update</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+</script>

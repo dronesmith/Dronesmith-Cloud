@@ -64,7 +64,7 @@
 
             angular.element('#appLoaded').empty();
             ga('set', '&uid', $scope.userInfo.id);
-            // $scope.$broadcast('session:update', $scope.userInfo);
+            $scope.$broadcast('session:update', $scope.userInfo);
             // Sync.launch();
           }
         });
@@ -179,7 +179,7 @@
 
     // Directive Controllers
 
-    .controller('CommunityBarCtrl', function($scope, $state, Session, Sync) {
+    .controller('CommunityBarCtrl', function($scope, $state, Session, Sync, $modal) {
       $scope.userInfo = null;
 
       $scope.$on('session:update', function(ev, sessionData) {
@@ -190,7 +190,21 @@
         // emit event to modView
         $scope.$emit('modView',
           {from: 'communityBar', action: 'toggleSidePanel'});
-      }
+      };
+
+      $scope.editAccount = function() {
+        var modalInstance = $modal.open({
+          templateUrl: 'editAccountModal.html',
+          controller: 'EditAccountModalCtrl',
+          resolve: {
+            userAccount: function() { return $scope.userInfo;  }
+          }
+        });
+
+        // modalInstance.result.then(function (selectedItem) {
+        // }, function () {
+        // });
+      };
 
       $scope.logout = function() {
         // console.log($scope.userInfo);
@@ -211,6 +225,48 @@
               '</video>');
             }
           });
+      };
+    })
+
+    .controller('EditAccountModalCtrl', function($scope, $modalInstance, userAccount, Session, Users) {
+
+        // always poll session since it may have been updated.
+        Session.get({}, function(data) {
+            $scope.userAccount = data.userData;
+        });
+
+      $scope.status = "";
+
+      $scope.ok = function() {
+        $scope.status = "";
+        // Send PUT request
+        if (!$scope.userAccount.password) {
+          $scope.status = "Your current password is required.";
+          return;
+        }
+
+        if ($scope.userAccount.newPassword || $scope.userAccount.confirmPassword) {
+          if ($scope.userAccount.newPassword !== $scope.userAccount.confirmPassword) {
+            $scope.status = "New password fields must match!";
+            return;
+          }
+        }
+
+        Users
+          .update($scope.userAccount)
+          .$promise
+          .then(function(data) {
+            // Need to remove the tender fields due to caching.
+            $scope.userAccount.password = null;
+            $scope.userAccount.newPassword = null;
+            $scope.userAccount.confirmPassword = null;
+            $modalInstance.close();
+          })
+        ;
+      };
+
+      $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
       };
     })
 

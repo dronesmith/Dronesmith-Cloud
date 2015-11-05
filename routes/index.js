@@ -49,10 +49,11 @@ module.exports = function(app, route) {
        .post('/api/user', user.create)
 
         //Send new password
-       .put('/api/user', user.forgotPassword)
+       .put('/api/user/forgotpassword', user.forgotPassword)
+       .put('/api/user/:id', user.update)
 
-        // Add event when user clicks something
-        .put('/api/user', user.update)
+        // // Add event when user clicks something
+        // .put('/api/user', user.update)
 
         // Find user by id
         .get('/api/user/:id', user.find)
