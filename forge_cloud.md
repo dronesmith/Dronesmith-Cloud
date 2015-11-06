@@ -2,21 +2,24 @@
 ## API Documentation
 
 ### Access & API Key
-API keys are currently private and only given by special request. Any given API key should not be public. The following headers are required to make a valid request to the API.
+API keys are currently private and only given by special request. Any given API key should be kept secret. The following custom HTTP headers are required to make a valid request to the API.
 
 	curl -H user-email=<your-email> \ 
-		 -H user-pass=<mypass> \
 	 	 -H user-key=<apikey> \
-	 		stage.dronesmith.io/cloud/user/123abc
+	 		stage.dronesmith.io/api/user/123abc
 	 		
-Without a valid api key and account, the server will respond with code `403` (not authorized).
+Without a valid api key and account, the server will respond with code `401` (not authorized).
 
-All api endpoints point to `stage.dronesmith.io/cloud/`.
+All api endpoints point to `stage.dronesmith.io/api/`.
 
-All api requests are handled as standard practice with `GET/POST/PUT/DELETE` HTTP headers. The responses will always be in [JSON](https://en.wikipedia.org/wiki/JSON) format. 
+All api requests are handled in standard practice with `GET/POST/PUT/DELETE` HTTP headers. The responses will always be in [JSON](https://en.wikipedia.org/wiki/JSON) format. 
+
+#### Gimme
+
+To obtain API keys, please contact [geoff@skyworksas.com](mailto:geoff@skyworksas.com). 
 
 #### Error Handling
-User-defined errors besides `403`s will have the response code `400`. Server side error codes *should not* happen, but if they do, you will see a `500` code. `400` errors will respond the following JSON object:
+User-defined errors besides `401`s will have the response code `400`. Server side error codes *should not* happen, but if they do, you will see a `500` code. `400` errors will respond the following JSON object:
 
 Return **400**:
 
@@ -24,68 +27,22 @@ Return **400**:
 		"error" : "message about the error." 
 	}
 
-### Session
-Sessions are useful for obtaining current activity of a user, such as if the user is currently online, or if they are flying a drone or not. The session manager also handles authentication. Current authentication is basic and only requires an email and password. 
-
-#### Log in / Log out
-
-To log a user in and start a session on your respective device, use the following request:
-
-	POST /session/authenticate
-	
-	POST Body
-	{
-		email: String,
-		password: String
-	}
-	
-The log in will return a public `User` object if sucessful. Else, an error message is returned. 
-
-As is with basic authentication, the session only lasts as long as the application is running. Once the connection with the server ends, the session ends with it. To manually log out a user, simply send the same request with the `deauth` boolean set to true:
-
-	POST /session/authenticate
-	
-	POST Body 
-	{
-		deauth: true,
-		email: String,
-		password: String
-	}
-	
-The response for a successful log out will be `{ "userData": null }`.
-
-#### Query a session
-
-Querying the user's session can be dones by sending the user's id. It returns the user's status
-
-	GET /session/
-	
-Return **200**:
-
-	{
-		status: "active",
-		lastLogin: Date,
-		userData: {	
-			...	
-		}
-	}
-	
-A `{ "status": "expired" }` indicates the user is currently not online.
-
-### User
-The `/user/` endpoint provides information for querying user accounts. Currently, you may only query a restricted subset of user information via get requests. 
+### User `/api/user/`
+The user endpoint provides information for querying user accounts. Currently, you may only query a restricted subset of user information via GET requests. 
 
 Here is the public schema:
 	
+	id			: Unique identifier
 	email 		: String,
 	fullName 	: String <optional>,
 	company		: String <optional>,
-	kind 		: enumeration,
+	kind 		: Enumerated String,
+	Otherkind	: String
 	created 	: Date,
 	lastLogin 	: Date,
 	userAgent 	: String,
 	ipAddr		: String,
-	drones 		: [Drone] <optional>
+	drones 		: Array of [Drone] <optional>
 	
 The userAgent property contains information about the browser and operating system the user used when they last logged in. ipAddr contains the last used IP address.
 	
@@ -131,6 +88,8 @@ Return **200**:
 		]	
 	}
 
+#### Pagination
+
 When not querying with `id`, you can also use **offset** and **size** fields divide up a query into multiple pieces (pagination), suitable for large queries. 
 
 	GET /user?offset=90&size=50 
@@ -161,25 +120,30 @@ Returns the first 50 entries of the user list who logged in last sorted in ascen
 
 #### Add a drone to a user `PUT /user/id/drone_id`
 
-It is recommended though not required that a drone be associated with a specific user. This can be by issuing a PUT request with the user id, followed by the drone id. `{ "status" : "ok" }` is returned. 	
+It is recommended though not required that a drone be associated with a specific user. This can be done by issuing a PUT request with the user id, followed by the drone id. `{ "status" : "ok" }` is returned. 	
 
 #### Remove a drone from a user `DELETE /user/id/drone_id`
 
 By the same virtue, one can remove a drone from a user with a DELETE request. Again, `{ "status" : "ok"}` is returned on success.
 
-### Drone
+### Drone `/api/drone/`
 
-The `/Drone/` public schema contains information pertaining to a particular UAV in question.
+The public schema contains information pertaining to a particular UAV in question.
 
-	name : String <optional>,
-	systemId : Number,
-	manufacturer : String <optional>,
-	created : Date,
-	updated : Date,
-	missions: [Mission] <optional>,
-	parameters: Object
+	id				: Unique Identifier
+	name 			: String <optional>,
+	systemId 		: Number,
+	manufacturer 	: String <optional>,
+	created 		: Date,
+	updated 		: Date <optional>,
+	hardwareId		: String <optional>,
+	firmwareId		: String <optional>,
+	parameters		: Mixed Object,
+	missions		: Array of [Mission] <optional>
 
 The parameters field is an associative array that contains a list of the drone's [parameters](https://pixhawk.org/firmware/parameters). You can think of these as settings for the drone. This should be updated whenever the drone object is updated.
+
+Each drone is required to have systemId. This should correspond to its `MAVLink` id and is defaulted to 1. It is advised but not required that each drone have a different systemId. 
 
 Querying a drone is similar to querying a user, but offers a more advanced query format to facilitate querying by different parameters.
 
@@ -237,6 +201,7 @@ Return **200**:
 		}	
 	}
 
+#### Pagination
 When not querying with `id`, you can also use **offset** and **size** fields divide up a query into multiple pieces (pagination), suitable for large queries. 
 
 	GET /drone?offset=90&size=50 
@@ -297,25 +262,69 @@ This status message indicates the drone was successfully deleted.
 			parameters: {}
 		}
 	}
+	
+#### Add a mission to a drone `PUT /drone/addMission/id/`
 
-### Mission
+It is recommended though not required that a mission be associated with a specific drone. This can be done by issuing a PUT request with the drone id, and including the middion id in the body:
+
+	PUT /drone/addMission/abc123
+	
+	PUT Body
+	{
+		missionId: def456
+	}
+
+Response **200**:
+
+	{
+		status: "OK"
+	}
+
+
+#### Remove a mission from a drone `DELETE /drone/removeMission/id`
+
+By the same virtue, one can remove a mission from a from with a DELETE request. Again, `{ "status" : "ok"}` is returned on success.
+
+	DELETE /drone/addMission/abc123
+	
+	DELETE Body
+	{
+		missionId: def456
+	}
+
+Response **200**:
+
+	{
+		status: "OK"
+	}
+
+
+### Mission `/api/mission/`
 
 The mission schema is organized as a sequence of MAVLink log format entries.
 
 	name 		: String <optional>,
+	kind		: Enumerated String,
 	start 		: Date,
 	end 		: Date <optional>,
 	user 		: User <optional>,
-	flight: [
+	errCount	: Number,
+	flight: Array of [
 		{
-			time : Date,
-			message : Number,
-			systemID : Number,
-			componentID : Number,
-			payload : Object <optional>
+			time 			: Date <optional>,
+			message 		: Number or String,
+			systemID 		: Number,
+			componentID 	: Number <optional>,
+			payload 		: Mixed Object <optional>
 		}
 	] <optional>,
-	parameters: Object
+	parameters: Mixed Object
+
+The mission schema is designed to be flexible to allowing many different flight logging formats. The current two that are being used are `sdlog` and `mavlink log` formats. Both of them are encoded into the following schema, but have different formats.
+
+The **mavlink log** format is a telemetry based ascii implementation that uses MAVLink messages as the basis of its datapoints. Such data includes a systemId, componentId, message number (which corresponds to type), and a time stamp at the end of each mesage. The payload is determined by the message type. Most of the data on Forge will be in the this format. You read more about it [here](http://qgroundcontrol.org/dev/logging).
+
+The **sdlog** format is a high-resolution binary based implementation that uses a dynamic look-up table mapped by its header. In essence, this format's actual data is defined on the fly by the header itself; however, to stay consistant, most of the messages are uniformly supported by different UAVs and ground control stations. This format does not time stamp each data point, and uses strings to represent message names. You can view more information about it [here](https://pixhawk.org/firmware/apps/sdlog2).
 
 Each mission will append a UTC Date formatted timestap at the beginning of a mission. The MAVLink log data is represented as a sequence of MAVLink packet entries. Typical flight times are within the range of 5-15 minutes. As MAVLink packets tend to output around 60 times a second, you can expect this array will be extremely large, even on smaller flights. 
 
@@ -357,7 +366,9 @@ Return **200**:
 		]
 	}
 
-Query a single drone, just enter its id.  
+Please note that you will **not** be able to view raw flight data points when querying multiple missions. You **must** query a single mission to view its datapoints. 
+
+Query a single mission, just enter its id.  
 
 	GET /mission/abc123
 	
@@ -370,6 +381,8 @@ Return **200**:
 			...
 		}	
 	}
+	
+#### Pagination
 
 When not querying with `id`, you can also use **offset** and **size** fields divide up a query into multiple pieces (pagination), suitable for large queries. 
 
@@ -399,8 +412,12 @@ When not querying with `id` you can use **sort** option to sort by one of the at
 	
 Returns the first 50 entries of the drone list who've been updated last sorted in ascending order. All sort options ***must*** be prefixed with a + for ascending order, or - for descending order.  
 
-#### Add a Mission `POST /mission/`
+#### Add a Mission `POST /mission/kind`
 
-Note that for uploading missions, you **must** include a drone and user to associate with. 
+To add a mission, simply send your mavlink log (in JOSN format) or an sdlog (in binary format). `kind` should be `mavlink` for the former and `sdlog` for the latter, else parsing errors may occur.
+
+`{status: "OK"}` JSON object is returned if successful. Please note that with high volume uploads, this request may take a while, so do not use short timeouts. Forge's maximum upload size is **50MB**. Please do not abuse this liberally large request size, or I will shorten it.  
 
 #### Remove a Mission `DELETE /mission/id`
+
+Deleting missions simply involves entering the mission id. `{status: "OK"}` JSON object is returned if successful.
