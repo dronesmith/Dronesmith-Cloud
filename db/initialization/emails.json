@@ -1,0 +1,79 @@
+[
+  {
+    "email":    "amanda@skyworksas.com",
+    "name":     "Amanda Cuenca",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "dominic@skyworksas.com",
+    "name":     "Dominic Genovese",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "evan@skyworksas.com",
+    "name":     "Evan Thomas",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "frankieh@skyworksas.com",
+    "name":     "Frankie Huang",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "greg@skyworksas.com",
+    "name":     "Greg Friesmuth",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "jinger@skyworksas.com",
+    "name":     "Jinger Zeng",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "nolan@skyworksas.com",
+    "name":     "Nolan Moore",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "paulf@skyworksas.com",
+    "name":     "Paul Fjare",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "rakitha@skyworksas.com",
+    "name":     "Rakitha Perera",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "randy@skyworksas.com",
+    "name":     "Randolph Yadao",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "sethw@skyworksas.com",
+    "name":     "Seth Welday",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "randyh@skyworksas.com",
+    "name":     "Randy Huynh",
+    "company":  "Skyworks Aerial Systems"
+  },
+
+  {
+    "email":    "nickyh@skyworksas.com",
+    "name":     "Nicky Huynh",
+    "company":  "Skyworks Aerial Systems"
+  },
+]
