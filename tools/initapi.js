@@ -139,7 +139,7 @@ mongoose.connection.on('connected', function() {
           to:       user.email
         }
         
-        mandrill_client.message.send({"message": message, "async": true},
+        mandrill_client.messages.send({"message": message, "async": true},
           function(result) {
             console.log(result);
           }, function(err) {
