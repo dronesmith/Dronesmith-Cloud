@@ -135,8 +135,12 @@ mongoose.connection.on('connected', function() {
                           + "<p>Password: <strong>" + newPassword + "</strong></p>"
                           + "<p>API Key: <strong>" + user.apiKey + "</strong></p>",
           subject:  "Your Forge Cloud Access Information",
-          from:     "hello@dronesmith.io",
-          to:       user.email
+          from_email:     "hello@dronesmith.io",
+          to:       [{
+                      "email": user.email,
+                      "name" : user.fullName,
+                      "type" : "to"
+                    }]
         }
         
         mandrill_client.messages.send({"message": message, "async": true},
