@@ -5,7 +5,9 @@ var
   config = require('../config/config'),
   mongoose = require('mongoose'),
   fs = require('fs'),
-  async = require('async')
+  async = require('async'),
+  mandrill = require('mandrill-api'),
+  mandrill_client = new mandrill.Mandrill('afbvO4sjVBbbBJuuqDRn0A');
 ;
 
 var uri = 'mongodb://';
@@ -33,7 +35,6 @@ mongoose.connection.on('connected', function() {
     path = require('path'),
     User = mongoose.model('User'),
     uuid = require('uuid'),
-    nodemailer = require('nodemailer'),
     utils = require('../lib/utils.js'),
 
     DRONE_MONGO_ID = "5637f2451cf63be64145366c"
@@ -125,10 +126,7 @@ mongoose.connection.on('connected', function() {
       });
 
       callbackList.push(function(user, cb) {
-        nodemailer.createTransport().sendMail({
-          from:     "hello@dronesmith.io",
-          to:       user.email,
-          subject:  "Your Forge Cloud Access Information",
+        var message = {
           html:     "<h2>Welcome to the next generation of Development.</h2>"
                           + "<p>We really appreciate you checking out our Early Access, and we hope you'll enjoy using Forge.</p>\n"
                           + "<p>Below is your login credentials and developer API key. It is advised you change your password"
@@ -136,11 +134,21 @@ mongoose.connection.on('connected', function() {
                           + "<p>Email: <strong>" + user.email + "</strong></p>"
                           + "<p>Password: <strong>" + newPassword + "</strong></p>"
                           + "<p>API Key: <strong>" + user.apiKey + "</strong></p>",
-        }, function(err, info) {
-          console.log(err, info);
-          return cb(err);
-        })
-        ;
+          subject:  "Your Forge Cloud Access Information",
+          from_email:     "hello@dronesmith.io",
+          to:       [{
+                      "email": user.email,
+                      "name" : user.fullName,
+                      "type" : "to"
+                    }]
+        }
+        
+        mandrill_client.messages.send({"message": message, "async": true},
+          function(result) {
+            console.log(result);
+          }, function(err) {
+            console.log('A mandrill error: ' + err.name + ' - ' + err.message);
+          });
       });
 
       async.waterfall(callbackList, function(err, result) {
