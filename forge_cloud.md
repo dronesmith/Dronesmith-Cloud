@@ -6,7 +6,7 @@ API keys are currently private and only given by special request. Any given API 
 
 	curl -H user-email=<your-email> \ 
 	 	 -H user-key=<apikey> \
-	 		stage.dronesmith.io/api/user/123abc
+	 		stage.dronesmith.io/api/user/563c2507a1e444b50b0f8d95
 	 		
 Without a valid api key and account, the server will respond with code `401` (not authorized).
 
@@ -46,7 +46,7 @@ Here is the public schema:
 	
 The userAgent property contains information about the browser and operating system the user used when they last logged in. ipAddr contains the last used IP address.
 	
-#### Query user(s) `GET /user/{id}?<querystring>`
+#### Query user(s) `GET /api/user/{id}?<querystring>`
 Find a user by a specific id. `id` is not required. 
 
 Example: Get a list of all users who identify as developers.
@@ -74,18 +74,25 @@ Return **200**:
 
 Query a single user. 
 
-	GET /user/abc123
+	GET /api/user/563c2507a1e444b50b0f8d95
 	
 Return **200**:
 	
 	{
-		email: "example@skyworksas.com",
-		created: "",
-		kind: "",
-		drones: [
-			123456,
-			abcdef
-		]	
+  		"id": "563c2507a1e444b50b0f8d95",
+  		"email": "sethw@skyworksas.com",
+  		"fullName": "Seth Welday",
+  		"company": "Skyworks Aerial Systems",
+  		"kind": "other",
+  		"Otherkind": "elevated",
+  		"created": "2015-11-06T03:56:55.878Z",
+  		"lastLogin": "2015-11-06T21:24:08.142Z",
+  		"userAgent": "Mozilla/5.0",
+  		"ipAddr": "127.0.0.1",
+  		"drones": [
+  			"5637f2451cf63be64145366c",
+  			...
+  		]
 	}
 
 #### Pagination
