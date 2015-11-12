@@ -59,14 +59,20 @@ Return **200**:
 		total: 34,
 		users: [
 			{
-				<user1> ...
-				id: 123abc,
-				kind: "developer"
+				"id": "563c2507a1e444b50b0f8d8b",
+      			"email": "amanda@skyworksas.com",
+      			"fullName": "Amanda",
+      			"company": "Skyworks Aerial Systems",
+      			"kind": "developer",
+      			...
 			}, 
 			{
-				<user2> ...
-				id: 456def,
-				kind: "developer"
+				"id": "563c2507a1e444b50b0f8d95",
+  				"email": "sethw@skyworksas.com",
+  				"fullName": "Seth",
+  				"company": "Skyworks Aerial Systems",
+  				"kind": "developer",
+  				...
 			}, 
 			...
 		]
@@ -81,7 +87,7 @@ Return **200**:
 	{
   		"id": "563c2507a1e444b50b0f8d95",
   		"email": "sethw@skyworksas.com",
-  		"fullName": "Seth Welday",
+  		"fullName": "Seth",
   		"company": "Skyworks Aerial Systems",
   		"kind": "other",
   		"Otherkind": "elevated",
