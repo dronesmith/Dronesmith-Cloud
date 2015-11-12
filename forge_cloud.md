@@ -47,7 +47,7 @@ Here is the public schema:
 The userAgent property contains information about the browser and operating system the user used when they last logged in. ipAddr contains the last used IP address.
 	
 #### Query user(s) `GET /api/user/{id}?<querystring>`
-Find a user by a specific id. `id` is not required. 
+Find a user by a specific id. `id` is not required. Without a `sort` specifier, the order of users returned is not defined. 
 
 Example: Get a list of all users who identify as developers.
 
@@ -161,7 +161,7 @@ Each drone is required to have systemId. This should correspond to its `MAVLink`
 Querying a drone is similar to querying a user, but offers a more advanced query format to facilitate querying by different parameters.
 
 #### Query drones(s) `GET /drone/{id}?<querystring>`
-Find a drone by a specific id. `id` is not required.
+Find a drone by a specific id. `id` is not required. Without a `sort` specifier, the order of drones returned is not defined. 
 
 Example: Get a list of all drones with UAVCAN disabled:
 
@@ -345,8 +345,8 @@ The parameters object contains a copy of the settings that were made for the dro
 
 The end timestamp is optional; however, all completed flights will have an end timestamp. The lack of this stamp indicates the flight is ongoing. If the mission failed to receive any data from the drone as a connection error, it will fill this field in with `null`. 
 
-#### Query drones(s) `GET /mission/{id}?<querystring>`
-Find a drone by a specific id. `id` is not required.
+#### Query missions(s) `GET /mission/{id}?<querystring>`
+Find a mission by a specific id. `id` is not required. Without a `sort` specifier, the order of missions returned is not defined. 
 
 Example: Get a list of all missions with UAVCAN disabled:
 
