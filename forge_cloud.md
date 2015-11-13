@@ -338,7 +338,8 @@ The mission schema is organized as a sequence of MAVLink log format entries.
 
 	name 		: String <optional>,
 	kind		: Enumerated String,
-	start 		: Date,
+	created		: Date,
+	start 		: Date <optional>,
 	end 		: Date <optional>,
 	user 		: User <optional>,
 	errCount	: Number,
