@@ -140,7 +140,7 @@ Returns the first 50 entries of the user list who were created last sorted in as
 
 #### Add a drone to a user `PUT /api/user/id/drone_id`
 
-It is recommended though not required that a drone be associated with a specific user. This can be done by issuing a PUT request with the user id, followed by the drone id. `{ "status" : "ok" }` is returned. An error will be returned if the drone does not exist. 	
+It is recommended though not required that a drone be associated with a specific user. This can be done by issuing a PUT request with the user id, followed by the drone id. `{ "status" : "ok" }` is returned. An error will be returned if the drone does not exist. The user's list of drones is a unique list, so any duplicates will be removed.	
 
 #### Remove a drone from a user `DELETE /api/user/id/drone_id`
 
@@ -296,9 +296,10 @@ This status message indicates the drone was successfully deleted.
 		}
 	}
 	
-#### Add a mission to a drone `PUT /api/drone/addMission/droneId/`
+#### Add a mission to a drone `PUT /api/	droneId/`
 
-It is recommended though not required that a mission be associated with a specific drone. This can be done by issuing a PUT request with the drone id, and including the middion id in the body:
+It is recommended though not required that a mission be associated with a specific drone. This can be done by issuing a PUT request with the drone id, and including the middion id in the body. An error will be returned if the mission does not exist. The drone's list of missions is a unique list, so any duplicates will be removed.	
+
 
 	PUT /drone/addMission/5637f2451cf63be64145366c
 	
