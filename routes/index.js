@@ -102,7 +102,7 @@ module.exports = function(app, route) {
         .put    ('/api/drone/:id',                drone.update)
 
         // add / remove missions
-        .put    ('/api/drone/removeMission/:id',  drone.removeMission)
+        .delete ('/api/drone/removeMission/:id',  drone.removeMission)
         .put    ('/api/drone/addMission/:id',     drone.addMission)
 
         // mission CRUD
