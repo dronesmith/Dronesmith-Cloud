@@ -146,7 +146,7 @@ app.use('/admin/', function(req, res, next) {
 app.use('/index/', function(req, res, next) {
 
   // ...with the exception of /session/ which handles this itself.
-  if (req.path == '/session') {
+  if (req.path == '/session' || req.path == '/user/forgotPassword') {
     next();
   } else if (!req.session.userData) {
     res.status(400).json({error: "Not logged in."});

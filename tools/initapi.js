@@ -7,7 +7,7 @@ var
   fs = require('fs'),
   async = require('async'),
   mandrill = require('mandrill-api'),
-  mandrill_client = new mandrill.Mandrill('afbvO4sjVBbbBJuuqDRn0A');
+  mandrill_client = new mandrill.Mandrill(config.mailer);
 ;
 
 var uri = 'mongodb://';
@@ -127,13 +127,17 @@ mongoose.connection.on('connected', function() {
 
       callbackList.push(function(user, cb) {
         var message = {
-          html:     "<h2>Welcome to the next generation of Development.</h2>"
-                          + "<p>We really appreciate you checking out our Early Access, and we hope you'll enjoy using Forge.</p>\n"
-                          + "<p>Below is your login credentials and developer API key. It is advised you change your password"
+          html:     "<h2>Welcome to the next generation of development.</h2>"
+                          + "<p>We really appreciate you checking out our early access, and we hope you'll enjoy using Forge."
+                          + " You can log in to your account at <a href=\"http://stage.dronesmith.io\">stage.dronesmith.io</a>, where you'll be able"
+                          + " to upload flight data, download tools for recording flights, and view the API documentation.</p>"
+                          + "<p>Below are your login credentials and developer API key. It is advised you change your password"
                           + " once logged in.</p>\n\n"
                           + "<p>Email: <strong>" + user.email + "</strong></p>"
                           + "<p>Password: <strong>" + newPassword + "</strong></p>"
-                          + "<p>API Key: <strong>" + user.apiKey + "</strong></p>",
+                          + "<p>API Key: <strong>" + user.apiKey + "</strong></p>"
+                          + "<p>Forge Cloud is still in development. If you believe you have found a bug, or would simply like to provide "
+                          + "feedback, we would greatly appriciate it. Don't hestitate to <a href=\"mailto:support@skyworksas.com\">let us know what you think</a>!</p>",
           subject:  "Your Forge Cloud Access Information",
           from_email:     "hello@dronesmith.io",
           to:       [{
@@ -141,8 +145,8 @@ mongoose.connection.on('connected', function() {
                       "name" : user.fullName,
                       "type" : "to"
                     }]
-        }
-        
+        };
+
         mandrill_client.messages.send({"message": message, "async": true},
           function(result) {
             console.log(result);
