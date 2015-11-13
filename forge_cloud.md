@@ -318,7 +318,7 @@ Response **200**:
 
 By the same virtue, one can remove a mission from a from with a DELETE request. Again, `{ "status" : "ok"}` is returned on success.
 
-	DELETE /api/drone/addMission/5637f2451cf63be64145366c
+	DELETE /api/drone/removeMission/5637f2451cf63be64145366c
 	
 	DELETE Body
 	{
