@@ -1,6 +1,0 @@
-{
-  "name": "Hangar",
-  "icon": "hangar.png",
-  "index": "hangar",
-  "controller": "HangarCtrl"
-}

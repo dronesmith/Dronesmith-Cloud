@@ -63,7 +63,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride());
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(favicon(path.join(__dirname, 'public/img/favicon.ico')));
+app.use(favicon(path.join(__dirname, 'forge-ux/public/assets/favicon.ico')));
 app.use(session({
   genid: function(req) {
     return uuid.v4();
@@ -75,10 +75,10 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(lessMiddleware(path.join(__dirname, 'theme'), {
-	dest: path.join(__dirname, 'public'),
-  debug: false
-}));
+// app.use(lessMiddleware(path.join(__dirname, 'forge-ux/public/theme'), {
+// 	dest: path.join(__dirname, 'forge-ux/public'),
+//   debug: false
+// }));
 
 
 // Check for session, later authorization
@@ -90,7 +90,7 @@ app.use(function (req, res, next) {
 });
 
 // Render statics (including HTML)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'forge-ux/public')));
 
 // Some logging stuff.
 app.use(function (req, res, next) {
@@ -99,7 +99,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (req, res, next) {
-    log.debug('[REQUEST]', req.method, req.url);
+    log.debug('[REQUEST]', req.ip, req.method, req.url);
     next();
 });
 
@@ -148,6 +148,8 @@ app.use('/index/', function(req, res, next) {
   // ...with the exception of /session/ which handles this itself.
   if (req.path == '/session' || req.path == '/user/forgotPassword') {
     next();
+  } else if (req.path == '/user' && req.method == 'POST') {
+    res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
   } else if (!req.session.userData) {
     res.status(400).json({error: "Not logged in."});
   } else {
@@ -161,7 +163,7 @@ app.use('/', router);
 app.use(function (req, res) {
     log.warn("Can not find page: " +  req.originalUrl);
     res.status(404);
-    res.sendFile(path.join(__dirname, '/public', '404.html'));
+    res.sendFile(path.join(__dirname, '/forge-ux/public', '404.html'));
 });
 // Handle 500s
 app.use(function (error, req, res, next) {

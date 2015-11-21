@@ -1,6 +1,0 @@
-{
-  "name": "Terminal",
-  "icon": "terminal.png",
-  "index": "terminal",
-  "controller": "terminalCtrl"
-}

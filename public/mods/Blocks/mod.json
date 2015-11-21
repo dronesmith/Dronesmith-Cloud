@@ -1,6 +1,0 @@
-{
-  "name": "Blocks",
-  "icon": "library.png",
-  "index": "blocksPage",
-  "controller": "BlocksCtrl"
-}
