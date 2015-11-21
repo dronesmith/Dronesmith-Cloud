@@ -1,0 +1,52 @@
+<section id="uploader">
+  <form name="uploaderForm">
+    <h4>Upload Mission</h4>
+    <fieldset class="form-group">
+      <label for="drone">Select Type</label>
+      <select
+        class="form-control"
+        ng-model="uploaderControl.kind"
+        ng-init="uploaderControl.kind='mavlink'">
+        <option value="mavlink">MAVLink Log</option>
+        <option value="sdlog">Binary Log</option>
+      </select>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label for="drone">Select Drone</label>
+      <select
+        ng-show="uploaderControl.drone"
+        class="form-control"
+        ng-model="uploaderControl.drone"
+        ng-init="uploaderControl.drone=UserObject.drones[0]"
+        ng-options="drone as drone.systemId for drone in UserObject.drones track by drone._id">
+      </select>
+      <p class="text-danger" ng-show="!uploaderControl.drone">User has no drones associated with them.</p>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label for="upload">Select File</label>
+      <input
+        type="file"
+        name="upload"
+        id="upload">
+    </fieldset>
+
+    <uib-progressbar
+      class="progress-striped active"
+      value="progressBar"
+      type="info"><em ng-show="progressBar > 0">{{progressBar | number:'2'}}%</em></uib-progressbar>
+    <button
+      type="submit"
+      class="btn btn-default"
+      ng-click="upload()"
+      ng-disabled="files.length == 0 || (uploaded)"
+      value="uploadMission">Upload</button>
+    <button class="btn btn-default" ng-click="clear()">Reset</button>
+    <p ng-show="uploaded" class="pull-right">
+      <span ng-show="uploadStatus=='error'" class="text-danger">Upload Failed.</span>
+      <span ng-show="uploadStatus=='success'" class="text-success">Sucessfully uploaded!</span>
+      <span ng-show="uploadStatus=='working'" class="text-warning">Working...</span>
+    </p>
+  </form>
+</section>

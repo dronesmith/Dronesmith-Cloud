@@ -1,0 +1,49 @@
+<section id="loginPane">
+    <form class="panel-body" name="loginForm" novalidate>
+      <fieldset
+        class="form-group"
+        ng-class="{
+          'has-error': loginForm.email.$dirty && loginForm.email.$invalid,
+          'has-success': loginForm.email.$dirty && loginForm.email.$valid
+        }">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Email"
+          ng-model="user.email"
+          ng-model-options="{ updateOn: 'blur' }"
+          required>
+          <span ng-show="loginForm.email.$error.email" class="text-danger">Please enter a valid email.</span>
+      </fieldset>
+      <fieldset
+        class="form-group"
+        ng-class="{
+          'has-error': loginForm.password.$dirty && loginForm.password.$invalid,
+          'has-success': loginForm.password.$dirty && loginForm.password.$valid
+        }">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Password"
+          ng-model="user.password"
+          ng-pattern="/^(?=.*[a-z]).{8,20}$/"
+          required>
+          <span ng-show="loginForm.password.$error.pattern" class="text-danger">Please enter a valid password.</span>
+      </fieldset>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        ng-disabled="!loginForm.$valid"
+        ng-click="update(user)"
+        value="LogIn">Log In</button>
+      <a href="" ui-sref="resetPassword">Forgot Password?</a>
+    </form>
+    <hr>
+      <button class="btn btn-default center-block" ui-sref="signup">Signup for Early Access</button>
+</section>

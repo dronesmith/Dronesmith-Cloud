@@ -1,0 +1,41 @@
+<section id="accountModal">
+  <div class="modal-header">
+    <h3 class="modal-title">Edit Account</h3>
+  </div>
+  <div class="modal-body">
+    <h4 class="text-center">{{userAccount.email}}</h4>
+    <form name="accountForm">
+      <fieldset class="form-group">
+        <label>Password <small>(required)</small></label>
+        <input type="password" class="form-control" ng-model="userAccount.password" required>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>New Password</label>
+        <input type="password" class="form-control" ng-model="userAccount.newPassword">
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" class="form-control" ng-model="userAccount.confirmPassword">
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Company Name</label>
+        <input type="text" class="form-control" ng-model="userAccount.company">
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Full Name</label>
+        <input type="text" class="form-control" ng-model="userAccount.fullName">
+      </fieldset>
+    </form>
+    <p ng-show="status">{{status}}</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-primary"
+      type="button"
+      ng-disabled="!accountForm.$valid"
+      ng-click="ok()">
+      Update
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</section>

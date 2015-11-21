@@ -1,0 +1,14 @@
+<section id="errorModal" ng-init="isCollapsed=true">
+    <div class="modal-body">
+    <h1 ng-show="error.status!=400" class="modal-title text-center">Oops <small>{{error.status}}</small></h1>
+    <p class="text-center text-danger">
+      <span>{{error.status}} {{error.statusText}}</span>
+    </p>
+    <p class="lead text-center">
+      <strong>{{error.data.error}}</strong>
+    </p>
+    <p class="text-center"><a href="" ng-click="isCollapsed=!isCollapsed">toggle debug information</a></p>
+    <pre uib-collapse="isCollapsed">{{error}}</pre>
+    <button class="btn btn-warning center-block" type="submit" ng-click="cancel()">Ok</button>
+  </div>
+</section>

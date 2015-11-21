@@ -1,0 +1,25 @@
+<section id="navbar">
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main" type="button">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="" ui-sref="forge" class="navbar-brand">Forge</a>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar-main">
+        <ul class="nav navbar-nav pull-right">
+          <li> <a href="" ng-click="editAccount()">Account</a> </li>
+          <li ng-class="{active: isActive('/upload')}"> <a href="" ui-sref="upload">Upload Flight</a> </li>
+          <li ng-class="{active: isActive('/')}"> <a href="" ui-sref="forge">Analytics</a> </li>
+          <li> <a target="_self" href="assets/tools/recordmav.zip" download="recordmav.zip">MAV Tools</a> </li>
+          <li> <a target="_self" href="assets/tools/api.pdf" download="api.pdf">API Docs</a> </li>
+          <li> <a href="" ng-click="logout()">Log Out</a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</section>

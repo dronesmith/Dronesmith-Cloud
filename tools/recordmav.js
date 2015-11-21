@@ -12,10 +12,12 @@ if (process.argv.length < 3) {
   console.log("\t--dev\tSpecify radio device file. Required.");
   console.log("\t--dest\tFile destination. (default is root directory of Forge Core.)");
   console.log("\t-t\tSpecify length of time in seconds for recording. Required.");
+  console.log("\t--pretty\tOutput JSON with proper white spacing.")
 } else {
   var time = 30,
     filedest = path.join(path.resolve(__dirname), 'output.json'),
-    dev = '';
+    dev = '',
+    pretty = false;
 
   for (var k in process.argv) {
     var arg = process.argv[k];
@@ -29,6 +31,9 @@ if (process.argv.length < 3) {
         break;
       case '--dest':
         filedest = path.resolve(process.argv[+k+1]) || path.resolve(__dirname);
+        break;
+      case '--pretty':
+        pretty = true;
         break;
     }
   }
@@ -69,7 +74,8 @@ if (process.argv.length < 3) {
 
         setTimeout(function() {
           stream['end'] = new Date();
-          fs.writeFileSync(filedest, JSON.stringify(stream));
+          if (pretty) fs.writeFileSync(filedest, JSON.stringify(stream, null, 4));
+          else fs.writeFileSync(filedest, JSON.stringify(stream));
           console.log("Done.\t\t\t\t:)");
           process.exit(0);
         }, time * 1000);

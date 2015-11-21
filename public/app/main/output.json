@@ -1,0 +1,1260 @@
+{
+    "flight": [
+        {
+            "time": "2015-11-13T21:22:30.349Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15405834,
+                "roll": 0.05528292432427406,
+                "pitch": 0.16218845546245575,
+                "yaw": -2.4481728076934814,
+                "rollspeed": 0.027715910226106644,
+                "pitchspeed": -0.006737451069056988,
+                "yawspeed": 0.02145419642329216
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:30.349Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:30.595Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:30.595Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15406067,
+                "roll": 0.056043725460767746,
+                "pitch": 0.16208451986312866,
+                "yaw": -2.44838809967041,
+                "rollspeed": -0.030924981459975243,
+                "pitchspeed": -0.0030866870656609535,
+                "yawspeed": 0.005584261380136013
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:30.755Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 1,
+            "payload": {
+                "onboard_control_sensors_present": 0,
+                "onboard_control_sensors_enabled": 0,
+                "onboard_control_sensors_health": 0,
+                "load": 125,
+                "voltage_battery": 0,
+                "current_battery": 0,
+                "drop_rate_comm": 0,
+                "errors_comm": 0,
+                "errors_count1": 0,
+                "errors_count2": 0,
+                "errors_count3": 0,
+                "errors_count4": 0,
+                "battery_remaining": -1
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:30.797Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 105,
+            "payload": {
+                "time_usec": -1773681872,
+                "xacc": 1.622633934020996,
+                "yacc": -0.6214579343795776,
+                "zacc": -10.683478355407715,
+                "xgyro": 0.03030380606651306,
+                "ygyro": -0.015647223219275475,
+                "zgyro": 0.00632693013176322,
+                "xmag": 0.0116799995303154,
+                "ymag": 0.021199999377131462,
+                "zmag": -0.4143199920654297,
+                "abs_pressure": 475.3899841308594,
+                "diff_pressure": 0,
+                "pressure_alt": 5944.77685546875,
+                "temperature": 37.04999923706055,
+                "fields_updated": 7167
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:30.799Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15406299,
+                "roll": 0.05647461861371994,
+                "pitch": 0.16221852600574493,
+                "yaw": -2.447849750518799,
+                "rollspeed": -0.015039213001728058,
+                "pitchspeed": -0.00432107737287879,
+                "yawspeed": 0.0019319336861371994
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:30.935Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 32,
+            "payload": {
+                "time_boot_ms": 15406424,
+                "x": 0,
+                "y": 0,
+                "z": -43.148460388183594,
+                "vx": 0,
+                "vy": 0,
+                "vz": 0.007679998874664307
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.073Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.281Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15406533,
+                "roll": 0.05685451626777649,
+                "pitch": 0.16221927106380463,
+                "yaw": -2.4484946727752686,
+                "rollspeed": -0.0016039125621318817,
+                "pitchspeed": -0.0055575184524059296,
+                "yawspeed": -0.00416175089776516
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.472Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15406762,
+                "roll": 0.05654696747660637,
+                "pitch": 0.16192878782749176,
+                "yaw": -2.4487030506134033,
+                "rollspeed": -0.012602664530277252,
+                "pitchspeed": -0.011681901291012764,
+                "yawspeed": -0.004139701835811138
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.472Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15406995,
+                "roll": 0.05592090263962746,
+                "pitch": 0.1607333868741989,
+                "yaw": -2.4492383003234863,
+                "rollspeed": 0.01793867163360119,
+                "pitchspeed": -0.016584396362304688,
+                "yawspeed": -0.00289255753159523
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.533Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.561Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.737Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15407227,
+                "roll": 0.05625306814908981,
+                "pitch": 0.15996940433979034,
+                "yaw": -2.449103832244873,
+                "rollspeed": 0.01671801507472992,
+                "pitchspeed": 0.00784583855420351,
+                "yawspeed": 0.0044730184599757195
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:31.957Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15407460,
+                "roll": 0.05580606684088707,
+                "pitch": 0.16082540154457092,
+                "yaw": -2.448848247528076,
+                "rollspeed": -0.012604570016264915,
+                "pitchspeed": -0.003157026134431362,
+                "yawspeed": -0.0016126073896884918
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.143Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.143Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15407690,
+                "roll": 0.05644925683736801,
+                "pitch": 0.1607280969619751,
+                "yaw": -2.4487314224243164,
+                "rollspeed": 0.020384758710861206,
+                "pitchspeed": 0.009052861481904984,
+                "yawspeed": 0.0008483277633786201
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.431Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15407922,
+                "roll": 0.056350138038396835,
+                "pitch": 0.1600443422794342,
+                "yaw": -2.4487476348876953,
+                "rollspeed": -0.03336771950125694,
+                "pitchspeed": 0.015155371278524399,
+                "yawspeed": -0.013794953003525734
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.624Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 32,
+            "payload": {
+                "time_boot_ms": 15407967,
+                "x": 0,
+                "y": 0,
+                "z": -43.19112777709961,
+                "vx": 0,
+                "vy": 0,
+                "vz": -0.01574399508535862
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.624Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.624Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15408155,
+                "roll": 0.05687228962779045,
+                "pitch": 0.1599702090024948,
+                "yaw": -2.44866943359375,
+                "rollspeed": 0.0057292357087135315,
+                "pitchspeed": 0.004157756920903921,
+                "yawspeed": 0.047311313450336456
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.796Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:32.876Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15408388,
+                "roll": 0.0570087805390358,
+                "pitch": 0.16077011823654175,
+                "yaw": -2.448460340499878,
+                "rollspeed": -0.015044721774756908,
+                "pitchspeed": 0.026146072894334793,
+                "yawspeed": -0.008857342414557934
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.052Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 105,
+            "payload": {
+                "time_usec": -1771379578,
+                "xacc": 1.7026495933532715,
+                "yacc": -0.6200448870658875,
+                "zacc": -10.737587928771973,
+                "xgyro": 0.03152553737163544,
+                "ygyro": -0.004651648458093405,
+                "zgyro": 0.008770391345024109,
+                "xmag": 0.012000000104308128,
+                "ymag": 0.020800000056624413,
+                "zmag": -0.4127199947834015,
+                "abs_pressure": 475.42999267578125,
+                "diff_pressure": 0,
+                "pressure_alt": 5944.16259765625,
+                "temperature": 37.05999755859375,
+                "fields_updated": 7167
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.084Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15408621,
+                "roll": 0.05780612304806709,
+                "pitch": 0.16047661006450653,
+                "yaw": -2.448084831237793,
+                "rollspeed": 0.017939254641532898,
+                "pitchspeed": -0.012950200587511063,
+                "yawspeed": -0.002722124569118023
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.255Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.335Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15408851,
+                "roll": 0.057602036744356155,
+                "pitch": 0.16079239547252655,
+                "yaw": -2.4482274055480957,
+                "rollspeed": -0.021160196512937546,
+                "pitchspeed": -0.01907362975180149,
+                "yawspeed": -0.016138831153512
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.511Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.575Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15409084,
+                "roll": 0.058706533163785934,
+                "pitch": 0.16073095798492432,
+                "yaw": -2.447446823120117,
+                "rollspeed": 0.000824478454887867,
+                "pitchspeed": 0.01146320253610611,
+                "yawspeed": -0.0026679961010813713
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.796Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15409316,
+                "roll": 0.058725930750370026,
+                "pitch": 0.16061478853225708,
+                "yaw": -2.446683168411255,
+                "rollspeed": 0.01547054760158062,
+                "pitchspeed": 0.0077877286821603775,
+                "yawspeed": 0.005922611802816391
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:33.956Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.013Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 32,
+            "payload": {
+                "time_boot_ms": 15409498,
+                "x": 0,
+                "y": 0,
+                "z": -43.29540252685547,
+                "vx": 0,
+                "vy": 0,
+                "vz": -0.05335133150219917
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.013Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15409549,
+                "roll": 0.058671630918979645,
+                "pitch": 0.16062583029270172,
+                "yaw": -2.445768117904663,
+                "rollspeed": 0.014233607798814774,
+                "pitchspeed": 0.0004538302309811115,
+                "yawspeed": 0.0059565044939517975
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.263Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15409779,
+                "roll": 0.058716632425785065,
+                "pitch": 0.15977905690670013,
+                "yaw": -2.4457454681396484,
+                "rollspeed": -0.0004349108785390854,
+                "pitchspeed": -0.02031964249908924,
+                "yawspeed": -0.006224189419299364
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.431Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.447Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.463Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15410011,
+                "roll": 0.05804356560111046,
+                "pitch": 0.15993446111679077,
+                "yaw": -2.4460010528564453,
+                "rollspeed": 0.017881441861391068,
+                "pitchspeed": 0.011446645483374596,
+                "yawspeed": 0.009690339677035809
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.719Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15410244,
+                "roll": 0.058171290904283524,
+                "pitch": 0.15989458560943604,
+                "yaw": -2.4447622299194336,
+                "rollspeed": -0.018778497353196144,
+                "pitchspeed": 0.02733398601412773,
+                "yawspeed": -0.00004725903272628784
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.970Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15410477,
+                "roll": 0.057906754314899445,
+                "pitch": 0.1602911651134491,
+                "yaw": -2.444949150085449,
+                "rollspeed": 0.022752858698368073,
+                "pitchspeed": 0.018779220059514046,
+                "yawspeed": -0.0036907698959112167
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:34.970Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:35.307Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15410711,
+                "roll": 0.05809338018298149,
+                "pitch": 0.16030803322792053,
+                "yaw": -2.4454572200775146,
+                "rollspeed": 0.026406075805425644,
+                "pitchspeed": -0.01665445975959301,
+                "yawspeed": 0.000002387911081314087
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:35.528Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 1,
+            "payload": {
+                "onboard_control_sensors_present": 0,
+                "onboard_control_sensors_enabled": 0,
+                "onboard_control_sensors_health": 0,
+                "load": 124,
+                "voltage_battery": 0,
+                "current_battery": 0,
+                "drop_rate_comm": 0,
+                "errors_comm": 0,
+                "errors_count1": 0,
+                "errors_count2": 0,
+                "errors_count3": 0,
+                "errors_count4": 0,
+                "battery_remaining": -1
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:35.784Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 105,
+            "payload": {
+                "time_usec": -1769081611,
+                "xacc": 1.7190401554107666,
+                "yacc": -0.5974105596542358,
+                "zacc": -10.726564407348633,
+                "xgyro": 0.016864769160747528,
+                "ygyro": -0.0009864566382020712,
+                "zgyro": 0.024652888998389244,
+                "xmag": 0.0116799995303154,
+                "ymag": 0.02143999934196472,
+                "zmag": -0.4124799966812134,
+                "abs_pressure": 475.44000244140625,
+                "diff_pressure": 0,
+                "pressure_alt": 5944.0087890625,
+                "temperature": 37.05999755859375,
+                "fields_updated": 7167
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:35.839Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15410939,
+                "roll": 0.057496801018714905,
+                "pitch": 0.16075938940048218,
+                "yaw": -2.444878578186035,
+                "rollspeed": -0.006585672497749329,
+                "pitchspeed": -0.027660474181175232,
+                "yawspeed": 0.00002350378781557083
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:35.839Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:35.839Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 32,
+            "payload": {
+                "time_boot_ms": 15411040,
+                "x": 0,
+                "y": 0,
+                "z": -43.34300994873047,
+                "vx": 0,
+                "vy": 0,
+                "vz": -0.04568829759955406
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:35.897Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.009Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15411172,
+                "roll": 0.057345595210790634,
+                "pitch": 0.16061164438724518,
+                "yaw": -2.4449892044067383,
+                "rollspeed": 0.014178439043462276,
+                "pitchspeed": -0.011781890876591206,
+                "yawspeed": 0.006148947402834892
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.065Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15411406,
+                "roll": 0.05718805640935898,
+                "pitch": 0.16020379960536957,
+                "yaw": -2.445437431335449,
+                "rollspeed": -0.0004888484254479408,
+                "pitchspeed": 0.0016497587785124779,
+                "yawspeed": -0.0023816656321287155
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.123Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.166Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15411639,
+                "roll": 0.0572211854159832,
+                "pitch": 0.16035807132720947,
+                "yaw": -2.4455153942108154,
+                "rollspeed": 0.0007294313982129097,
+                "pitchspeed": -0.005682098679244518,
+                "yawspeed": -0.007247015833854675
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.326Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15411867,
+                "roll": 0.0577983632683754,
+                "pitch": 0.16050580143928528,
+                "yaw": -2.4456613063812256,
+                "rollspeed": 0.0007262304425239563,
+                "pitchspeed": 0.016301754862070084,
+                "yawspeed": 0.0037690093740820885
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.485Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.549Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15412101,
+                "roll": 0.05794920399785042,
+                "pitch": 0.159513458609581,
+                "yaw": -2.4447638988494873,
+                "rollspeed": -0.0029458487406373024,
+                "pitchspeed": 0.017521284520626068,
+                "yawspeed": 0.0001282375305891037
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.735Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 219,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:36.783Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15412334,
+                "roll": 0.0586869940161705,
+                "pitch": 0.15950943529605865,
+                "yaw": -2.4441919326782227,
+                "rollspeed": 0.022697722539305687,
+                "pitchspeed": -0.015470091253519058,
+                "yawspeed": -0.003499232232570648
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.023Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15412567,
+                "roll": 0.058644913136959076,
+                "pitch": 0.1592121571302414,
+                "yaw": -2.4441001415252686,
+                "rollspeed": 0.001917349174618721,
+                "pitchspeed": -0.01302709337323904,
+                "yawspeed": 0.014862296171486378
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.203Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 32,
+            "payload": {
+                "time_boot_ms": 15412571,
+                "x": 0,
+                "y": 0,
+                "z": -43.251319885253906,
+                "vx": 0,
+                "vy": 0,
+                "vz": 0.009840761311352253
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.251Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 220,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.363Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15412796,
+                "roll": 0.05827312171459198,
+                "pitch": 0.1595456302165985,
+                "yaw": -2.443268299102783,
+                "rollspeed": -0.015202261507511139,
+                "pitchspeed": 0.0016313404776155949,
+                "yawspeed": -0.019308704882860184
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.502Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.544Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15413029,
+                "roll": 0.0581599697470665,
+                "pitch": 0.1601351499557495,
+                "yaw": -2.4428210258483887,
+                "rollspeed": 0.02021792158484459,
+                "pitchspeed": 0.008961983025074005,
+                "yawspeed": -0.007071333006024361
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.570Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 105,
+            "payload": {
+                "time_usec": -1766783601,
+                "xacc": 1.767716884613037,
+                "yacc": -0.570568859577179,
+                "zacc": -10.737720489501953,
+                "xgyro": -0.00023945909924805164,
+                "ygyro": -0.018090685829520226,
+                "zgyro": 0.008770391345024109,
+                "xmag": 0.011839999817311764,
+                "ymag": 0.020479999482631683,
+                "zmag": -0.41711997985839844,
+                "abs_pressure": 475.4100036621094,
+                "diff_pressure": 0,
+                "pressure_alt": 5944.4697265625,
+                "temperature": 37.05999755859375,
+                "fields_updated": 7167
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:37.826Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15413262,
+                "roll": 0.057611119002103806,
+                "pitch": 0.1590457409620285,
+                "yaw": -2.4427857398986816,
+                "rollspeed": -0.0005598068237304688,
+                "pitchspeed": 0.0028540396597236395,
+                "yawspeed": 0.006389988586306572
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.076Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 220,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.118Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15413495,
+                "roll": 0.05793473869562149,
+                "pitch": 0.15913042426109314,
+                "yaw": -2.4419543743133545,
+                "rollspeed": -0.0017860643565654755,
+                "pitchspeed": 0.0052991947159171104,
+                "yawspeed": 0.02106698416173458
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.295Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15413724,
+                "roll": 0.05751403048634529,
+                "pitch": 0.15933924913406372,
+                "yaw": -2.4417672157287598,
+                "rollspeed": 0.018974624574184418,
+                "pitchspeed": 0.001636576373130083,
+                "yawspeed": 0.023535532876849174
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.528Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 220,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.575Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15413957,
+                "roll": 0.05585349351167679,
+                "pitch": 0.15951880812644958,
+                "yaw": -2.442164421081543,
+                "rollspeed": -0.015233725309371948,
+                "pitchspeed": 0.0004145866259932518,
+                "yawspeed": -0.003332110121846199
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.591Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.617Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 32,
+            "payload": {
+                "time_boot_ms": 15414114,
+                "x": 0,
+                "y": 0,
+                "z": -43.1800651550293,
+                "vx": 0,
+                "vy": 0,
+                "vz": 0.02297200821340084
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.745Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15414190,
+                "roll": 0.055822018533945084,
+                "pitch": 0.1595674306154251,
+                "yaw": -2.4423279762268066,
+                "rollspeed": -0.005454950965940952,
+                "pitchspeed": 0.03217780590057373,
+                "yawspeed": 0.014999651350080967
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:38.969Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15414423,
+                "roll": 0.0552140548825264,
+                "pitch": 0.16021104156970978,
+                "yaw": -2.442486047744751,
+                "rollspeed": 0.02143155038356781,
+                "pitchspeed": -0.008141934871673584,
+                "yawspeed": 0.002771018072962761
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:39.129Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 220,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:39.169Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15414655,
+                "roll": 0.05674302577972412,
+                "pitch": 0.16020862758159637,
+                "yaw": -2.4417219161987305,
+                "rollspeed": -0.009101971052587032,
+                "pitchspeed": 0.01506187953054905,
+                "yawspeed": -0.009444577619433403
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:39.425Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15414885,
+                "roll": 0.05709220468997955,
+                "pitch": 0.1602512001991272,
+                "yaw": -2.4415335655212402,
+                "rollspeed": -0.009102010168135166,
+                "pitchspeed": 0.012608274817466736,
+                "yawspeed": -0.00576618080958724
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:39.568Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 0,
+            "payload": {
+                "custom_mode": 65536,
+                "type": 2,
+                "autopilot": 12,
+                "base_mode": 81,
+                "system_status": 0,
+                "mavlink_version": 3
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:39.624Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 74,
+            "payload": {
+                "airspeed": 0,
+                "groundspeed": 0,
+                "alt": 0,
+                "climb": 0,
+                "heading": 220,
+                "throttle": 0
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:39.624Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15415118,
+                "roll": 0.05750623717904091,
+                "pitch": 0.15986624360084534,
+                "yaw": -2.4414100646972656,
+                "rollspeed": -0.026214808225631714,
+                "pitchspeed": -0.006943759508430958,
+                "yawspeed": -0.01308450847864151
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:39.895Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 30,
+            "payload": {
+                "time_boot_ms": 15415351,
+                "roll": 0.05831967294216156,
+                "pitch": 0.15967905521392822,
+                "yaw": -2.4408397674560547,
+                "rollspeed": -0.0164480097591877,
+                "pitchspeed": 0.023598097264766693,
+                "yawspeed": 0.012601783499121666
+            }
+        },
+        {
+            "time": "2015-11-13T21:22:40.118Z",
+            "systemId": 1,
+            "componentId": 1,
+            "message": 1,
+            "payload": {
+                "onboard_control_sensors_present": 0,
+                "onboard_control_sensors_enabled": 0,
+                "onboard_control_sensors_health": 0,
+                "load": 123,
+                "voltage_battery": 0,
+                "current_battery": 0,
+                "drop_rate_comm": 0,
+                "errors_comm": 0,
+                "errors_count1": 0,
+                "errors_count2": 0,
+                "errors_count3": 0,
+                "errors_count4": 0,
+                "battery_remaining": -1
+            }
+        }
+    ],
+    "parameters": {},
+    "start": "2015-11-13T21:22:30.347Z",
+    "end": "2015-11-13T21:22:40.353Z"
+}

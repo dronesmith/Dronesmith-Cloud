@@ -1,0 +1,155 @@
+<section id="signupPane">
+    <form ng-hide="signupSubmitted" class="panel-body" name="signUpForm" novalidate>
+      <fieldset
+        class="form-group"
+        ng-class="{
+          'has-error': signUpForm.email.$dirty && signUpForm.email.$invalid,
+          'has-success': signUpForm.email.$dirty && signUpForm.email.$valid
+        }">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Email"
+          ng-model="user.email"
+          ng-model-options="{ updateOn: 'blur' }"
+          required>
+          <span ng-show="signUpForm.email.$error.email" class="text-danger">Please enter a valid email.</span>
+      </fieldset>
+      <fieldset
+        class="form-group"
+        ng-class="{
+          'has-error': signUpForm.password.$dirty && signUpForm.password.$invalid || (user.confirmPassword !== user.password),
+          'has-success': signUpForm.password.$dirty && signUpForm.password.$valid
+        }">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Password"
+          ng-model="user.password"
+          ng-model-options="{ updateOn: 'blur' }"
+          ng-pattern="/^(?=.*[a-z]).{8,20}$/"
+          required>
+          <span ng-show="signUpForm.password.$error.pattern" class="text-danger">Please enter a valid password.</span>
+      </fieldset>
+      <fieldset
+        class="form-group"
+        ng-class="{
+          'has-error': (signUpForm.confirmPassword.$dirty && signUpForm.confirmPassword.$invalid) || (user.confirmPassword !== user.password),
+          'has-success': signUpForm.confirmPassword.$dirty && signUpForm.confirmPassword.$valid
+        }">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          ng-model="user.confirmPassword"
+          ng-model-options="{ updateOn: 'blur' }"
+          ng-pattern="/^(?=.*[a-z]).{8,20}$/"
+          required>
+          <span ng-show="signUpForm.confirmPassword.$error.pattern" class="text-danger">Please enter a valid password.</span>
+          <span ng-show="user.confirmPassword !== user.password" class="text-danger">Passwords don't match.</span>
+      </fieldset>
+
+      <h3 class="text-center">I am a...</h3>
+
+      <fieldset
+        class="radio-inline">
+        <label for="kind">
+        <input
+          type="radio"
+          ng-model="user.kind"
+          name="kind"
+          id="kind"
+          value="developer"
+          ng-checked="true">Developer</label>
+      </fieldset>
+
+      <fieldset
+        class="radio-inline">
+        <label for="kind">
+        <input
+          type="radio"
+          ng-model="user.kind"
+          name="kind"
+          id="kind"
+          value="enthusiast">Enthusiast</label>
+      </fieldset>
+
+      <fieldset
+        class="radio-inline">
+        <label for="kind">
+        <input
+          type="radio"
+          ng-model="user.kind"
+          name="kind"
+          id="kind"
+          value="educator">Educator</label>
+      </fieldset>
+
+      <fieldset
+        class="radio-inline">
+        <label for="kind">
+        <input
+          type="radio"
+          ng-model="user.kind"
+          name="kind"
+          id="kind"
+          value="hacker">Hacker</label>
+      </fieldset>
+
+      <fieldset
+        class="radio-inline">
+        <label for="kind">
+        <input
+          type="radio"
+          ng-model="user.kind"
+          name="kind"
+          id="kind"
+          value="other">Other</label>
+      </fieldset>
+
+      <fieldset
+        ng-show="user.kind=='other'"
+        class="form-group"
+        ng-class="{
+          'has-error': signUpForm.Otherkind.$dirty && signUpForm.Otherkind.$invalid,
+          'has-success': signUpForm.Otherkind.$dirty && signUpForm.Otherkind.$valid
+        }">
+        <input
+          type="text"
+          ng-maxlength="25"
+          class="form-control"
+          id="Otherkind"
+          name="Otherkind"
+          placeholder="What do you do?"
+          ng-model="user.Otherkind"
+          ng-required="user.kind=='other'">
+          <span ng-show="signUpForm.confirmPassword.$error.pattern" class="text-danger">Please enter a valid password.</span>
+      </fieldset>
+
+      <hr>
+
+      <button
+        type="submit"
+        class="btn btn-primary pull-left"
+        ng-disabled="!signUpForm.$valid || (user.confirmPassword !== user.password)"
+        ng-click="update(user)"
+        value="Signup">Create Account</button>
+      <button class="btn btn-default pull-right" ui-sref="login">Cancel</button>
+    </form>
+    <hgroup class="text-center" ng-show="signupSubmitted">
+      <h3>Thanks for signing up!</h3>
+      <p class="lead">
+        You'll need to verify your account in order be apart of the early access.
+      </p>
+      <button class="btn btn-defualt" ui-sref="login">Return to Login</button>
+    </hgroup>
+</section>

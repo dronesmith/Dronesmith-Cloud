@@ -1,6 +1,0 @@
-{
-  "name": "My Forge",
-  "icon": "myforge.png",
-  "index": "myForge",
-  "controller": "MyForgeCtrl"
-}

@@ -63,7 +63,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride());
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(favicon(path.join(__dirname, 'public/img/favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/assets/favicon.ico')));
 app.use(session({
   genid: function(req) {
     return uuid.v4();
@@ -99,7 +99,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (req, res, next) {
-    log.debug('[REQUEST]', req.method, req.url);
+    log.debug('[REQUEST]', req.ip, req.method, req.url);
     next();
 });
 
@@ -148,6 +148,8 @@ app.use('/index/', function(req, res, next) {
   // ...with the exception of /session/ which handles this itself.
   if (req.path == '/session' || req.path == '/user/forgotPassword') {
     next();
+  } else if (req.path == '/user' && req.method == 'POST') {
+    res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
   } else if (!req.session.userData) {
     res.status(400).json({error: "Not logged in."});
   } else {

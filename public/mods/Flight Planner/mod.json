@@ -1,6 +1,0 @@
-{
-  "name": "Flight Planner",
-  "icon": "planner.png",
-  "index": "flightPlanner",
-  "controller": "FlightPlannerCtrl"
-}
