@@ -32,6 +32,10 @@
         "prefix": "forge.sess::",
         "pass": ""
     },
-    "mailer": "afbvO4sjVBbbBJuuqDRn0A", 
+    "realtime": {
+      "port": 4001,
+      "defaultAddress": "0.0.0.0"
+    },
+    "mailer": "afbvO4sjVBbbBJuuqDRn0A",
     "adminKey": ""
 }
