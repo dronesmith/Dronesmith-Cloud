@@ -208,6 +208,6 @@ if (cluster.isMaster
     log.info('Running in', app.get('env').toUpperCase(), 'mode');
   });
 
-  // realtime component on top of the REST stuff.
+  // All real time aspects of the server here. Includes the drone server, and websocket http streams. 
   require('./lib/realtime')(server);
 }
