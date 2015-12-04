@@ -4,7 +4,8 @@
 var
   fs = require('fs'),
   emitter = require('events').EventEmitter,
-  net = require('net');
+  dgram = require('dgram'),
+  dronedp = require('../../lib/dronedp');
 
 var
   MONITOR_PORT = 4001,
@@ -27,13 +28,13 @@ reloader.emit('reload');
 function loadConfig() {
   var stat = fs.statSync(FORGE_CONFIG);
 
-      if(stat) {
-          // read file
-          return fs.readFileSync(FORGE_CONFIG);
-      } else {
-        console.log('[ERROR]', 'config not found!');
-        return null;
-      }
+  if(stat) {
+    // read file
+    return fs.readFileSync(FORGE_CONFIG);
+  } else {
+    console.log('[ERROR]', 'config not found!');
+    return null;
+  }
 }
 
 // (flight) Garbage collector
@@ -51,19 +52,14 @@ setInterval(function() {
   }
 }, 60000);
 
-function generateMsg(type, data) {
-  switch (type) {
-    case 0xFD: // MAVLink
-      // parsed MAVLink message
-  }
-  var sendBuff = new Buffer(5);
 
-}
 
 function run() {
-  var client = net.connect({port: MONITOR_PORT, host: MONITOR_HOST}, function() {
-    console.log('[MON]', 'Connected.');
-    var config = loadConfig();
+  var client = dgram.createSocket('udp4');
+
+  // status messages
+  statusMon = setInterval(function() {
+    var config = loadConfig(), buff;
 
     try {
       var cfgData = JSON.parse(config.toString());
@@ -71,36 +67,45 @@ function run() {
       console.log('[ERROR]', e);
     }
 
-    // status messages
-      statusMon = setInterval(function() {
-        if (cfgData && !cfgData.drone) {
-          client.write(JSON.stringify({
-            op: 'new',
-            email: cfgData.email,
-            password: cfgData.password,
-            serialId: cfgData.serialId
-          }));
-        }
+    if (cfgData && !cfgData.drone) {
+      buff = dronedp.generateMsg(0x10, {
+        op: 'new',
+        email: cfgData.email,
+        password: cfgData.password,
+        serialId: cfgData.serialId
+      });
+      client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
+    }
 
-        client.write(JSON.stringify({op: 'sync'}));
-      }, MONITOR_INTERVAL * 1000);
+    buff = dronedp.generateMsg(0x10, { op: 'status' });
+    client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
+  }, MONITOR_INTERVAL * 1000);
 
-    client.on('data', function(msg) {
-      console.log('[MON]', msg);
-    });
+  client.on('message', function(msg, rinfo) {
+    var decoded = dronedp.parseMessage(msg);
+    if (decoded.error) {
+      console.log('[MON]', decoded.error);
+    }
+
+    if (decoded.drone) {
+      var config = loadConfig();
+
+      try {
+        var cfgData = JSON.parse(config.toString());
+      } catch (e) {
+        console.log('[ERROR]', e);
+      }
+
+      cfgData.drone = decoded.drone;
+      fs.writeFileSync(FORGE_CONFIG, JSON.stringify(cfgData));
+    }
   });
 
+  // Reinitialize app on error
   client.on('error', function(err) {
-    client.destroy();
-    setTimeout(function() {
-          reloader.emit('reload');
-    }, RELOAD_TIME * 1000)
-  });
-
-  client.on('end', function() {
-    console.log('[MON]', 'Disconnected.');
-    clearInterval(statusMon);
-    client.destroy();
-    reloader.emit('reload');
+      client.close();
+      setTimeout(function() {
+      reloader.emit('reload');
+    }, RELOAD_TIME * 1000);
   });
 };
