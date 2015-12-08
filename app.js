@@ -37,6 +37,17 @@ var app = express();
 app.set('port', config.application.port || 3000);
 app.set('env', env);
 
+// Init Session
+var serveSession = session({
+  genid: function(req) {
+    return uuid.v4();
+  },
+  secret: 'tit-a-lee-tit-a-loo',
+  resave: false,
+  saveUninitialized: false,
+  store: new RedisStore(config.session)
+});
+
 /**
  * Middlewares
  *
@@ -64,15 +75,7 @@ app.use(methodOverride());
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, 'forge-ux/public/assets/favicon.ico')));
-app.use(session({
-  genid: function(req) {
-    return uuid.v4();
-  },
-  secret: 'tit-a-lee-tit-a-loo',
-  resave: false,
-  saveUninitialized: false,
-  store: new RedisStore(config.session)
-}));
+app.use(serveSession);
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(lessMiddleware(path.join(__dirname, 'forge-ux/public/theme'), {
@@ -208,6 +211,6 @@ if (cluster.isMaster
     log.info('Running in', app.get('env').toUpperCase(), 'mode');
   });
 
-  // All real time aspects of the server here. Includes the drone server, and websocket http streams. 
-  require('./lib/realtime')(server);
+  // All real time aspects of the server here. Includes the drone server, and websocket http streams.
+  require('./lib/realtime')(server, serveSession);
 }

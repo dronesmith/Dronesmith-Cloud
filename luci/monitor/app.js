@@ -15,7 +15,7 @@ var
   FORGE_CONFIG = 'config.json',
   FORGE_SYNC = '/Forge/data/',
   RELOAD_TIME = 10,
-  MONITOR_INTERVAL = 5;
+  MONITOR_INTERVAL = 1;
 
 var
   reloader = new emitter(),
@@ -89,7 +89,7 @@ function run() {
         sendObj.serialId = cfgData.serialId;
         sendObj.op = 'connect';
       }
-      
+
       buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId, sendObj);
       client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
     }
