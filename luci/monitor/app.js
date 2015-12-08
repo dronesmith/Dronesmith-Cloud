@@ -38,24 +38,33 @@ function loadConfig() {
 }
 
 // (flight) Garbage collector
-setInterval(function() {
-  var config = loadConfig();
-
-  if (config && config.tempFlightCnt) {
-    fs.stat(FORGE_SYNC, function(err, stat) {
-      if (err) {
-        console.log('[ERROR]', err.code);
-      } else {
-        console.log('[GB]', stat);
-      }
-    });
-  }
-}, 60000);
-
-
+// TODO
+// setInterval(function() {
+//   var config = loadConfig();
+//
+//   if (config && config.tempFlightCnt) {
+//     fs.stat(FORGE_SYNC, function(err, stat) {
+//       if (err) {
+//         console.log('[ERROR]', err.code);
+//       } else {
+//         console.log('[GB]', stat);
+//       }
+//     });
+//   }
+// }, 60000);
 
 function run() {
   var client = dgram.createSocket('udp4');
+  var sessionId = 0, noSessionCnt = 0;
+
+  // session timer
+  var sessionTimeout = setInterval(function() {
+    if (noSessionCnt++ > 5) {
+      sessionId = 0;
+      noSessionCnt = 0;
+      console.log('[MON]', 'No valid reply from server.');
+    }
+  }, 5000);
 
   // status messages
   statusMon = setInterval(function() {
@@ -67,26 +76,42 @@ function run() {
       console.log('[ERROR]', e);
     }
 
-    if (cfgData && !cfgData.drone) {
-      buff = dronedp.generateMsg(0x10, {
-        op: 'new',
-        email: cfgData.email,
-        password: cfgData.password,
-        serialId: cfgData.serialId
-      });
+    var sendObj = {op: 'status'};
+
+    if (cfgData) {
+
+      if (!cfgData.drone || sessionId == 0) {
+        // if no drone meta data or a session Id, send a connection request
+        sendObj.email = cfgData.email;
+        sendObj.password = cfgData.password;
+        sendObj.serialId = cfgData.serialId;
+        sendObj.op = 'connect';
+      } else {
+        // send a status request
+        sendObj.session = sessionId;
+      }
+      buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId, sendObj);
       client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
     }
-
-    buff = dronedp.generateMsg(0x10, { op: 'status' });
-    client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
   }, MONITOR_INTERVAL * 1000);
 
   client.on('message', function(msg, rinfo) {
     var decoded = dronedp.parseMessage(msg);
     if (decoded.error) {
       console.log('[MON]', decoded.error);
+    } else {
+      // Only resetting this if there was no error.
+      // Might need to update this in the future, but
+      // just to be safe for now.
+      noSessionCnt = 0;
     }
 
+    // update sessionId if different.
+    if (decoded.sessionId) {
+      sessionId = decoded.sessionId;
+    }
+
+    // update drone information from server.
     if (decoded.drone) {
       var config = loadConfig();
 
