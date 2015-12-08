@@ -55,12 +55,12 @@ function loadConfig() {
 
 function run() {
   var client = dgram.createSocket('udp4');
-  var sessionId = 0, noSessionCnt = 0;
+  var sessionId = '', noSessionCnt = 0;
 
   // session timer
   var sessionTimeout = setInterval(function() {
     if (noSessionCnt++ > 5) {
-      sessionId = 0;
+      sessionId = '';
       noSessionCnt = 0;
       console.log('[MON]', 'No valid reply from server.');
     }
@@ -78,6 +78,8 @@ function run() {
 
     var sendObj = {op: 'status'};
 
+    console.log(sessionId);
+
     if (cfgData) {
 
       if (!cfgData.drone || sessionId == 0) {
@@ -86,10 +88,8 @@ function run() {
         sendObj.password = cfgData.password;
         sendObj.serialId = cfgData.serialId;
         sendObj.op = 'connect';
-      } else {
-        // send a status request
-        sendObj.session = sessionId;
       }
+      
       buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId, sendObj);
       client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
     }
@@ -106,13 +106,17 @@ function run() {
       noSessionCnt = 0;
     }
 
+    console.log(decoded);
+
     // update sessionId if different.
-    if (decoded.sessionId) {
-      sessionId = decoded.sessionId;
+    if (decoded.session) {
+      sessionId = decoded.session;
     }
 
+    var data = decoded.data;
+
     // update drone information from server.
-    if (decoded.drone) {
+    if (data.drone) {
       var config = loadConfig();
 
       try {
@@ -121,7 +125,7 @@ function run() {
         console.log('[ERROR]', e);
       }
 
-      cfgData.drone = decoded.drone;
+      cfgData.drone = data.drone;
       fs.writeFileSync(FORGE_CONFIG, JSON.stringify(cfgData));
     }
   });
