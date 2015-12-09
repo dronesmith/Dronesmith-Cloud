@@ -49,3 +49,5 @@ mediadb.dump.sql
 samplelog.*
 
 admin.txt
+
+luci/monitor/config.json
