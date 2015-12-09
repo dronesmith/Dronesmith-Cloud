@@ -21,6 +21,7 @@ var
   reloader = new emitter(),
   statusMon = null;
 
+// Init the app
 reloader.on('reload', run);
 reloader.emit('reload');
 
@@ -53,6 +54,7 @@ function loadConfig() {
 //   }
 // }, 60000);
 
+// Entry point.
 function run() {
   var client = dgram.createSocket('udp4');
   var sessionId = '', noSessionCnt = 0;
@@ -78,11 +80,9 @@ function run() {
 
     var sendObj = {op: 'status'};
 
-    console.log(sessionId);
-
     if (cfgData) {
 
-      if (!cfgData.drone || sessionId == 0) {
+      if (!cfgData.drone || sessionId == '') {
         // if no drone meta data or a session Id, send a connection request
         sendObj.email = cfgData.email;
         sendObj.password = cfgData.password;
@@ -95,6 +95,7 @@ function run() {
     }
   }, MONITOR_INTERVAL * 1000);
 
+  // Rx handling
   client.on('message', function(msg, rinfo) {
     var decoded = dronedp.parseMessage(msg);
     if (decoded.error) {
@@ -105,8 +106,6 @@ function run() {
       // just to be safe for now.
       noSessionCnt = 0;
     }
-
-    console.log(decoded);
 
     // update sessionId if different.
     if (decoded.session) {
