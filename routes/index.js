@@ -82,6 +82,8 @@ module.exports = function(app, route) {
         .get    ('/index/mission',                mission.findAll)
         .post   ('/index/mission/:format',        mission.addMission)
         .put    ('/index/drone/addMission/:id',   drone.addMission)
+        .delete ('/index/drone/:id',              drone.remove)
+        .put    ('/index/drone/:id',              drone.update)
 
 
         //
