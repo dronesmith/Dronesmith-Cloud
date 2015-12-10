@@ -5,10 +5,12 @@ var
   fs = require('fs'),
   emitter = require('events').EventEmitter,
   dgram = require('dgram'),
+  mavlinkhelper = require('../../lib/mavlinkhelper'),
   dronedp = require('../../lib/dronedp');
 
 var
   MONITOR_PORT = 4001,
+  MAVLINK_DEV = 4002,
   MONITOR_HOST = 'localhost',
   // FORGE_CONFIG = '/Forge/config.json',
   // FORGE_SYNC = '/Forge/data/',
@@ -57,7 +59,21 @@ function loadConfig() {
 // Entry point.
 function run() {
   var client = dgram.createSocket('udp4');
+  var mavConnect = dgram.createSocket('udp4');
   var sessionId = '', noSessionCnt = 0;
+
+  // Mavlink listener
+  mavConnect.bind(MAVLINK_DEV, function() {
+    mavConnect.on('message', function(msg) {
+      mavlinkhelper.parseJSON(msg, function(err, result) {
+        if (!err) {
+          reloader.emit('system:mavlink', result);
+        } else {
+          console.log('[ERROR]', err);
+        }
+      });
+    });
+  });
 
   // session timer
   var sessionTimeout = setInterval(function() {
@@ -94,6 +110,12 @@ function run() {
       client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
     }
   }, MONITOR_INTERVAL * 1000);
+
+  // Echo mavlink data
+  reloader.on('system:mavlink', function(result) {
+    var buff = dronedp.generateMsg(dronedp.OP_MAVLINK_TEXT, sessionId, result);
+    client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
+  });
 
   // Rx handling
   client.on('message', function(msg, rinfo) {

@@ -36,6 +36,10 @@
       "port": 4001,
       "defaultAddress": "0.0.0.0"
     },
+    "mavlink": {
+      "system": 1,
+      "component": 1
+    },
     "mailer": "afbvO4sjVBbbBJuuqDRn0A",
     "adminKey": ""
 }

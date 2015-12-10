@@ -22,7 +22,7 @@ if (process.argv.length < 3) {
   mav.on('ready', function() {
     var
       filedest = path.join(path.resolve(__dirname), 'noMotorLogTest.mavlink'),
-      port = 4001,
+      port = 4002,
       loop = 1,
       forever = false,
       freq = 60;
@@ -48,8 +48,6 @@ if (process.argv.length < 3) {
           break;
       }
     }
-
-    // var emitter = new events.EventEmitter();
 
     // init udp
     var socket = dgram.createSocket('udp4');
@@ -86,7 +84,6 @@ if (process.argv.length < 3) {
         process.exit(-1);
       }
 
-      // console.log(Buffer(msgBuff));
       var buff = Buffer(msgBuff);
       socket.send(buff, 0, buff.length, port, "localhost", function(err) {
         if (err) {
