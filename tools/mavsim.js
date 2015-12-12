@@ -22,7 +22,7 @@ if (process.argv.length < 3) {
   mav.on('ready', function() {
     var
       filedest = path.join(path.resolve(__dirname), 'noMotorLogTest.mavlink'),
-      port = 4002,
+      port = 4003,
       loop = 1,
       forever = false,
       freq = 60;

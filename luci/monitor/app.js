@@ -9,9 +9,9 @@ var
   dronedp = require('../../lib/dronedp');
 
 var
-  MONITOR_PORT = 4001,
-  MAVLINK_DEV = 4002,
-  MONITOR_HOST = 'localhost',
+  MONITOR_PORT = 4002,
+  MAVLINK_DEV = 4003,
+  MONITOR_HOST = 'stage.dronesmith.io',
   // FORGE_CONFIG = '/Forge/config.json',
   // FORGE_SYNC = '/Forge/data/',
   FORGE_CONFIG = 'config.json',
