@@ -11,7 +11,8 @@ var
 var
   MONITOR_PORT = 4002,
   MAVLINK_DEV = 4003,
-  MONITOR_HOST = 'stage.dronesmith.io',
+  // MONITOR_HOST = 'stage.dronesmith.io',
+  MONITOR_HOST = 'localhost',
   // FORGE_CONFIG = '/Forge/config.json',
   // FORGE_SYNC = '/Forge/data/',
   FORGE_CONFIG = 'config.json',

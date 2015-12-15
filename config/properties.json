@@ -33,8 +33,11 @@
         "pass": ""
     },
     "realtime": {
-      "port": 4001,
+      "port": 4002,
       "defaultAddress": "0.0.0.0"
+    },
+    "sitl": {
+      "port": 4005
     },
     "mavlink": {
       "system": 1,
