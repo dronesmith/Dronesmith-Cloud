@@ -120,14 +120,14 @@ function run() {
 
   // Rx handling
   client.on('message', function(msg, rinfo) {
-    var decoded = dronedp.parseMessage(msg);
-    if (decoded.error) {
-      console.log('[MON]', decoded.error);
-    } else {
+    try {
+      var decoded = dronedp.parseMessage(msg);
       // Only resetting this if there was no error.
       // Might need to update this in the future, but
       // just to be safe for now.
       noSessionCnt = 0;
+    } catch (e) {
+      console.log('[MON]', e);
     }
 
     // update sessionId if different.
