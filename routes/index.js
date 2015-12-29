@@ -14,6 +14,7 @@ var passport = require('passport'),
   mission = require('../lib/controllers/mission'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  code = require('../lib/controllers/code'),
   cloudbit = require('../lib/controllers/cloudbit');
 
 module.exports = function(app, route) {
@@ -114,6 +115,13 @@ module.exports = function(app, route) {
         .get    ('/api/mission',                  mission.findAll)
         .post   ('/api/mission/:format',          mission.addMission)
         .delete ('/api/mission/:id',              mission.remove)
+
+        // Code CRUD
+        .post   ('/api/code/:drone',              code.create)
+        .put    ('/api/code/:id',                 code.update)
+        .get    ('/api/code/:id',                 code.find)
+        .get    ('/api/code',                     code.findAll)
+        .delete ('/api/code/:id',                 code.remove)
 
         //
         // XXX
