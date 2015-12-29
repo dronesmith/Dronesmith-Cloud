@@ -43,6 +43,10 @@
       "system": 1,
       "component": 1
     },
+    "programming": {
+      "launcher": "python",
+      "path": "code/exec.py"
+    },
     "mailer": "afbvO4sjVBbbBJuuqDRn0A",
     "adminKey": ""
 }

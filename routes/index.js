@@ -122,6 +122,7 @@ module.exports = function(app, route) {
         .get    ('/api/code/:id',                 code.find)
         .get    ('/api/code',                     code.findAll)
         .delete ('/api/code/:id',                 code.remove)
+        .post   ('/api/code/exec/:id',            code.exec)
 
         //
         // XXX
