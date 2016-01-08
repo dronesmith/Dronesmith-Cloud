@@ -85,6 +85,9 @@ module.exports = function(app, route) {
         .put    ('/index/drone/addMission/:id',   drone.addMission)
         .delete ('/index/drone/:id',              drone.remove)
         .put    ('/index/drone/:id',              drone.update)
+        .post   ('/index/code/:drone',            code.create)
+        .put    ('/index/code/:id',               code.update)
+        .post   ('/index/code/exec/:id',          code.exec)
 
 
         //
