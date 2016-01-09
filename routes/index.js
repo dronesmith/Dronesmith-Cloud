@@ -82,12 +82,16 @@ module.exports = function(app, route) {
         .get    ('/index/mission/:id',            mission.find)
         .get    ('/index/mission',                mission.findAll)
         .post   ('/index/mission/:format',        mission.addMission)
+
         .put    ('/index/drone/addMission/:id',   drone.addMission)
         .delete ('/index/drone/:id',              drone.remove)
         .put    ('/index/drone/:id',              drone.update)
+
+        // Order here is important.
+        .post   ('/index/code/exec/run',          code.execNow)
+        .post   ('/index/code/exec/:id',          code.exec)
         .post   ('/index/code/:drone',            code.create)
         .put    ('/index/code/:id',               code.update)
-        .post   ('/index/code/exec/:id',          code.exec)
 
 
         //
@@ -120,12 +124,12 @@ module.exports = function(app, route) {
         .delete ('/api/mission/:id',              mission.remove)
 
         // Code CRUD
+        .post   ('/api/code/exec/:id',            code.exec)
         .post   ('/api/code/:drone',              code.create)
         .put    ('/api/code/:id',                 code.update)
         .get    ('/api/code/:id',                 code.find)
         .get    ('/api/code',                     code.findAll)
         .delete ('/api/code/:id',                 code.remove)
-        .post   ('/api/code/exec/:id',            code.exec)
 
         //
         // XXX
