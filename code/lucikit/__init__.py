@@ -704,7 +704,7 @@ class RGBLED(object):
 
     """
     """
-    def setDefault(self):
+    def setDefault(self, color=3):
         msg = self._vehicle.message_factory.command_long_encode(
             0, 0, self.RGBLED_COMMAND, 0,
             self.RGBLED_OP_SET_DEFAULT,
