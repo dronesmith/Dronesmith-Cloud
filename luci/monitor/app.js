@@ -1,39 +1,35 @@
 'use strict';
 
+var fs = require('fs');
+var dgram = require('dgram');
+var mavlinkhelper = require('../../lib/mavlinkhelper');
+var dronedp = require('../../lib/dronedp');
+var launcher = require('../../lib/codelauncher');
+var Emitter = require('events').EventEmitter;
 
-var
-  fs = require('fs'),
-  emitter = require('events').EventEmitter,
-  dgram = require('dgram'),
-  mavlinkhelper = require('../../lib/mavlinkhelper'),
-  dronedp = require('../../lib/dronedp');
+var MONITOR_PORT = 4002;
+var MAVLINK_DEV = 14550;
+var CODE_DEV = 14551;
+// var MONITOR_HOST = 'stage.dronesmith.io',
+var MONITOR_HOST = 'localhost';
+// var FORGE_CONFIG = '/Forge/config.json',
+// var FORGE_SYNC = '/Forge/data/',
+var FORGE_CONFIG = 'config.json';
+var RELOAD_TIME = 10;
+var MONITOR_INTERVAL = 1;
 
-var
-  MONITOR_PORT = 4002,
-  MAVLINK_DEV = 4003,
-  // MONITOR_HOST = 'stage.dronesmith.io',
-  MONITOR_HOST = 'localhost',
-  // FORGE_CONFIG = '/Forge/config.json',
-  // FORGE_SYNC = '/Forge/data/',
-  FORGE_CONFIG = 'config.json',
-  FORGE_SYNC = '/Forge/data/',
-  RELOAD_TIME = 10,
-  MONITOR_INTERVAL = 1;
-
-var
-  reloader = new emitter(),
-  statusMon = null;
+var reloader = new Emitter();
+var statusMon = null;
 
 // Init the app
 reloader.on('reload', run);
 reloader.emit('reload');
 
 // get config info
-function loadConfig() {
+function loadConfig () {
   var stat = fs.statSync(FORGE_CONFIG);
 
-  if(stat) {
-    // read file
+  if (stat) {
     return fs.readFileSync(FORGE_CONFIG);
   } else {
     console.log('[ERROR]', 'config not found!');
@@ -58,15 +54,21 @@ function loadConfig() {
 // }, 60000);
 
 // Entry point.
-function run() {
+function run () {
   var client = dgram.createSocket('udp4');
   var mavConnect = dgram.createSocket('udp4');
-  var sessionId = '', noSessionCnt = 0;
+  var sessionId = '';
+
+  var noSessionCnt = 0;
+
+  var codeStatus = {
+    script: null
+  };
 
   // Mavlink listener
-  mavConnect.bind(MAVLINK_DEV, function() {
-    mavConnect.on('message', function(msg) {
-      mavlinkhelper.parseJSON(msg, function(err, result) {
+  mavConnect.bind(MAVLINK_DEV, function () {
+    mavConnect.on('message', function (msg) {
+      mavlinkhelper.parseJSON(msg, function (err, result) {
         if (!err) {
           reloader.emit('system:mavlink', result);
         } else {
@@ -77,7 +79,7 @@ function run() {
   });
 
   // session timer
-  var sessionTimeout = setInterval(function() {
+  var sessionTimeout = setInterval(function () {
     if (noSessionCnt++ > 5) {
       sessionId = '';
       noSessionCnt = 0;
@@ -86,8 +88,9 @@ function run() {
   }, 5000);
 
   // status messages
-  statusMon = setInterval(function() {
-    var config = loadConfig(), buff;
+  statusMon = setInterval(function () {
+    var config = loadConfig();
+    var buff;
 
     try {
       var cfgData = JSON.parse(config.toString());
@@ -98,13 +101,13 @@ function run() {
     var sendObj = {op: 'status'};
 
     if (cfgData) {
-
-      if (!cfgData.drone || sessionId == '') {
+      if (!cfgData.drone || sessionId === '') {
         // if no drone meta data or a session Id, send a connection request
         sendObj.email = cfgData.email;
         sendObj.password = cfgData.password;
         sendObj.serialId = cfgData.serialId;
         sendObj.op = 'connect';
+        sendObj.codeStatus = codeStatus;
       }
 
       buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId, sendObj);
@@ -113,18 +116,19 @@ function run() {
   }, MONITOR_INTERVAL * 1000);
 
   // Echo mavlink data
-  reloader.on('system:mavlink', function(result) {
+  reloader.on('system:mavlink', function (result) {
     var buff = dronedp.generateMsg(dronedp.OP_MAVLINK_TEXT, sessionId, result);
     client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
   });
 
   // Rx handling
-  client.on('message', function(msg, rinfo) {
+  client.on('message', function (msg, rinfo) {
     try {
       var decoded = dronedp.parseMessage(msg);
       // Only resetting this if there was no error.
       // Might need to update this in the future, but
       // just to be safe for now.
+
       noSessionCnt = 0;
     } catch (e) {
       console.log('[MON]', e);
@@ -150,13 +154,28 @@ function run() {
       cfgData.drone = data.drone;
       fs.writeFileSync(FORGE_CONFIG, JSON.stringify(cfgData));
     }
+
+    if (data.codeBuffer && codeStatus.script == null) {
+      console.log('[MON] Got CODE, running job.');
+
+      launcher.runScript(null, codeStatus, data.codeBuffer, '../../code/exec.py');
+    }
+  });
+
+  launcher.getEmitter().on('code:update', function (msg) {
+    var buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId,
+      {op: 'code', msg: msg, status: codeStatus});
+    client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
   });
 
   // Reinitialize app on error
-  client.on('error', function(err) {
-      client.close();
-      setTimeout(function() {
+  client.on('error', function (err) {
+    client.close();
+
+    console.log(err);
+
+    setTimeout(function () {
       reloader.emit('reload');
     }, RELOAD_TIME * 1000);
   });
-};
+}

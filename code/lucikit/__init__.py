@@ -1134,7 +1134,7 @@ class Vehicle(HasObservers):
 
             self.notify_attribute_listeners('ekf_ok', self.ekf_ok)
 
-        self._flightmode = 'AUTO'
+        self._flightmode = 'STABILIZE'
         self._armed = False
         self._system_status = None
 

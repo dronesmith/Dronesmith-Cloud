@@ -2,10 +2,11 @@ import sys
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-from dronekit import *
+from lucikit import *
 from pymavlink import *
 
 __SIMLY__ = '0.0.0.0:4006'
+__DRONE__ = '0.0.0.0:14551'
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:

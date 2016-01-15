@@ -23,6 +23,7 @@ require('./lib/db');
 var passport = require('./lib/passport')();
 
 // get root path
+// FIXME
 global.appRoot = path.resolve(__dirname);
 
 // get basic properties and set logging.
