@@ -1,38 +1,66 @@
+/**
+ *
+ * Luci Monitor
+ * @author Geoff Gardner
+ * @beta Early-access software.
+ *
+ * Copyright 2016 Dronesmith Technologies.
+ */
+
 'use strict';
 
-var fs = require('fs');
-var dgram = require('dgram');
-var mavlinkhelper = require('../../lib/mavlinkhelper');
-var dronedp = require('../../lib/dronedp');
-var launcher = require('../../lib/codelauncher');
-var Emitter = require('events').EventEmitter;
+var
+  fs = require('fs'),
+  dgram = require('dgram'),
+  Emitter = require('events').EventEmitter;
 
-var MONITOR_PORT = 4002;
-var MAVLINK_DEV = 14550;
-var CODE_DEV = 14551;
-// var MONITOR_HOST = 'stage.dronesmith.io',
-var MONITOR_HOST = 'localhost';
-// var FORGE_CONFIG = '/Forge/config.json',
-// var FORGE_SYNC = '/Forge/data/',
-var FORGE_CONFIG = 'config.json';
-var RELOAD_TIME = 10;
-var MONITOR_INTERVAL = 1;
+var
+  utils = require('./common/utils'),
+  mavlinkhelper = require('./common/mavlinkhelper'),
+  dronedp = require('./common/dronedp'),
+  launcher = require('./common/codelauncher');
 
 var reloader = new Emitter();
 var statusMon = null;
+var log = utils.log;
+var settings = utils.settings;
 
+//
 // Init the app
+//
 reloader.on('reload', run);
 reloader.emit('reload');
 
-// get config info
-function loadConfig () {
-  var stat = fs.statSync(FORGE_CONFIG);
+/**
+ * Loads property data from the configuration JSON.
+ *
+ * @function loadProperties
+ * @return {Object} loaded property data.
+ * @throws {Error} an error.
+ */
+function loadProperties () {
+  try {
+    var props = fs.readFileSync(settings.PROPS_FILE);
+    return JSON.parse(props);
+  } catch (e) {
+    throw Error('loadProps: ' + e);
+  }
+}
+
+/**
+ * Loads the user config file.
+ *
+ * @function loadConfig
+ * @returns {Object} config file if successful, null otherwise.
+ * @param {String} the file path to load the config file from.
+ */
+function loadConfig (config) {
+  var stat = fs.statSync(config);
 
   if (stat) {
-    return fs.readFileSync(FORGE_CONFIG);
+    return fs.readFileSync(config);
   } else {
-    console.log('[ERROR]', 'config not found!');
+    log('error', 'config not found!');
     return null;
   }
 }
@@ -53,49 +81,63 @@ function loadConfig () {
 //   }
 // }, 60000);
 
-// Entry point.
+/**
+ * Runs the main application. Should never exit. Gets called by the main event
+ * emitter.
+ *
+ * @function run
+ */
 function run () {
-  var client = dgram.createSocket('udp4');
-  var mavConnect = dgram.createSocket('udp4');
-  var sessionId = '';
+  var
+    client = dgram.createSocket('udp4'),
+    mavConnect = dgram.createSocket('udp4');
 
-  var noSessionCnt = 0;
+  var
+    sessionId = '',
+    noSessionCnt = 0;
 
   var codeStatus = {
     script: null
   };
 
+  try {
+    var props = loadProperties(settings.PROPS_FILE);
+  } catch (e) {
+    log('error', e);
+    return; // kill app
+  }
+
   // Mavlink listener
-  mavConnect.bind(MAVLINK_DEV, function () {
+  mavConnect.bind(props.mavlink, function () {
     mavConnect.on('message', function (msg) {
       mavlinkhelper.parseJSON(msg, function (err, result) {
         if (!err) {
           reloader.emit('system:mavlink', result);
         } else {
-          console.log('[ERROR]', err);
+          log('error', err);
         }
       });
     });
   });
 
-  // session timer
+  // Session timer
   var sessionTimeout = setInterval(function () {
     if (noSessionCnt++ > 5) {
       sessionId = '';
       noSessionCnt = 0;
-      console.log('[MON]', 'No valid reply from server.');
+      log('warn', 'No valid reply from server.');
     }
-  }, 5000);
+  }, settings.SESSION_TIMER * 1000);
 
-  // status messages
+  // Status messages
   statusMon = setInterval(function () {
-    var config = loadConfig();
+    var config = loadConfig(props.config);
     var buff;
 
     try {
       var cfgData = JSON.parse(config.toString());
     } catch (e) {
-      console.log('[ERROR]', e);
+      log('error', e);
     }
 
     var sendObj = {op: 'status'};
@@ -111,14 +153,14 @@ function run () {
       }
 
       buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId, sendObj);
-      client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
+      client.send(buff, 0, buff.length, props.monitor.port, props.monitor.host);
     }
-  }, MONITOR_INTERVAL * 1000);
+  }, settings.MONITOR_INTERVAL * 1000);
 
-  // Echo mavlink data
+  // Echo mavlink data to host
   reloader.on('system:mavlink', function (result) {
     var buff = dronedp.generateMsg(dronedp.OP_MAVLINK_TEXT, sessionId, result);
-    client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
+    client.send(buff, 0, buff.length, props.monitor.port, props.monitor.host);
   });
 
   // Rx handling
@@ -131,7 +173,7 @@ function run () {
 
       noSessionCnt = 0;
     } catch (e) {
-      console.log('[MON]', e);
+      log('error', e);
     }
 
     // update sessionId if different.
@@ -143,39 +185,39 @@ function run () {
 
     // update drone information from server.
     if (data.drone) {
-      var config = loadConfig();
+      var config = loadConfig(props.config);
 
       try {
         var cfgData = JSON.parse(config.toString());
       } catch (e) {
-        console.log('[ERROR]', e);
+        log('error', e);
       }
 
       cfgData.drone = data.drone;
-      fs.writeFileSync(FORGE_CONFIG, JSON.stringify(cfgData));
+      fs.writeFileSync(props.config, JSON.stringify(cfgData));
     }
 
     if (data.codeBuffer && codeStatus.script == null) {
-      console.log('[MON] Got CODE, running job.');
+      log('info', 'Got CODE, running job.');
 
-      launcher.runScript(null, codeStatus, data.codeBuffer, '../../code/exec.py');
+      launcher.runScript(null, codeStatus, data.codeBuffer, settings.CODE_EXEC);
     }
   });
 
   launcher.getEmitter().on('code:update', function (msg) {
     var buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId,
       {op: 'code', msg: msg, status: codeStatus});
-    client.send(buff, 0, buff.length, MONITOR_PORT, MONITOR_HOST);
+    client.send(buff, 0, buff.length, props.monitor.port, props.monitor.host);
   });
 
   // Reinitialize app on error
   client.on('error', function (err) {
     client.close();
 
-    console.log(err);
+    log('error', err);
 
     setTimeout(function () {
       reloader.emit('reload');
-    }, RELOAD_TIME * 1000);
+    }, settings.RELOAD_TIME * 1000);
   });
 }
