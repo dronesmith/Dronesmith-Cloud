@@ -1,6 +1,10 @@
 # Luci Monitor
 
-The default node and python instances on the Edison will work. 
+## Version support
+
+This code was developed on node `5.1`, but currently runs on Edison's default `0.10.38` node firmware. The test javascript however seems to be getting weird issues on node `0.10.38`, but will run fine node `5.1`.
+
+## Install and Run
 
 **install.sh** - Installs the node dependencies and some python middleware,  which are used to act as a communications node between the Edison and the coprocessor.
 

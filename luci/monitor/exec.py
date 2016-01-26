@@ -1,6 +1,4 @@
 import sys
-from pymongo import MongoClient
-from bson.objectid import ObjectId
 
 from lucikit import *
 from pymavlink import *
