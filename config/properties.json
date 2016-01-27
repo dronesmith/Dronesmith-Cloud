@@ -14,7 +14,7 @@
     "db": {
       "user": "",
       "name": "forge",
-      "url": "mongodb://localhost/forge",
+      "url": "mongodb://localhost/",
       "options": {}
     },
     "session": {
