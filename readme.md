@@ -1,7 +1,7 @@
 # Dronesmith Cloud
 
 # Read this
-https://docs.google.com/a/skyworksas.com/document/d/1MBC_XJI4MBlnFKsf7wPOWXr3pZnDD3V4Lx3Z4hY_baA/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1y9aIohTzRTXO7jY6bAiIlzlYxzn_XsIhBmQGd6GNQkU
 
 # Technologies
 Forge is entirely MEAN stack, and as such is powered by the following technologies:
