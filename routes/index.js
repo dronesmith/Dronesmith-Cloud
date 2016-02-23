@@ -6,7 +6,9 @@
  *
  */
 
-var passport = require('passport'),
+var
+  path = require('path'),
+  passport = require('passport'),
   user = require('../lib/controllers/user'),
   session = require('../lib/controllers/session'),
   flight = require('../lib/controllers/flight'),
@@ -50,6 +52,13 @@ module.exports = function(app, route) {
           } else {
             return res.redirect('/');
           }
+        })
+
+        //
+        // Promo route
+        //
+        .get('/lucicam', function(req, res) {
+          res.sendFile('promo/lucicam.html', { root: path.join(__dirname, '../forge-ux/public') });
         })
 
         //
