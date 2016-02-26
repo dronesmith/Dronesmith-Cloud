@@ -42,6 +42,8 @@ exports.openTunnel = function() {
       function attemptInfo() {
         getTunnelInfo('http://localhost:4040/api/tunnels', function(data) {
           if (data) {
+            if (!data.tunnels) { return; }
+            if (!data.tunnels[0]) {return; }
             clearInterval(timer);
             var info = data.tunnels[0].public_url.split('tcp://')[1].split(':');
             emitter.emit('connect', {url: info[0], port: info[1], uname: 'root', pass: 'doingitlive'});
