@@ -35,12 +35,16 @@ exports.openTunnel = function() {
 
       task = cp.spawn(spawnStr, ['tcp', '22']);
 
+      task.on('close', (code) => {
+        log('info', `Tunnel closed with code ${code}`);
+      });
+
       function attemptInfo() {
         getTunnelInfo('http://localhost:4040/api/tunnels', function(data) {
           if (data) {
             clearInterval(timer);
             var info = data.tunnels[0].public_url.split('tcp://')[1].split(':');
-            emitter.emit('connect', {url: info[0], port: info[1], uname: 'geoff', pass: 'doingitlive'});
+            emitter.emit('connect', {url: info[0], port: info[1], uname: 'root', pass: 'doingitlive'});
           } else {
             // perhaps indicate error here
           }
@@ -81,6 +85,13 @@ function getTunnelInfo(requestAddr, cb) {
   }).on('error', function(err) {
     log('warn', 'Connection refused. Usually means ngrok hasn\'t connected yet...');
   });
+}
+
+exports.killTunnel = function() {
+
+  if (task) {
+    task.kill('SIGINT');
+  }
 }
 
 exports.getEmitter = function() {

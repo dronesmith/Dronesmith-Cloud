@@ -129,6 +129,7 @@ function run () {
       sessionId = '';
       noSessionCnt = 0;
       log('warn', 'No valid reply from server.');
+      tunnel.killTunnel();
     }
   }, settings.SESSION_TIMER * 1000);
 
@@ -206,6 +207,7 @@ function run () {
       tunnel.openTunnel();
     } else if (!data.terminal && terminalOnline) {
       // kill tunnel
+      tunnel.killTunnel();
       terminalOnline = false;
     }
 
