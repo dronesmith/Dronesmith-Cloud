@@ -11,7 +11,8 @@ exports.settings = {
   MONITOR_INTERVAL : 1,
   SESSION_TIMER : 5,
   MAV_SYSTEM: 1,
-  MAV_COMPONENT: 1
+  MAV_COMPONENT: 1,
+  NGROK_AUTH: '7kmpYXuGZaRGXMSADoMus_6fe8N2q9wtFaCdJE5BeSt'
 };
 
 // Init the logger

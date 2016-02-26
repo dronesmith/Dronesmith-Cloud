@@ -18,7 +18,8 @@ var
   utils = require('./common/utils'),
   mavlinkhelper = require('./common/mavlinkhelper'),
   dronedp = require('./common/dronedp'),
-  launcher = require('./common/codelauncher');
+  launcher = require('./common/codelauncher'),
+  tunnel = require('./common/tunnel');
 
 var reloader = new Emitter();
 var statusMon = null;
@@ -99,6 +100,8 @@ function run () {
   var codeStatus = {
     script: null
   };
+
+  var terminalOnline = false;
 
   try {
     var props = loadProperties(settings.PROPS_FILE);
@@ -197,12 +200,29 @@ function run () {
       fs.writeFileSync(props.config, JSON.stringify(cfgData));
     }
 
+    if (data.terminal && !terminalOnline) {
+      // open tunnel
+      terminalOnline = true;
+      tunnel.openTunnel();
+    } else if (!data.terminal && terminalOnline) {
+      // kill tunnel
+      terminalOnline = false;
+    }
+
     if (data.codeBuffer && codeStatus.script == null) {
       log('info', 'Got CODE, running job.');
 
       launcher.runScript(null, codeStatus, data.codeBuffer, settings.CODE_EXEC);
     }
   });
+
+  tunnel.getEmitter().on('connect', function(info) {
+    log('info', 'sending terminal info to server...');
+    var buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId,
+      {op: 'terminal', msg: info, status: terminalOnline});
+    client.send(buff, 0, buff.length, props.monitor.port, props.monitor.host);
+  });
+
 
   launcher.getEmitter().on('code:update', function (msg) {
     var buff = dronedp.generateMsg(dronedp.OP_STATUS, sessionId,
