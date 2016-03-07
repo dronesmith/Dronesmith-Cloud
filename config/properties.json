@@ -47,6 +47,10 @@
       "launcher": "python",
       "path": "code/exec.py"
     },
+    "git": {
+      "defaultHost": "api.bitbucket.org",
+      "defaultPath": "/2.0/repositories/dronesmithdev"
+    },
     "mailer": "afbvO4sjVBbbBJuuqDRn0A",
     "adminKey": ""
 }

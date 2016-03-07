@@ -17,6 +17,7 @@ var
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   code = require('../lib/controllers/code'),
+  appCtrl = require('../lib/controllers/app'),
   cloudbit = require('../lib/controllers/cloudbit');
 
 module.exports = function(app, route) {
@@ -103,6 +104,10 @@ module.exports = function(app, route) {
         .put    ('/index/code/:id',               code.update)
 
 
+        // Apps
+        .get    ('/index/app/',                   appCtrl.findAll)
+
+
         //
         // Forge Cloud API routes. An API key is required.
         //
@@ -139,6 +144,9 @@ module.exports = function(app, route) {
         .get    ('/api/code/:id',                 code.find)
         .get    ('/api/code',                     code.findAll)
         .delete ('/api/code/:id',                 code.remove)
+
+        // Apps
+        .get    ('/api/app/',                     appCtrl.findAll)
 
         //
         // XXX
