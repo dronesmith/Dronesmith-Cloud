@@ -204,25 +204,29 @@ class Fmu(object):
 
 
     def takeoff(self, alt = 1):
-        self.home = [self.vehicle.location.global_frame.lat,
+        if self.home is None:
+            self.home = [self.vehicle.location.global_frame.lat,
                             self.vehicle.location.global_frame.lon]
         self.change_mode('AUTO')
         self.arm()
         self.vehicle.simple_takeoff(alt)
 
-    def land(self, loc = None):
+    def land(self):
         self.vehicle.mode = VehicleMode("RTL")
+        self.home = None
 
     def addBroadcast(self, ip):
         os.system('mavproxy.py --daemon --master=' + self.master + '--out=' + ip)
 
     def arm(self):
-        self.vehicle.armed = True
-        while not self.vehicle.armed:
-            time.sleep(.1)
+        if self.vehicle.is_armable:
+            self.vehicle.armed = True
+            while not self.vehicle.armed:
+                time.sleep(.1)
 
     def disarm(self):
         self.vehicle.armed = False
+        self.home = None
         while self.vehicle.armed:
             time.sleep(.1)
 
@@ -298,7 +302,7 @@ class Fmu(object):
         for i in len(self.vehicle.channels.overrides):
             self.vehicle.channels.overrides[i] = None
 
-    def runPlayList(self, playlist):
+    def runPlaylist(self, playlist):
         data = json.loads(playlist)
         for item in data:
             if item.cmd == 'up':
@@ -309,14 +313,16 @@ class Fmu(object):
                 self.left(item.rate)
             elif item.cmd == 'right':
                 self.right(item.rate)
-            elif item.cmd == 'front':
-                self.front(item.rate)
-            elif item.cmd == 'front':
+            elif item.cmd == 'forward':
+                self.forward(item.rate)
+            elif item.cmd == 'backward':
                 self.backward(item.rate)
             elif item.cmd == 'rotate':
                 self.rotate(angle)
             elif item.cmd == 'takeoff':
                 self.takeoff(item.alt)
+            elif self.cmd == 'hold':
+                self.hold()
             elif item.cmd == 'land':
                 self.land()
             else:
