@@ -98,7 +98,7 @@ app.use(express.static(path.join(__dirname, 'forge-ux/public')));
 
 // Some logging stuff.
 app.use(function (req, res, next) {
-    res.setHeader('x-powered-by', 'SkyworksAS');
+    res.setHeader('x-powered-by', 'DronesmithTech');
     return next();
 });
 
