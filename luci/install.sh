@@ -10,6 +10,12 @@
 
 set -e
 
+function finish {
+  echo "!! Error occured. Please try again."
+}
+
+trap finish EXIT
+
 echo "[------] Configuring Edison..."
 configure_edison --setup
 
