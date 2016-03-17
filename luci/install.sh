@@ -31,16 +31,17 @@ rm -rf dssnode/
 
 echo "[****--] Installing Lucimon..."
 git clone https://bitbucket.org/dronesmithdev/forge-core.git dss
-cd dss/luci/monitor
+cd ~/dss/luci/monitor
 npm install
 cp ~/dss/luci/common.xml ./node_modules/mavlink/src/mavlink/message_definitions/v1.0/common.xml
 cp ~/dss/luci/mavlinkv10.py /usr/lib/python2.7/site-packages/pymavlink/mavlinkv10.py
-rm /usr/lib/python2.7/site-packages/pymavlink/mavlinkv10.pyc
+#rm /usr/lib/python2.7/site-packages/pymavlink/mavlinkv10.pyc
 cp -r ~/dss/ /opt/dss/
-cp ~/dss/luci/monitor/load.sh /etc/init.d/load.sh
+mkdir /etc/init.d
+cp ~/dss/luci/load.sh /etc/init.d/load.sh
 chmod +x /etc/init.d/load.sh
 cd /etc/init.d/
-update-rc.d run.sh defaults
+update-rc.d load.sh defaults
 
 echo "[*****-] Flashing the FMU..."
 echo "Please note that the FMU must be powered and may need to be rebooted."
