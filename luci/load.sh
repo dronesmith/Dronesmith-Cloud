@@ -2,4 +2,4 @@
 
 set -e
 
-sh /opt/dss/luci/run.sh 
+sh /opt/dss/luci/monitor/run.sh 
