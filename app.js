@@ -133,7 +133,7 @@ app.use('/api/', function(req, res, next) {
         }
       });
   } else {
-    return res.status(401).send();
+    return res.header('WWW-Authenticate', 'Basic realm="Dronesmith Cloud"').status(401).send();
   }
 });
 
@@ -142,7 +142,7 @@ app.use('/admin/', function(req, res, next) {
   if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
     next();
   } else {
-    return res.status(401).send();
+    return res.header('WWW-Authenticate', 'Basic realm="Dronesmith Cloud"').status(401).send();
   }
 });
 
