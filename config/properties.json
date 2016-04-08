@@ -45,7 +45,7 @@
     },
     "programming": {
       "launcher": "python",
-      "path": "code/exec.py"
+      "path": "lucikit/devkit/exec.py"
     },
     "git": {
       "defaultHost": "api.bitbucket.org",

@@ -1,7 +1,7 @@
 {
   "monitor": {
     "port": 4002,
-    "host": "24.234.109.135"
+    "host": "localhost"
   },
   "mavlink": 14550,
   "code": 14551,

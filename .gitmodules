@@ -1,3 +1,6 @@
 [submodule "forge-ux"]
 	path = forge-ux
 	url = https://bitbucket.org/dronesmithdev/forge-ux.git
+[submodule "lucikit"]
+	path = lucikit
+	url = https://flatlevel@bitbucket.org/dronesmithdev/lucikit.git
