@@ -135,7 +135,8 @@ module.exports = function(app, route) {
         // mission CRUD
         .get    ('/api/mission/:id',              mission.find)
         .get    ('/api/mission',                  mission.findAll)
-        .put    ('/api/mission/:id/associate/',   mission.associate)
+        .put    ('/api/mission/:id/associate',    mission.associate)
+        .put    ('/rt/mission/:id/associate',     mission.associate)
         .post   ('/api/mission/:format',          mission.addMission)
         .delete ('/api/mission/:id',              mission.remove)
 
