@@ -70,8 +70,9 @@ var serveSession = session({
  *   Processes LESS to CSS on the fly to make our lives easier.
  */
 app.use(compression());
-app.use(bodyParser.json({limit: '50mb'})); // The large limit is not recommended, and we may use a stream later, but for testing purposes.
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.raw({limit: '50mb'}));
 app.use(methodOverride());
 app.use(expressValidator());
 app.use(cookieParser());

@@ -134,6 +134,7 @@ module.exports = function(app, route) {
         // mission CRUD
         .get    ('/api/mission/:id',              mission.find)
         .get    ('/api/mission',                  mission.findAll)
+        .put    ('/api/mission/:id/associate/',   mission.associate)
         .post   ('/api/mission/:format',          mission.addMission)
         .delete ('/api/mission/:id',              mission.remove)
 
@@ -147,13 +148,6 @@ module.exports = function(app, route) {
 
         // Apps
         .get    ('/api/app/',                     appCtrl.findAll)
-
-        //
-        // XXX
-        // Legacy support for parrot bro and the flight schema.
-        //
-        .get    ('/legacy/flight/:userid',        flight.findMission)
-        .post   ('/legacy/flight/:userid',        flight.addMission)
 
         //
         // Admin routes. These require the master key.
