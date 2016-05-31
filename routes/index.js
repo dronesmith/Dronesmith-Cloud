@@ -91,7 +91,8 @@ module.exports = function(app, route) {
         // We'll let some methods also be index, so the user can upload flights.
         .get    ('/index/mission/:id',            mission.find)
         .get    ('/index/mission',                mission.findAll)
-        .post   ('/index/mission/:format',        mission.addMission)
+        .put    ('/index/mission/:id/associate',  mission.associate)
+        .post   ('/rt/mission/:format',        mission.addMission)
 
         .put    ('/index/drone/addMission/:id',   drone.addMission)
         .delete ('/index/drone/:id',              drone.remove)
