@@ -92,7 +92,6 @@ module.exports = function(app, route) {
         .get    ('/index/mission/:id',            mission.find)
         .get    ('/index/mission',                mission.findAll)
         .put    ('/index/mission/:id/associate',  mission.associate)
-        .post   ('/rt/mission/:format',        mission.addMission)
 
         .put    ('/index/drone/addMission/:id',   drone.addMission)
         .delete ('/index/drone/:id',              drone.remove)
@@ -136,7 +135,6 @@ module.exports = function(app, route) {
         .get    ('/api/mission/:id',              mission.find)
         .get    ('/api/mission',                  mission.findAll)
         .put    ('/api/mission/:id/associate',    mission.associate)
-        .put    ('/rt/mission/:id/associate',     mission.associate)
         .post   ('/api/mission/:format',          mission.addMission)
         .delete ('/api/mission/:id',              mission.remove)
 
@@ -150,6 +148,12 @@ module.exports = function(app, route) {
 
         // Apps
         .get    ('/api/app/',                     appCtrl.findAll)
+
+        //
+        // Real time routes. These require a valid session Id.
+        //
+        .post   ('/rt/mission/:format',           mission.addMission)
+        .put    ('/rt/mission/:id/associate',     mission.associate)
 
         //
         // Admin routes. These require the master key.
