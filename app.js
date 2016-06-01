@@ -147,6 +147,11 @@ app.use('/admin/', function(req, res, next) {
   }
 });
 
+app.use('/rt/', function(req, res, next) {
+  // TODO check on session route.
+  next();
+});
+
 // Index routes should always have a session.
 app.use('/index/', function(req, res, next) {
 
