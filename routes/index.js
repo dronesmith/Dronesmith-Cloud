@@ -166,7 +166,7 @@ module.exports = function(app, route) {
 
         // .get('/api/cloudbit', cloudbit.get)
         // .post('/api/cloudbit', cloudbit.output)
-
+        
         // Confirm Route. This is used by new user accounts to verify their
         // account.
         .get    ('/:type([A-Z|a-z|0-9]{24})',     user.confirm)

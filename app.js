@@ -159,7 +159,8 @@ app.use('/index/', function(req, res, next) {
   if (req.path == '/session' || req.path == '/user/forgotPassword') {
     next();
   } else if (req.path == '/user' && req.method == 'POST') {
-    res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
+    next(); // open up registration
+    // res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
   } else if (!req.session.userData) {
     res.status(400).json({error: "Not logged in."});
   } else {
