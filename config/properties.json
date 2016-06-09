@@ -1,15 +1,13 @@
 {
     "application": {
-        "name": "Forge Core",
+        "name": "Dronesmith Cloud",
         "script": "./app.js",
         "port": "4000",
-        "env": {
-            "NODE_ENV": "development"
-        }
+        "env": "development"
     },
     "log": {
         "path": "log/",
-        "filename": "forgecore.log"
+        "filename": "dss.log"
     },
     "db": {
       "user": "",

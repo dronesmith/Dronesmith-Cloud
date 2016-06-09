@@ -27,8 +27,8 @@ var passport = require('./lib/passport')();
 global.appRoot = path.resolve(__dirname);
 
 // get basic properties and set logging.
-var env = process.env.NODE_ENV || 'development',
-	config = require('./config/config.js'),
+var config = require('./config/config.js'),
+  env = config.application.env || 'development',
   log = require('./lib/log.js').getLogger(__filename);
 
 // Init
@@ -187,26 +187,36 @@ app.use(function (error, req, res, next) {
 app.locals.pretty = true;
 
 // These middlewares should only be loaded in non-prod envs.
-if (app.get('env').NODE_ENV ==='development') {
-  errorHandler = require('error-handler');
-  app.use(errorHandler({ dumpExceptions: true, showStack: true }));
-}
+// FIXME - library is crashing.
+// if (app.get('env') === 'development') {
+//   var errorHandler = require('error-handler');
+//   app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+// }
 
 if (cluster.isMaster
     && (app.get('env') !== 'development')
     && (process.argv.indexOf('--singleProcess') < 0)) {
 
-    log.warn('Running in prod, deploying cluster');
+    var emoji = require('node-emoji');
+
+    log.info(emoji.emojify(':tada:  Welcome to Dronesmith Cloud! :tada:'));
+
+    log.info(emoji.emojify(':beer:  Created by Dronesmith Technologies.'));
+
+    log.info('\n\n\nCopyright (C) 2016 Dronesmith Technologies Inc, all rights reserved. '
+      + '\nUnauthorized copying of any source code or assets within this project, via any medium is strictly prohibited.'
+      + '\nProprietary and confidential.\n\n');
 
     var cpuCount = require('os').cpus().length;
 
+    log.info('[MASTER] Deploying cluster across', cpuCount, 'logical cores.' );
+
     for (var i = 0; i < cpuCount; ++i) {
-      log.info('Forking', i);
       cluster.fork();
     }
 
     cluster.on('exit', function(worker) {
-      log.warn('WARNING: Worker', worker.id, 'died.');
+      log.warn('[MASTER] Worker', worker.id, 'died.');
       cluster.fork();
     });
 } else {
@@ -215,13 +225,20 @@ if (cluster.isMaster
     var host = server.address().address;
     var port = server.address().port;
 
-    log.info('Server listening on', app.get('port'));
-    log.info('Running in', app.get('env').toUpperCase(), 'mode');
+    log.info('[WORKER] Server listening on', app.get('port'));
+    log.info('[WORKER] Running in', app.get('env').toUpperCase(), 'mode');
   });
 
-  // All real time aspects of the server here. Includes the drone server, and websocket http streams.
+  log.info('[WORKER] Initializing Dronelink');
+  require('./lib/datalinks/dronelink').Singleton();
+
+  log.info('[WORKER] Initializing SITL');
+  require('./lib/datalinks/sitllink').Singleton();
+
+  log.info('[WORKER] Deploying Client RT');
   require('./lib/datalinks/clientlink')(server, serveSession);
 
   // Luci Cam Launch promo
+  log.info('[WORKER] Deploying LUCICAM app');
   require('./lib/lucicam');
 }
