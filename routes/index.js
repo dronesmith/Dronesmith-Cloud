@@ -1,3 +1,15 @@
+/**
+ * Dronesmith Cloud
+ *
+ * Principle Engineer: Geoff Gardner <geoff@dronesmith.io>
+ *
+ * Copyright (C) 2016 Dronesmith Technologies Inc, all rights reserved.
+ * Unauthorized copying of any source code or assets within this project, via
+ * any medium is strictly prohibited.
+ *
+ * Proprietary and confidential.
+ */
+
 'use strict';
 
 /**
@@ -166,7 +178,7 @@ module.exports = function(app, route) {
 
         // .get('/api/cloudbit', cloudbit.get)
         // .post('/api/cloudbit', cloudbit.output)
-        
+
         // Confirm Route. This is used by new user accounts to verify their
         // account.
         .get    ('/:type([A-Z|a-z|0-9]{24})',     user.confirm)
