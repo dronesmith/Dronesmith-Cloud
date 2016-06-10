@@ -74,6 +74,10 @@ module.exports = function(app, route) {
           res.sendFile('promo/lucicam.html', { root: path.join(__dirname, '../forge-ux/public') });
         })
 
+        .get('/hello', function(req, res) {
+          res.send('world!');
+        })
+
         //
         // Index routes. These are accesible by the frontend and do not
         // require api keys.
