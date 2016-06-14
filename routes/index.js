@@ -74,9 +74,9 @@ module.exports = function(app, route) {
           res.sendFile('promo/lucicam.html', { root: path.join(__dirname, '../forge-ux/public') });
         })
 
-        .get('/hello', function(req, res) {
-          res.send('world!');
-        })
+        // .get('/hello', function(req, res) {
+        //   res.send('world!');
+        // })
 
         //
         // Index routes. These are accesible by the frontend and do not
@@ -143,6 +143,7 @@ module.exports = function(app, route) {
         .post   ('/api/drone',                    drone.create)
         .delete ('/api/drone/:id',                drone.remove)
         .put    ('/api/drone/:id',                drone.update)
+        .post   ('/api/drone/:name/cmd',          drone.sendCmd)
 
         // add / remove missions
         .delete ('/api/drone/removeMission/:id',  drone.removeMission)
