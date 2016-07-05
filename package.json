@@ -25,7 +25,6 @@
     "less-middleware": "^2.1.0",
     "littlebits-cloud-http": "^0.3.4",
     "log4js": "^0.6.36",
-    "mandrill-api": "^1.0.45",
     "merge": "^1.2.0",
     "method-override": "^2.3.6",
     "mongoose": "^4.4.20",
@@ -38,12 +37,12 @@
     "q": "^1.4.1",
     "qs": "^5.2.0",
     "redis": "^2.6.1",
-    "serialport": "^2.1.2",
     "serve-favicon": "^2.2.1",
     "socket.io": "^1.4.6",
     "time-grunt": "^1.3.0",
     "underscore": "^1.8.3",
-    "uuid": "^2.0.2"
+    "uuid": "^2.0.2",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "error-handler": "^1.0.0",
