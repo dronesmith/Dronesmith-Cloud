@@ -55,7 +55,7 @@ var serveSession = session({
   genid: function(req) {
     return uuid.v4();
   },
-  secret: 'tit-a-lee-tit-a-loo',
+  secret: 'CLx2wWpEJ94KV8Fw4ewVhRzU',
   resave: false,
   saveUninitialized: false,
   store: new RedisStore(config.session)

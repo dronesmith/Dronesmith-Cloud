@@ -55,6 +55,7 @@
     "grunt-external-daemon": "^1.1.0",
     "grunt-node-inspector": "^0.4.2",
     "grunt-nodemon": "^0.4.2",
+    "node-uglifier": "^0.4.5",
     "time-grunt": "^1.3.0"
   }
 }
