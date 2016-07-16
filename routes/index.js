@@ -144,6 +144,7 @@ module.exports = function(app, route) {
         .delete ('/api/drone/:id',                drone.remove)
         .put    ('/api/drone/:id',                drone.update)
         .post   ('/api/drone/:name/cmd',          drone.sendCmd)
+        .get    ('/api/drone/:name/live',         drone.getTelemetry)
 
         // add / remove missions
         .delete ('/api/drone/removeMission/:id',  drone.removeMission)
