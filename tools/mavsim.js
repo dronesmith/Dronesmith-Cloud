@@ -13,7 +13,7 @@
 'use strict';
 
 var path = require('path'),
-  mavlink = require('mavlink'),
+  mavlink = require('../node-mavlink'),
   events = require('events'),
   dgram = require('dgram'),
   fs = require('fs');
