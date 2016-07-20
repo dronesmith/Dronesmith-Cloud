@@ -133,7 +133,7 @@ app.use('/api/', function(req, res, next) {
 
     User
       .findOne({email: req.headers['user-email']})
-      .select({apiKey: 1})
+      .select({apiKey: 1, apiCnt: 1})
       .exec(function(err, key) {
         if (err || !key) {
           return res.status(401).send();
@@ -141,7 +141,8 @@ app.use('/api/', function(req, res, next) {
           if (req.headers['user-key'] !== key.apiKey) {
             return res.status(401).send();
           } else {
-            next();
+            key.apiCnt++;
+            key.save(function() { next(); });
           }
         }
       });
