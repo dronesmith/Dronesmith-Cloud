@@ -130,8 +130,11 @@ module.exports = function(app, route) {
         //
 
         // User CRUD. Limiting these to read-only methods.
-        .get    ('/api/user/:id',                 user.find)
-        .get    ('/api/user',                     user.findAll)
+        // Headers are good enough.
+        .get    ('/api/user/',                    user.findAPI)
+
+        // TODO - admin roles for finding all users.
+        // .get    ('/api/user',                     user.findAll)
 
         // Add / remove drones
         .put    ('/api/user/:id/:drone_id',       user.addDrone)

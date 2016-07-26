@@ -151,6 +151,29 @@ app.use('/api/', function(req, res, next) {
   }
 });
 
+// app.use('/api/drone/', function(req, res, next) {
+//   if (req.path == '/api/drone' && req.method == 'POST') {
+//     next();
+//   } else {
+//     var User = require('mongoose').model('User');
+//     var _ = require('underscore');
+//
+//     if (!req.params._id) {
+//       return next(); // we'll get all drones the user has.
+//     }
+//
+//     User
+//       .findOne({email: req.headers['user-email']})
+//       .select({drones: 1})
+//       .exec(function(err, user) {
+//         user.drones.indexOf(req.params._id);
+//         console.log('finding ', user.drones.indexOf(req.params._id));
+//         return next();
+//       })
+//     ;
+//   }
+// });
+
 // validate admin
 app.use('/admin/', function(req, res, next) {
   if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
