@@ -142,7 +142,7 @@ module.exports = function(app, route) {
 
         // drone CRUD
         .get    ('/api/drone/:id',                drone.find)
-        .get    ('/api/drone',                    drone.findAll)
+        .get    ('/api/drone',                    drone.findAllAPI)
         .post   ('/api/drone',                    drone.create)
         .delete ('/api/drone/:id',                drone.remove)
         .put    ('/api/drone/:id',                drone.update)
