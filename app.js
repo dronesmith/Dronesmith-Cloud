@@ -34,6 +34,9 @@ require('./lib/db');
 
 var passport = require('./lib/passport')();
 
+const KEEN_ENV = 'testing';
+global.KEEN_ENV = KEEN_ENV;
+
 // get root path
 // FIXME
 global.appRoot = path.resolve(__dirname);
@@ -42,6 +45,13 @@ global.appRoot = path.resolve(__dirname);
 var config = require('./config/config.js'),
   env = config.application.env || 'development',
   log = require('./lib/log.js').getLogger(__filename);
+
+// Activity tracking
+var KeenTracking = require('keen-tracking');
+
+// Configure a client instance
+var keenClient = new KeenTracking(config.keen);
+global.KeenTracking = keenClient;
 
 // Init
 var app = express();
@@ -106,6 +116,22 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/', function(req, res, next) {
+  keenClient.recordEvent('visitor', {
+    env: KEEN_ENV,
+    tracking: {
+      path: req.path,
+      ip: req.ip,
+      method: req.method,
+      url: req.url,
+      host: req.hostname,
+      referrer: req.headers.referrer,
+      userAgent: req.headers['user-agent']
+    }
+  });
+  next();
+});
+
 // Render statics (including HTML)
 app.use(express.static(path.join(__dirname, 'forge-ux/public')));
 
@@ -116,8 +142,8 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (req, res, next) {
-    log.debug('[REQUEST]', req.ip, req.method, req.url);
-    next();
+  log.debug('[REQUEST]', req.ip, req.method, req.url);
+  next();
 });
 
 
@@ -142,6 +168,17 @@ app.use('/api/', function(req, res, next) {
             return res.status(401).send();
           } else {
             key.apiCnt++;
+
+            keenClient.recordEvent('api', {
+              env: KEEN_ENV,
+              email: req.headers['user-email'],
+              apiCnt: key.apiCnt,
+              path: req.path,
+              ip: req.ip,
+              method: req.method,
+              url: req.url
+            });
+
             key.save(function() { next(); });
           }
         }
@@ -176,6 +213,18 @@ app.use('/api/', function(req, res, next) {
 
 // validate admin
 app.use('/admin/', function(req, res, next) {
+  keenClient.recordEvent('admin', {
+    env: KEEN_ENV,
+    tracking: {
+      path: req.path,
+      ip: req.ip,
+      method: req.method,
+      url: req.url,
+      host: req.hostname,
+      referrer: req.headers.referrer,
+      userAgent: req.headers['user-agent']
+    }
+  });
   if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
     next();
   } else {
@@ -185,6 +234,18 @@ app.use('/admin/', function(req, res, next) {
 
 app.use('/rt/', function(req, res, next) {
   // TODO check on session route.
+  keenClient.recordEvent('flightsync', {
+    env: KEEN_ENV,
+    tracking: {
+      path: req.path,
+      ip: req.ip,
+      method: req.method,
+      url: req.url,
+      host: req.hostname,
+      referrer: req.headers.referrer,
+      userAgent: req.headers['user-agent']
+    }
+  });
   next();
 });
 
@@ -200,6 +261,18 @@ app.use('/index/', function(req, res, next) {
   } else if (!req.session.userData) {
     res.status(400).json({error: "Not logged in."});
   } else {
+    keenClient.recordEvent('client', {
+      env: KEEN_ENV,
+      tracking: {
+        path: req.path,
+        ip: req.ip,
+        method: req.method,
+        url: req.url,
+        host: req.hostname,
+        referrer: req.headers.referrer,
+        userAgent: req.headers['user-agent']
+      }
+    });
     next();
   }
 });
