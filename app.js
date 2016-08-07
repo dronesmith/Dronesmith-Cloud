@@ -169,17 +169,24 @@ app.use('/api/', function(req, res, next) {
           } else {
             key.apiCnt++;
 
-            keenClient.recordEvent('api', {
-              env: KEEN_ENV,
-              email: req.headers['user-email'],
-              apiCnt: key.apiCnt,
-              path: req.path,
-              ip: req.ip,
-              method: req.method,
-              url: req.url
-            });
+            User.find({}).count().exec(function(err, counter) {
+              if (err != null) {
+                counter = 0;
+              }
 
-            key.save(function() { next(); });
+              keenClient.recordEvent('api', {
+                env: KEEN_ENV,
+                email: req.headers['user-email'],
+                apiCnt: key.apiCnt,
+                path: req.path,
+                ip: req.ip,
+                method: req.method,
+                url: req.url,
+                cnt: counter
+              });
+
+              key.save(function() { next(); });
+            });
           }
         }
       });
