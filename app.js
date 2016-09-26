@@ -351,6 +351,12 @@ if (cluster.isMaster
   if (config.ssl.use) {
     var server = https.createServer(creds, app);
     server.listen(app.get('port'), function () {
+      // HTTP forwarding
+      http.createServer(function (req, res) {
+        res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+        res.end();
+      }).listen(80);
+            
       var host = server.address().address;
       var port = server.address().port;
 
