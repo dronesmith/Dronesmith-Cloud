@@ -55,7 +55,7 @@
     },
     "mailgun": {
       "api": "key-aabe9fdb372fd9747ed010d1dba54c91",
-      "domain": "sandbox905be1c3447a479e8a6c3e5f96f2c7aa.mailgun.org"
+      "domain": "mg.dronesmith.io"
     },
     "adminKey": ""
 }
