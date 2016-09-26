@@ -358,7 +358,7 @@ if (cluster.isMaster
       log.info('[WORKER] Running in', app.get('env').toUpperCase(), 'mode');
     });
   } else {
-    var server = http.createServer(creds, app);
+    var server = http.createServer(app);
     server.listen(app.get('port'), function () {
       var host = server.address().address;
       var port = server.address().port;
