@@ -13,7 +13,11 @@
 'use strict';
 
 // Node modules
-var cluster = require('cluster'),
+var
+  fs = require('fs'),
+  http = require('http'),
+  https = require('https'),
+  cluster = require('cluster'),
   path = require('path'),
   uuid = require('uuid');
 
@@ -45,6 +49,14 @@ global.appRoot = path.resolve(__dirname);
 var config = require('./config/config.js'),
   env = config.application.env || 'development',
   log = require('./lib/log.js').getLogger(__filename);
+
+if (config.ssl.use) {
+  var creds = {
+    key: fs.readFileSync(config.ssl.path + 'privkey.pem'),
+    cert: fs.readFileSync(config.ssl.path + 'fullchain.pem'),
+    ca: fs.readFileSync(config.ssl.path + 'chain.pem')
+  };
+}
 
 // Activity tracking
 var KeenTracking = require('keen-tracking');
@@ -336,14 +348,25 @@ if (cluster.isMaster
       cluster.fork();
     });
 } else {
-  var server = app.listen(app.get('port'), function () {
+  if (config.ssl.use) {
+    var server = https.createServer(creds, app);
+    server.listen(app.get('port'), function () {
+      var host = server.address().address;
+      var port = server.address().port;
 
-    var host = server.address().address;
-    var port = server.address().port;
+      log.info('[WORKER] Server listening on', app.get('port'));
+      log.info('[WORKER] Running in', app.get('env').toUpperCase(), 'mode');
+    });
+  } else {
+    var server = http.createServer(creds, app);
+    server.listen(app.get('port'), function () {
+      var host = server.address().address;
+      var port = server.address().port;
 
-    log.info('[WORKER] Server listening on', app.get('port'));
-    log.info('[WORKER] Running in', app.get('env').toUpperCase(), 'mode');
-  });
+      log.info('[WORKER] Server listening on', app.get('port'));
+      log.info('[WORKER] Running in', app.get('env').toUpperCase(), 'mode');
+    });
+  }
 
   log.info('[WORKER] Initializing Dronelink');
   require('./lib/datalinks/dronelink').Singleton();

@@ -57,5 +57,9 @@
       "api": "key-aabe9fdb372fd9747ed010d1dba54c91",
       "domain": "mg.dronesmith.io"
     },
+    "ssl": {
+      "use": false,
+      "path": "/etc/letsencrypt/live/cloud.dronesmith.io/"
+    },
     "adminKey": ""
 }
