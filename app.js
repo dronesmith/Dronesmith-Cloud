@@ -275,6 +275,18 @@ app.use('/index/', function(req, res, next) {
   if (req.path == '/session' || req.path == '/user/forgotPassword') {
     next();
   } else if (req.path == '/user' && req.method == 'POST') {
+    keenClient.recordEvent('client', {
+      env: KEEN_ENV,
+      tracking: {
+        path: req.path,
+        ip: req.ip,
+        method: req.method,
+        url: req.url,
+        host: req.hostname,
+        referrer: req.headers.referrer,
+        userAgent: req.headers['user-agent']
+      }
+    });
     next(); // open up registration
     // res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
   } else if (!req.session.userData) {
@@ -356,7 +368,7 @@ if (cluster.isMaster
         res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
         res.end();
       }).listen(80);
-            
+
       var host = server.address().address;
       var port = server.address().port;
 
