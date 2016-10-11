@@ -176,6 +176,7 @@ module.exports = function(app, route) {
         //
         .post   ('/rt/mission/:format',           mission.addMission)
         .put    ('/rt/mission/:id/associate',     mission.associate)
+        .post   ('/rt/droneinfo',                 drone.rtRequest)
 
         //
         // Admin routes. These require the master key.

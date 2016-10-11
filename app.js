@@ -376,14 +376,14 @@ if (cluster.isMaster
     });
   }
 
-  log.info('[WORKER] Initializing Dronelink');
-  require('./lib/datalinks/dronelink').Singleton();
+  //log.info('[WORKER] Initializing Dronelink');
+  //require('./lib/datalinks/dronelink').Singleton();
 
-  log.info('[WORKER] Initializing SITL');
-  require('./lib/datalinks/sitllink').Singleton();
+  // log.info('[WORKER] Initializing SITL');
+  // require('./lib/datalinks/sitllink').Singleton();
 
-  log.info('[WORKER] Deploying Client RT');
-  require('./lib/datalinks/clientlink')(server, serveSession);
+  // log.info('[WORKER] Deploying Client RT');
+  // require('./lib/datalinks/clientlink')(server, serveSession);
 
   // Luci Cam Launch promo
   log.info('[WORKER] Deploying LUCICAM app');
