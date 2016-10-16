@@ -143,14 +143,18 @@ module.exports = function(app, route) {
         // drone CRUD
         .get    ('/api/drone/:id',                drone.find)
         .get    ('/api/drone',                    drone.findAllAPI)
+        // TODO POST drone -> makes a simulated drone
+        // TODO POST drone/pause pauses a simulated drone
         // .post   ('/api/drone',                    drone.create)
-        // .delete ('/api/drone/:id',                drone.remove)
+        .delete ('/api/drone/:id',                drone.remove)
         .put    ('/api/drone/:id',                drone.update)
         // .post   ('/api/drone/:name/cmd',          drone.sendCmd)
         // .get    ('/api/drone/:name/live',         drone.getTelemetry)
 
         // add / remove missions
+        // TODO make this /api/drone/<name>/mission DEL
         .delete ('/api/drone/removeMission/:id',  drone.removeMission)
+        // TODO remove this
         .put    ('/api/drone/addMission/:id',     drone.addMission)
 
         // mission CRUD
