@@ -115,14 +115,14 @@ module.exports = function(app, route) {
         .put    ('/index/drone/:id',              drone.update)
 
         // Order here is important.
-        .post   ('/index/code/exec/run',          code.execNow)
-        .post   ('/index/code/exec/:id',          code.exec)
-        .post   ('/index/code/:drone',            code.create)
-        .put    ('/index/code/:id',               code.update)
+        // .post   ('/index/code/exec/run',          code.execNow)
+        // .post   ('/index/code/exec/:id',          code.exec)
+        // .post   ('/index/code/:drone',            code.create)
+        // .put    ('/index/code/:id',               code.update)
 
 
         // Apps
-        .get    ('/index/app/',                   appCtrl.findAll)
+        // .get    ('/index/app/',                   appCtrl.findAll)
 
 
         //
@@ -137,17 +137,17 @@ module.exports = function(app, route) {
         // .get    ('/api/user',                     user.findAll)
 
         // Add / remove drones
-        .put    ('/api/user/:id/:drone_id',       user.addDrone)
-        .delete ('/api/user/:id/:drone_id',       user.removeDrone)
+        // .put    ('/api/user/:id/:drone_id',       user.addDrone)
+        // .delete ('/api/user/:id/:drone_id',       user.removeDrone)
 
         // drone CRUD
         .get    ('/api/drone/:id',                drone.find)
         .get    ('/api/drone',                    drone.findAllAPI)
-        .post   ('/api/drone',                    drone.create)
-        .delete ('/api/drone/:id',                drone.remove)
+        // .post   ('/api/drone',                    drone.create)
+        // .delete ('/api/drone/:id',                drone.remove)
         .put    ('/api/drone/:id',                drone.update)
-        .post   ('/api/drone/:name/cmd',          drone.sendCmd)
-        .get    ('/api/drone/:name/live',         drone.getTelemetry)
+        // .post   ('/api/drone/:name/cmd',          drone.sendCmd)
+        // .get    ('/api/drone/:name/live',         drone.getTelemetry)
 
         // add / remove missions
         .delete ('/api/drone/removeMission/:id',  drone.removeMission)
@@ -161,15 +161,15 @@ module.exports = function(app, route) {
         .delete ('/api/mission/:id',              mission.remove)
 
         // Code CRUD
-        .post   ('/api/code/exec/:id',            code.exec)
-        .post   ('/api/code/:drone',              code.create)
-        .put    ('/api/code/:id',                 code.update)
-        .get    ('/api/code/:id',                 code.find)
-        .get    ('/api/code',                     code.findAll)
-        .delete ('/api/code/:id',                 code.remove)
+        // .post   ('/api/code/exec/:id',            code.exec)
+        // .post   ('/api/code/:drone',              code.create)
+        // .put    ('/api/code/:id',                 code.update)
+        // .get    ('/api/code/:id',                 code.find)
+        // .get    ('/api/code',                     code.findAll)
+        // .delete ('/api/code/:id',                 code.remove)
 
         // Apps
-        .get    ('/api/app/',                     appCtrl.findAll)
+        // .get    ('/api/app/',                     appCtrl.findAll)
 
         //
         // Real time routes. These require a valid session Id.

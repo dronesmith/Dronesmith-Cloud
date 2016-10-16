@@ -3,7 +3,7 @@
         "name": "Dronesmith Cloud",
         "script": "./app.js",
         "port": "4000",
-        "env": "development"
+        "env": "production"
     },
     "log": {
         "path": "log/",

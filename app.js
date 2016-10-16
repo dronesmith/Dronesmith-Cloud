@@ -330,7 +330,6 @@ if (cluster.isMaster
     var emoji = require('node-emoji');
 
     log.info(emoji.emojify(':tada:  Welcome to Dronesmith Cloud! :tada:'));
-
     log.info(emoji.emojify(':beer:  Created by Dronesmith Technologies.'));
 
     log.info('\n\n\nCopyright (C) 2016 Dronesmith Technologies Inc, all rights reserved. '
@@ -338,6 +337,9 @@ if (cluster.isMaster
       + '\nProprietary and confidential.\n\n');
 
     var cpuCount = require('os').cpus().length;
+
+    log.info('[MASTER] Deploying Promotional Lucicam');
+    require('./lib/lucicam');
 
     log.info('[MASTER] Deploying cluster across', cpuCount, 'logical cores.' );
 
@@ -386,6 +388,6 @@ if (cluster.isMaster
   // require('./lib/datalinks/clientlink')(server, serveSession);
 
   // Luci Cam Launch promo
-  log.info('[WORKER] Deploying LUCICAM app');
-  require('./lib/lucicam');
+  //log.info('[WORKER] Deploying LUCICAM app');
+  //require('./lib/lucicam');
 }
