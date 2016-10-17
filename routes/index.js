@@ -131,7 +131,7 @@ module.exports = function(app, route) {
 
         // User CRUD. Limiting these to read-only methods.
         // Headers are good enough.
-        .get    ('/api/user/',                    user.findAPI)
+        // .get    ('/api/user/',                    user.findAPI)
 
         // TODO - admin roles for finding all users.
         // .get    ('/api/user',                     user.findAll)
@@ -143,25 +143,26 @@ module.exports = function(app, route) {
         // drone CRUD
         .get    ('/api/drone/:id',                drone.find)
         .get    ('/api/drone',                    drone.findAllAPI)
-        // TODO POST drone -> makes a simulated drone
-        // TODO POST drone/pause pauses a simulated drone
-        // .post   ('/api/drone',                    drone.create)
-        .delete ('/api/drone/:id',                drone.remove)
+        .post   ('/api/drone',                    drone.createSim)
+        .post   ('/api/drone/:name',              drone.createSim)
+        .post   ('/api/drone/:name/start',        drone.startSim)
+        .post   ('/api/drone/:name/stop',         drone.pauseSim)
+        .delete ('/api/drone/:name',              drone.remove)
         .put    ('/api/drone/:id',                drone.update)
         // .post   ('/api/drone/:name/cmd',          drone.sendCmd)
         // .get    ('/api/drone/:name/live',         drone.getTelemetry)
 
         // add / remove missions
         // TODO make this /api/drone/<name>/mission DEL
-        .delete ('/api/drone/removeMission/:id',  drone.removeMission)
+        // .delete ('/api/drone/removeMission/:id',  drone.removeMission)
         // TODO remove this
-        .put    ('/api/drone/addMission/:id',     drone.addMission)
+        // .put    ('/api/drone/addMission/:id',     drone.addMission)
 
         // mission CRUD
         .get    ('/api/mission/:id',              mission.find)
         .get    ('/api/mission',                  mission.findAll)
-        .put    ('/api/mission/:id/associate',    mission.associate)
-        .post   ('/api/mission/:format',          mission.addMission)
+        // .put    ('/api/mission/:id/associate',    mission.associate)
+        // .post   ('/api/mission/:format',          mission.addMission)
         .delete ('/api/mission/:id',              mission.remove)
 
         // Code CRUD

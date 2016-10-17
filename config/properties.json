@@ -35,7 +35,8 @@
       "defaultAddress": "0.0.0.0"
     },
     "sitl": {
-      "port": 4005
+      "port": 4243,
+      "address": "192.168.229.13"
     },
     "mavlink": {
       "system": 1,
