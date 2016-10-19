@@ -300,6 +300,19 @@ app.use('/index/', function(req, res, next) {
 
 app.use('/', router);
 
+app.all('/api/drone/*', function(req, res, next) {
+  var strs = req.url.split('/');
+  if (strs[1] == 'api') {
+    var newstr = "";
+    for (var i = 2; i < strs.length; ++i) {
+      newstr += '/' + strs[i];
+    }
+    res.redirect(307, config.apiservice.url + newstr);
+  } else {
+    next();
+  }
+});
+
 // Handle 404s
 app.use(function (req, res) {
     log.warn("Can not find page: " +  req.originalUrl);

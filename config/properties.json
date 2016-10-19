@@ -62,5 +62,8 @@
       "use": false,
       "path": "/etc/letsencrypt/live/cloud.dronesmith.io/"
     },
+    "apiservice": {
+      "url": "http://localhost:8080"
+    },
     "adminKey": ""
 }
