@@ -149,6 +149,9 @@ module.exports = function(app, route) {
         .post   ('/api/drone/:name/stop',         drone.pauseSim)
         .delete ('/api/drone/:name',              drone.remove)
         .put    ('/api/drone/:id',                drone.update)
+        .post   ('/api/drone/:name/sensor/:payload', drone.updateSensor)
+        .post   ('/rt/drone/:name/sensor/:payload', drone.updateSensorRt)
+        .get   ('/api/drone/:name/sensor/:payload', drone.getSensor)
         // .post   ('/api/drone/:name/cmd',          drone.sendCmd)
         // .get    ('/api/drone/:name/live',         drone.getTelemetry)
 
