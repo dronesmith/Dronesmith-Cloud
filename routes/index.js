@@ -168,6 +168,10 @@ module.exports = function(app, route) {
         // .post   ('/api/mission/:format',          mission.addMission)
         .delete ('/api/mission/:id',              mission.remove)
 
+        .get    ('/api/', function(req, res) {
+          return res.status(204).send();
+        })
+
         // Code CRUD
         // .post   ('/api/code/exec/:id',            code.exec)
         // .post   ('/api/code/:drone',              code.create)

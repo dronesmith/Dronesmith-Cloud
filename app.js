@@ -174,10 +174,10 @@ app.use('/api/', function(req, res, next) {
       .select({apiKey: 1, apiCnt: 1})
       .exec(function(err, key) {
         if (err || !key) {
-          return res.status(401).send();
+          return res.status(403).send();
         } else {
           if (req.headers['user-key'] !== key.apiKey) {
-            return res.status(401).send();
+            return res.status(403).send();
           } else {
             key.apiCnt++;
 
@@ -203,7 +203,7 @@ app.use('/api/', function(req, res, next) {
         }
       });
   } else {
-    return res.header('WWW-Authenticate', 'Basic realm="Dronesmith Cloud"').status(401).send();
+    return res.status(403).send();
   }
 });
 
@@ -247,7 +247,7 @@ app.use('/admin/', function(req, res, next) {
   if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
     next();
   } else {
-    return res.header('WWW-Authenticate', 'Basic realm="Dronesmith Cloud"').status(401).send();
+    return res.status(403).send();
   }
 });
 
@@ -317,7 +317,11 @@ app.all('/api/drone/*', function(req, res, next) {
 app.use(function (req, res) {
     log.warn("Can not find page: " +  req.originalUrl);
     res.status(404);
-    res.sendFile(path.join(__dirname, '/forge-ux/public', '404.html'));
+    if (req.url.split('/')[1] == 'api') {
+      res.send();
+    } else {
+      res.sendFile(path.join(__dirname, '/forge-ux/public', '404.html'));  
+    }
 });
 // Handle 500s
 app.use(function (error, req, res, next) {
