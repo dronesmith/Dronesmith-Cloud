@@ -137,7 +137,7 @@ app.get('/', function(req, res, next) {
       method: req.method,
       url: req.url,
       host: req.hostname,
-      referrer: req.headers.referrer,
+      referrer: req.headers['referer'],
       userAgent: req.headers['user-agent']
     }
   });
@@ -181,10 +181,10 @@ app.use('/api/', function(req, res, next) {
           } else {
             key.apiCnt++;
 
-            User.find({}).count().exec(function(err, counter) {
-              if (err != null) {
-                counter = 0;
-              }
+            // User.find({}).count().exec(function(err, counter) {
+            //   if (err != null) {
+            //     counter = 0;
+            //   }
 
               keenClient.recordEvent('api', {
                 env: KEEN_ENV,
@@ -193,12 +193,11 @@ app.use('/api/', function(req, res, next) {
                 path: req.path,
                 ip: req.ip,
                 method: req.method,
-                url: req.url,
-                cnt: counter
+                url: req.url
               });
 
               key.save(function() { next(); });
-            });
+            // });
           }
         }
       });
@@ -271,24 +270,25 @@ app.use('/rt/', function(req, res, next) {
 // Index routes should always have a session.
 app.use('/index/', function(req, res, next) {
 
-  // just record all events
-  keenClient.recordEvent('client', {
-    env: KEEN_ENV,
-    tracking: {
-      path: req.path,
-      ip: req.ip,
-      method: req.method,
-      url: req.url,
-      host: req.hostname,
-      referrer: req.headers.referrer,
-      userAgent: req.headers['user-agent']
-    }
-  });
-
   // ...with the exception of /session/ which handles this itself.
   if (req.path == '/session' || req.path == '/user/forgotPassword') {
+    // just record all events
+    keenClient.recordEvent('client', {
+      env: KEEN_ENV,
+      tracking: {
+        user: req.session.userData,
+        path: req.path,
+        ip: req.ip,
+        method: req.method,
+        url: req.url,
+        host: req.hostname,
+        referrer: req.headers.referrer,
+        userAgent: req.headers['user-agent']
+      }
+    });
     next();
   } else if (req.path == '/user' && req.method == 'POST') {
+    // We will send keen event after signup
     next(); // open up registration
     // res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
   } else if (!req.session.userData) {
@@ -320,7 +320,7 @@ app.use(function (req, res) {
     if (req.url.split('/')[1] == 'api') {
       res.send();
     } else {
-      res.sendFile(path.join(__dirname, '/forge-ux/public', '404.html'));  
+      res.sendFile(path.join(__dirname, '/forge-ux/public', '404.html'));
     }
 });
 // Handle 500s
