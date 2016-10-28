@@ -1,5 +1,8 @@
 # Dronesmith Cloud
 
+# Node compatibility
+Currently the cloud is running on Node v5 on the production server, and has been tested properly up to Node v7, however there are some deprecation warnings, namely using new Buffer instead of Buffer.alloc or Buffer.from, Mongoose Promise is also deprecated. These will need to be removed as we upgrade on Node, but there is no immediate need for this.
+
 # Technologies
 Dronesmith Cloud is entirely MEAN stack, and as such is powered by the following technologies:
 
@@ -28,12 +31,9 @@ as well. Upgrading to Angular 2 and Material Design for our UX is also on the di
 table. Do not expect this tech stack to be stagnet as things change.
 
 # Running
+Simply use the install script:
 
-	git submodule update --init
-	npm install
-	cd forge-ux/
-	bower install
-	cd ..
+	./install.sh
 	node app.js
 
 
@@ -53,17 +53,8 @@ The frontend portion of the projct has been divided into its own repo. Work curr
 
 # Contributing
 
-Contributing is pretty standard. See the Airtable for things to work on and bugs to fix.
-
-<!--1. Assigned yourself an unassigned **FORG** ticket in Jira.
-2. git branch FORG-[ticketnumber] (eg, FORG-45)-->
-3. Implement your work on a development branch.
-4. Make a pull request to master when you are ready
-5. Geoff will do a code review of this pull req, and if everything looks good, will give the thumbs up and merge it.
-
 The code is not very well documented, and not nearly as clean as I'd like it to be, so feel free to ask questions if you noticed something weird.
 
+# License 
 
-# Ideas
-
-Ideas, brainstorming, and out-of-the-box thinking are encouraged! Please ping Geoff and/or Greg on Slack to bounce ideas around, or post it in the `#dss-dev` channel on Slack.
+Dronesmith Cloud is closed source, proprietary software. 
