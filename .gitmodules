@@ -1,6 +1,3 @@
-[submodule "forge-ux"]
-	path = forge-ux
-	url = https://bitbucket.org/dronesmithdev/forge-ux.git
 [submodule "node-mavlink"]
 	path = node-mavlink
 	url = https://github.com/Dronesmith-tech/node-mavlink

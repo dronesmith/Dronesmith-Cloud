@@ -40,39 +40,12 @@ module.exports = function(app, route) {
             next();
         })
 
-        // Check for global query strings
-        .get('/', function(req, res, next) {
-          if (req.query.code) {
-            User
-              .findOne({_id: req.query.code})
-              .then(function(data, error) {
-                if (error || !data) {
-                  return res.redirect('/');
-                } else {
-                  if (req.query.waitlist) {
-                    return res
-                      .status(400)
-                      .json({"error": "Uh oh, you missed your chance for early access! :("});
-                    ;
-                  } else {
-                    return res
-                      .json({"status": "ok"});
-                    ;
-                  }
-                }
-              })
-            ;
-          } else {
-            return res.redirect('/');
-          }
-        })
-
         //
         // Promo route
         //
-        .get('/lucicam', function(req, res) {
-          res.sendFile('promo/lucicam.html', { root: path.join(__dirname, '../forge-ux/public') });
-        })
+        // .get('/lucicam', function(req, res) {
+        //   res.sendFile('promo/lucicam.html', { root: path.join(__dirname, '../forge-ux/public') });
+        // })
 
         // .get('/hello', function(req, res) {
         //   res.send('world!');
@@ -84,15 +57,15 @@ module.exports = function(app, route) {
         //
 
         // Authenticate a session (allows logins)
-        .post   ('/index/session',                session.authenticate)
+        // .post   ('/index/session',                session.authenticate)
 
         // Get user info
-        .get    ('/index/session',                session.poll)
+        // .get    ('/index/session',                session.poll)
 
         // .put('/api/session', session.sync)
 
         //
-        .get    ('/index/user/',                  user.getSessionUser)
+        .get    ('/index/user/',                  user.findAll)
 
         // User creation
         .post   ('/index/user',                   user.create)
@@ -203,22 +176,8 @@ module.exports = function(app, route) {
 
         // Confirm Route. This is used by new user accounts to verify their
         // account.
-        .get    ('/:type([A-Z|a-z|0-9]{24})',     user.confirm)
+        // .get    ('/:type([A-Z|a-z|0-9]{24})',     user.confirm)
     ;
-
-    if (app.get('env') === 'development') {
-        route
-            // tests for 404 and 500s
-            .all('/404', function (req, res) {
-                logger.warn("Can not find page: " + req.route.path);
-                res.status(404);
-                res.render('404', {title: '404: File Not Found'});
-            })
-            .all('/500', function (req, res, next) {
-                next(new Error('keyboard cat!'));
-            })
-        ;
-    }
 
     return route;
 };

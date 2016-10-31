@@ -27,16 +27,10 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
   expressValidator = require('express-validator'),
-  cookieParser = require('cookie-parser'),
-  favicon = require('serve-favicon'),
-  session = require('express-session'),
-  RedisStore = require('connect-redis')(session),
-  lessMiddleware = require('less-middleware');
+  api = require('./lib/api');
 
 // Init internal modules
 require('./lib/db');
-
-var passport = require('./lib/passport')();
 
 const KEEN_ENV = 'testing';
 global.KEEN_ENV = KEEN_ENV;
@@ -72,17 +66,6 @@ var app = express();
 app.set('port', config.application.port || 3000);
 app.set('env', env);
 
-// Init Session
-var serveSession = session({
-  genid: function(req) {
-    return uuid.v4();
-  },
-  secret: 'CLx2wWpEJ94KV8Fw4ewVhRzU',
-  resave: false,
-  saveUninitialized: false,
-  store: new RedisStore(config.session)
-});
-
 /**
  * Middlewares
  *
@@ -94,14 +77,6 @@ var serveSession = session({
  *   For REST API implementations, this ensures that browser compatilbity.
  * - Express Validator
  *   Easier to parse query strings
- * - Cookie Parser
- *   For dealing with cookies, which are bound to arise
- * - Favicon
- *   The favicon...
- * - Session
- *   Session manager.
- * - Less Middleware
- *   Processes LESS to CSS on the fly to make our lives easier.
  */
 app.use(compression());
 app.use(bodyParser.json());
@@ -109,54 +84,36 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.raw({limit: '50mb'}));
 app.use(methodOverride());
 app.use(expressValidator());
-app.use(cookieParser());
-app.use(favicon(path.join(__dirname, 'forge-ux/public/assets/favicon.ico')));
-app.use(serveSession);
-app.use(passport.initialize());
-app.use(passport.session());
-// app.use(lessMiddleware(path.join(__dirname, 'forge-ux/public/theme'), {
-// 	dest: path.join(__dirname, 'forge-ux/public'),
-//   debug: false
-// }));
 
+// Handle AJAX requests
 app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, user-key, user-email");
 
     // intercept OPTIONS method
     if ('OPTIONS' == req.method) {
-        res.send(200);
+      res.send(200);
     } else {
-        next();
+      next();
     }
-});
-
-// Check for session, later authorization
-app.use(function (req, res, next) {
-  if (!req.session) {
-    return next(new Error('Session should never be null!\nIs Redis running?'));
-  }
-  next();
 });
 
 app.get('/', function(req, res, next) {
-  keenClient.recordEvent('visitor', {
-    env: KEEN_ENV,
-    tracking: {
-      path: req.path,
-      ip: req.ip,
-      method: req.method,
-      url: req.url,
-      host: req.hostname,
-      referrer: req.headers['referer'],
-      userAgent: req.headers['user-agent']
-    }
-  });
-  next();
-});
+  // keenClient.recordEvent('visitor', {
+  //   env: KEEN_ENV,
+  //   tracking: {
+  //     path: req.path,
+  //     ip: req.ip,
+  //     method: req.method,
+  //     url: req.url,
+  //     host: req.hostname,
+  //     referrer: req.headers['referer'],
+  //     userAgent: req.headers['user-agent']
+  //   }
+  // });
 
-// Render statics (including HTML)
-app.use(express.static(path.join(__dirname, 'forge-ux/public')));
+  res.send('Dronesmith Cloud Service');
+});
 
 // Some logging stuff.
 app.use(function (req, res, next) {
@@ -216,29 +173,6 @@ app.use('/api/', function(req, res, next) {
     return res.status(403).send();
   }
 });
-
-// app.use('/api/drone/', function(req, res, next) {
-//   if (req.path == '/api/drone' && req.method == 'POST') {
-//     next();
-//   } else {
-//     var User = require('mongoose').model('User');
-//     var _ = require('underscore');
-//
-//     if (!req.params._id) {
-//       return next(); // we'll get all drones the user has.
-//     }
-//
-//     User
-//       .findOne({email: req.headers['user-email']})
-//       .select({drones: 1})
-//       .exec(function(err, user) {
-//         user.drones.indexOf(req.params._id);
-//         console.log('finding ', user.drones.indexOf(req.params._id));
-//         return next();
-//       })
-//     ;
-//   }
-// });
 
 // validate admin
 app.use('/admin/', function(req, res, next) {
@@ -302,10 +236,6 @@ app.use('/index/', function(req, res, next) {
     // We will send keen event after signup
     next(); // open up registration
     // res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
-  } else if (!req.session.userData) {
-    res.status(400).json({error: "Not logged in."});
-  } else {
-    next();
   }
 });
 
@@ -318,7 +248,20 @@ app.all('/api/drone/*', function(req, res, next) {
     for (var i = 2; i < strs.length; ++i) {
       newstr += '/' + strs[i];
     }
-    res.redirect(307, config.apiservice.url + newstr);
+
+    console.log(newstr);
+
+    api.Request(req, newstr, function(response, err) {
+      if (err) {
+        return next(err);
+      } else {
+        if (response.status == 200 || response.status == 400) {
+          return res.status(response.status).json(response.chunk);
+        } else {
+          return res.status(response.status).send(response.chunk);
+        }
+      }
+    });
   } else {
     next();
   }
@@ -328,11 +271,7 @@ app.all('/api/drone/*', function(req, res, next) {
 app.use(function (req, res) {
     log.warn("Can not find page: " +  req.originalUrl);
     res.status(404);
-    if (req.url.split('/')[1] == 'api') {
-      res.send();
-    } else {
-      res.sendFile(path.join(__dirname, '/forge-ux/public', '404.html'));
-    }
+    res.send();
 });
 // Handle 500s
 app.use(function (error, req, res, next) {
@@ -343,13 +282,6 @@ app.use(function (error, req, res, next) {
 });
 
 app.locals.pretty = true;
-
-// These middlewares should only be loaded in non-prod envs.
-// FIXME - library is crashing.
-// if (app.get('env') === 'development') {
-//   var errorHandler = require('error-handler');
-//   app.use(errorHandler({ dumpExceptions: true, showStack: true }));
-// }
 
 if (cluster.isMaster
     && (app.get('env') !== 'development')
@@ -366,8 +298,8 @@ if (cluster.isMaster
 
     var cpuCount = require('os').cpus().length;
 
-    log.info('[MASTER] Deploying Promotional Lucicam');
-    require('./lib/lucicam');
+    // log.info('[MASTER] Deploying Promotional Lucicam');
+    // require('./lib/lucicam');
 
     log.info('[MASTER] Deploying cluster across', cpuCount, 'logical cores.' );
 
@@ -405,17 +337,4 @@ if (cluster.isMaster
       log.info('[WORKER] Running in', app.get('env').toUpperCase(), 'mode');
     });
   }
-
-  //log.info('[WORKER] Initializing Dronelink');
-  //require('./lib/datalinks/dronelink').Singleton();
-
-  // log.info('[WORKER] Initializing SITL');
-  // require('./lib/datalinks/sitllink').Singleton();
-
-  // log.info('[WORKER] Deploying Client RT');
-  // require('./lib/datalinks/clientlink')(server, serveSession);
-
-  // Luci Cam Launch promo
-  //log.info('[WORKER] Deploying LUCICAM app');
-  //require('./lib/lucicam');
 }
