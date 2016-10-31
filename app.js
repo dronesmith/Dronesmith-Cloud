@@ -119,6 +119,17 @@ app.use(passport.session());
 //   debug: false
 // }));
 
+app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, user-key, user-email");
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    } else {
+        next();
+    }
+});
 
 // Check for session, later authorization
 app.use(function (req, res, next) {
