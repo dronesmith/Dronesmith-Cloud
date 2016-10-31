@@ -65,5 +65,8 @@
     "apiservice": {
       "url": "http://localhost:8080"
     },
+    "auth": {
+      "key": "SecX8QnzIA3CgeEUN5JBwBFGTxa2M5Rv"
+    },
     "adminKey": ""
 }
