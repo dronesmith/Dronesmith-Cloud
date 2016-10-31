@@ -12,6 +12,7 @@
   "repository": "https://bitbucket.org/dronesmithdev/forge-core",
   "dependencies": {
     "async": "^2.0.0-rc.6",
+    "authy": "^1.2.0",
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
     "connect-redis": "^2.3.0",
