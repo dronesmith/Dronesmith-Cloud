@@ -249,8 +249,6 @@ app.all('/api/drone/*', function(req, res, next) {
       newstr += '/' + strs[i];
     }
 
-    console.log(newstr);
-
     api.Request(req, newstr, function(response, err) {
       if (err) {
         return next(err);
