@@ -213,30 +213,21 @@ app.use('/rt/', function(req, res, next) {
 });
 
 // Index routes should always have a session.
-app.use('/index/', function(req, res, next) {
-
-  // ...with the exception of /session/ which handles this itself.
-  if (req.path == '/session' || req.path == '/user/forgotPassword') {
-    // just record all events
-    keenClient.recordEvent('client', {
-      env: KEEN_ENV,
-      tracking: {
-        user: req.session.userData,
-        path: req.path,
-        ip: req.ip,
-        method: req.method,
-        url: req.url,
-        host: req.hostname,
-        referrer: req.headers.referrer,
-        userAgent: req.headers['user-agent']
-      }
-    });
-    next();
-  } else if (req.path == '/user' && req.method == 'POST') {
-    // We will send keen event after signup
-    next(); // open up registration
-    // res.status(400).json({error: "Sorry, Forge Cloud is currently invite only."});
-  }
+app.use('/index/user', function(req, res, next) {
+  keenClient.recordEvent('client', {
+    env: KEEN_ENV,
+    tracking: {
+      user: req.user,
+      path: req.path,
+      ip: req.ip,
+      method: req.method,
+      url: req.url,
+      host: req.hostname,
+      referrer: req.headers.referrer,
+      userAgent: req.headers['user-agent']
+    }
+  });
+  next();
 });
 
 app.use('/', router);

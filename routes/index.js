@@ -64,28 +64,24 @@ module.exports = function(app, route) {
 
         // .put('/api/session', session.sync)
 
-        //
-        .get    ('/index/user/',                  user.findAll)
-
-        // User creation
-        .post   ('/index/user',                   user.create)
-
-        // Send new password
-        .put    ('/index/user/forgotpassword',    user.forgotPassword)
-
-        // Update user account
-        .put    ('/index/user/',                  user.update)
+        // User API for UX service
+        .get    ('/index/user/',                      user.findAll)
+        .get    ('/index/user/:id',                   user.find)
+        .post   ('/index/user',                       user.create)
+        .post   ('/index/user/:id/forgotpassword',    user.forgotPassword)
+        .put    ('/index/user/:id',                   user.update)
+        .delete ('/index/user/:id',                   user.destroy)
 
         // NOTE
         // We'll let some methods also be index, so the user can upload flights.
-        .get    ('/index/mission/:id',            mission.find)
-        .get    ('/index/mission',                mission.findAll)
-        .put    ('/index/mission/:id/associate',  mission.associate)
-        .post   ('/index/mission/:format',        mission.addMission)
-
-        .put    ('/index/drone/addMission/:id',   drone.addMission)
-        .delete ('/index/drone/:id',              drone.remove)
-        .put    ('/index/drone/:id',              drone.update)
+        // .get    ('/index/mission/:id',            mission.find)
+        // .get    ('/index/mission',                mission.findAll)
+        // .put    ('/index/mission/:id/associate',  mission.associate)
+        // .post   ('/index/mission/:format',        mission.addMission)
+        //
+        // .put    ('/index/drone/addMission/:id',   drone.addMission)
+        // .delete ('/index/drone/:id',              drone.remove)
+        // .put    ('/index/drone/:id',              drone.update)
 
         // Order here is important.
         // .post   ('/index/code/exec/run',          code.execNow)
