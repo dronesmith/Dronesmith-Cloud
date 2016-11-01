@@ -70,8 +70,8 @@ module.exports = function(app, route) {
         .post   ('/index/user',                       user.create)
         .post   ('/index/user/:id/verifyPhone',       user.verifyPhone)
         .post   ('/index/user/:id/authPhone',         user.sendPhoneVerify)
-        .post   ('/index/user/:id/sendemail',         user.sendMail)
-        .post   ('/index/user/:id/forgotpassword',    user.forgotPassword)
+        // .post   ('/index/user/:id/sendemail',         user.sendMail)
+        // .post   ('/index/user/:id/forgotpassword',    user.forgotPassword)
         .put    ('/index/user/:id',                   user.update)
         .delete ('/index/user/:id',                   user.destroy)
 
