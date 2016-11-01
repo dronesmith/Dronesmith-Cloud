@@ -232,6 +232,20 @@ app.use('/index/user', function(req, res, next) {
 
 app.use('/', router);
 
+app.get('/api/drones', function(req, res, next) {
+  api.Request(req, '/drones', function(response, err) {
+    if (err) {
+      return next(err);
+    } else {
+      if (response.status == 200 || response.status == 400) {
+        return res.status(response.status).json(response.chunk);
+      } else {
+        return res.status(response.status).send(response.chunk);
+      }
+    }
+  });
+});
+
 app.all('/api/drone/*', function(req, res, next) {
   var strs = req.url.split('/');
   if (strs[1] == 'api') {
