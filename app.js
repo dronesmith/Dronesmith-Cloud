@@ -217,7 +217,7 @@ app.use('/index/user', function(req, res, next) {
   keenClient.recordEvent('client', {
     env: KEEN_ENV,
     tracking: {
-      user: req.user,
+      user: req.params.id,
       path: req.path,
       ip: req.ip,
       method: req.method,
