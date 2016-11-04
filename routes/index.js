@@ -167,7 +167,7 @@ module.exports = function(app, route) {
         // Admin routes. These require the master key.
         //
         .post   ('/admin/user/updatepassword',    user.updatePassword)
-        .post   ('/admin/user/generateUser',      user.generateUser)
+        .post   ('/admin/user',                   user.generateUser)
         .get    ('/admin/user/generateKey',       user.generateKey)
         .post   ('/admin/user/generateUserKey/:id', user.generateUserKey)
 
