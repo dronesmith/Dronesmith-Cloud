@@ -227,7 +227,11 @@ app.use('/index/user', function(req, res, next) {
       userAgent: req.headers['user-agent']
     }
   });
-  next();
+  if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
+    next();
+  } else {
+    return res.status(403).send();
+  }
 });
 
 app.use('/', router);
