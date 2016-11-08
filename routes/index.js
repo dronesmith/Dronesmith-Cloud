@@ -166,10 +166,24 @@ module.exports = function(app, route) {
         //
         // Admin routes. These require the master key.
         //
-        .post   ('/admin/user/updatepassword',    user.updatePassword)
-        .post   ('/admin/user',                   user.generateUser)
-        .get    ('/admin/user/generateKey',       user.generateKey)
-        .post   ('/admin/user/generateUserKey/:id', user.generateUserKey)
+
+        // User administration
+        .get    ('/admin/user/',                      user.findAll)
+        .get    ('/admin/user/:id',                   user.find)
+        .put    ('/admin/user/:id',                   user.update)
+        .delete ('/admin/user/:id',                   user.destroy)
+        .post   ('/admin/user/updatepassword',        user.updatePassword)
+        .post   ('/admin/user',                       user.generateUser)
+        .get    ('/admin/user/generateKey',           user.generateKey)
+        .post   ('/admin/user/generateUserKey/:id',   user.generateUserKey)
+
+        // Drone administration
+        .get    ('/admin/simdrone',                  drone.getSimDrones)
+        .get    ('/admin/simdrone/:name',            drone.getSimStats)
+        .delete ('/admin/simdrone/:name',            drone.remove)
+        .post   ('/admin/simdrone/:name/stop',       drone.pauseSim)
+        .post   ('/admin/simdrone/:name/start',      drone.startSim)
+
 
         // .get('/api/cloudbit', cloudbit.get)
         // .post('/api/cloudbit', cloudbit.output)
