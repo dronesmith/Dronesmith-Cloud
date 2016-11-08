@@ -283,9 +283,17 @@ app.use(function (req, res) {
 // Handle 500s
 app.use(function (error, req, res, next) {
     log.error(error);
+
+    var code = 500;
+
+    if (error.status) {
+      code = error.status;
+    } else if (error.statusCode) {
+      code = error.statusCode;
+    }
     res
-      .status(500)
-      .send(error.stack); // rendering this via angular
+      .status(code)
+      .json({error: error.message, debug: error.stack}); // rendering this via angular
 });
 
 app.locals.pretty = true;
