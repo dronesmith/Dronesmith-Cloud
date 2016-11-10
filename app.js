@@ -27,6 +27,7 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
   expressValidator = require('express-validator'),
+  serveStatic = require('serve-static'),
   api = require('./lib/api');
 
 // Init internal modules
@@ -84,6 +85,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.raw({limit: '50mb'}));
 app.use(methodOverride());
 app.use(expressValidator());
+app.use(serveStatic(__dirname + '/public'));
 
 // Handle AJAX requests
 app.use(function(req, res, next) {
