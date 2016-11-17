@@ -138,6 +138,8 @@ app.use('/api/', function(req, res, next) {
 
   if (req.headers['user-email'] && req.headers['user-key']) {
     var User = require('mongoose').model('User');
+    var Drone = require('mongoose').model('Drone');
+    var utils = require('./lib/utils');
 
     User
       .findOne({email: req.headers['user-email']})
@@ -149,6 +151,15 @@ app.use('/api/', function(req, res, next) {
           if (req.headers['user-key'] !== key.apiKey) {
             return res.status(403).send();
           } else {
+
+            var parsed = req.path.split('/');
+            if (parsed.length >= 3 && parsed[1] == 'drone' && parsed[2]) {
+              Drone.findOneAndUpdate({$or: [
+                {_id: utils.castDocumentId(parsed[2])},
+                {name: parsed[2]}
+              ]}, {$set: {lastapicall: new Date()}}, function(err) {if (err) log.error(err)});
+            }
+
             key.apiCnt++;
 
             // User.find({}).count().exec(function(err, counter) {
@@ -319,6 +330,13 @@ if (cluster.isMaster
     // require('./lib/lucicam');
 
     log.info('[MASTER] Deploying cluster across', cpuCount, 'logical cores.' );
+
+    // Prune thread
+
+    setInterval(function() {
+      require('./lib/controllers/drone').pruneInactive(config.sitl.prune);
+    }, config.sitl.prune * 1000);
+
 
     for (var i = 0; i < cpuCount; ++i) {
       cluster.fork();
