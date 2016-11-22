@@ -37,7 +37,9 @@
     "sitl": {
       "port": 4243,
       "address": "192.168.229.13",
-      "prune": 3600
+      "prune": 3600,
+      "lat": 40.7420,
+      "lon": -73.9876
     },
     "mavlink": {
       "system": 1,
