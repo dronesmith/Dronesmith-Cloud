@@ -33,7 +33,7 @@ var express = require('express'),
 // Init internal modules
 require('./lib/db');
 
-const KEEN_ENV = 'testing';
+const KEEN_ENV = 'production';
 global.KEEN_ENV = KEEN_ENV;
 
 // get root path
@@ -167,6 +167,7 @@ app.use('/api/', function(req, res, next) {
             //     counter = 0;
             //   }
 
+            if (config.keen.use) {
               keenClient.recordEvent('api', {
                 env: KEEN_ENV,
                 email: req.headers['user-email'],
@@ -176,6 +177,7 @@ app.use('/api/', function(req, res, next) {
                 method: req.method,
                 url: req.url
               });
+            }
 
               key.save(function() { next(); });
             // });
@@ -189,18 +191,20 @@ app.use('/api/', function(req, res, next) {
 
 // validate admin
 app.use('/admin/', function(req, res, next) {
-  keenClient.recordEvent('admin', {
-    env: KEEN_ENV,
-    tracking: {
-      path: req.path,
-      ip: req.ip,
-      method: req.method,
-      url: req.url,
-      host: req.hostname,
-      referrer: req.headers.referrer,
-      userAgent: req.headers['user-agent']
-    }
-  });
+  if (config.keen.use) {
+    keenClient.recordEvent('admin', {
+      env: KEEN_ENV,
+      tracking: {
+        path: req.path,
+        ip: req.ip,
+        method: req.method,
+        url: req.url,
+        host: req.hostname,
+        referrer: req.headers.referrer,
+        userAgent: req.headers['user-agent']
+      }
+    });
+  }
   if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
     next();
   } else {
@@ -210,36 +214,40 @@ app.use('/admin/', function(req, res, next) {
 
 app.use('/rt/', function(req, res, next) {
   // TODO check on session route.
-  keenClient.recordEvent('flightsync', {
-    env: KEEN_ENV,
-    tracking: {
-      path: req.path,
-      ip: req.ip,
-      method: req.method,
-      url: req.url,
-      host: req.hostname,
-      referrer: req.headers.referrer,
-      userAgent: req.headers['user-agent']
-    }
-  });
+  if (config.keen.use) {
+    keenClient.recordEvent('flightsync', {
+      env: KEEN_ENV,
+      tracking: {
+        path: req.path,
+        ip: req.ip,
+        method: req.method,
+        url: req.url,
+        host: req.hostname,
+        referrer: req.headers.referrer,
+        userAgent: req.headers['user-agent']
+      }
+    });
+  }
   next();
 });
 
 // Index routes should always have a session.
 app.use('/index/user', function(req, res, next) {
-  keenClient.recordEvent('client', {
-    env: KEEN_ENV,
-    tracking: {
-      user: req.params.id,
-      path: req.path,
-      ip: req.ip,
-      method: req.method,
-      url: req.url,
-      host: req.hostname,
-      referrer: req.headers.referrer,
-      userAgent: req.headers['user-agent']
-    }
-  });
+  if (config.keen.use) {
+    keenClient.recordEvent('client', {
+      env: KEEN_ENV,
+      tracking: {
+        user: req.params.id,
+        path: req.path,
+        ip: req.ip,
+        method: req.method,
+        url: req.url,
+        host: req.hostname,
+        referrer: req.headers.referrer,
+        userAgent: req.headers['user-agent']
+      }
+    });
+  }
   if (req.headers['admin-key'] && req.headers['admin-key'] === config.adminKey) {
     next();
   } else {
